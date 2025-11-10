@@ -802,7 +802,17 @@ if __name__ == "__main__":
         Thread(target=reset_scheduler, daemon=True).start()
         print("✅ 排程執行緒已啟動")
 
-        port = int(os.environ.get("PORT", 8080))
+        # 處理PORT環境變數
+        port_str = os.environ.get("PORT", "8080")
+        print(f"📝 PORT環境變數: '{port_str}'")
+
+        try:
+            port = int(port_str)
+            print(f"✅ 解析端口號: {port}")
+        except ValueError as e:
+            print(f"⚠️ 無效的PORT值: '{port_str}'，使用預設端口8080")
+            port = 8080
+
         print(f"🌐 啟動web服務器，端口: {port}")
         app.run(host="0.0.0.0", port=port)
 
