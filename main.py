@@ -14,13 +14,16 @@ load_dotenv()
 
 app = Flask(__name__, static_folder=".", static_url_path="")
 
-# 資料庫配置 - 測試環境使用SQLite
-if os.environ.get('RAILWAY_ENVIRONMENT'):
-    # Railway生產環境使用PostgreSQL
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# 資料庫配置
+database_url = os.environ.get('DATABASE_URL')
+if database_url:
+    # 使用PostgreSQL（Railway或其他環境）
+    print(f"使用PostgreSQL資料庫: {database_url[:50]}...")
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 else:
     # 本地測試環境使用SQLite
     test_db_name = os.environ.get('TEST_DB_NAME', 'ticket_system_test.db')
+    print(f"使用SQLite資料庫: {test_db_name}")
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{test_db_name}'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -784,10 +787,27 @@ def reset_scheduler():
 
 # === Main ===
 if __name__ == "__main__":
-    # 初始化資料庫
-    init_database()
+    print("🚀 啟動叫號系統應用...")
+    print(f"📍 運行環境: {os.environ.get('RAILWAY_ENVIRONMENT', '本地開發')}")
+    print(f"🌐 端口: {os.environ.get('PORT', 8080)}")
 
-    # 啟動排程執行緒
-    Thread(target=reset_scheduler, daemon=True).start()
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+    try:
+        # 初始化資料庫
+        print("📊 初始化資料庫...")
+        init_database()
+        print("✅ 資料庫初始化完成")
+
+        # 啟動排程執行緒
+        print("⏰ 啟動排程執行緒...")
+        Thread(target=reset_scheduler, daemon=True).start()
+        print("✅ 排程執行緒已啟動")
+
+        port = int(os.environ.get("PORT", 8080))
+        print(f"🌐 啟動web服務器，端口: {port}")
+        app.run(host="0.0.0.0", port=port)
+
+    except Exception as e:
+        print(f"❌ 應用啟動失敗: {e}")
+        import traceback
+        traceback.print_exc()
+        raise
