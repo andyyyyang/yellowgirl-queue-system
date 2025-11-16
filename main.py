@@ -70,6 +70,8 @@ def init_database():
             set_state_value('next_no', 1)
         if not get_state_value('last_reset_date'):
             set_state_value('last_reset_date', None)
+        if not get_state_value('marked'):
+            set_state_value('marked', [])
 
 # ───────────────────────────────────────────────
 
@@ -678,6 +680,7 @@ def status():
         "current": get_state_value('current'),
         "waiting": get_state_value('waiting', []),
         "missed": get_state_value('missed', []),
+        "marked": get_state_value('marked', []),
         "next_no": get_state_value('next_no', 1)
     })
 
@@ -694,6 +697,16 @@ def take():
 def next_call():
     waiting = get_state_value('waiting', [])
     if waiting:
+        # 先檢查之前的 current 是否在標記清單中，如果在就取消標記
+        previous_current = get_state_value('current')
+        if previous_current is not None:
+            marked = get_state_value('marked', [])
+            if previous_current in marked:
+                marked.remove(previous_current)
+                set_state_value('marked', marked)
+                print(f"✅ 號碼 {previous_current} 已到達，自動取消標記")
+
+        # 設置新的 current
         current = waiting.pop(0)
         set_state_value('waiting', waiting)
         set_state_value('current', current)
@@ -722,6 +735,14 @@ def delete_missed(number):
     try:
         missed.remove(number)
         set_state_value('missed', missed)
+
+        # 如果該號碼也在標記清單中，同時移除標記
+        marked = get_state_value('marked', [])
+        if number in marked:
+            marked.remove(number)
+            set_state_value('marked', marked)
+            print(f"❌ 從過號清單移除號碼 {number}，同時取消其標記")
+
         return "", 204
     except ValueError:
         abort(404, description="not found")
@@ -732,6 +753,7 @@ def manual_reset():
     set_state_value('current', None)
     set_state_value('missed', [])
     set_state_value('waiting', [])
+    set_state_value('marked', [])
     set_state_value('next_no', 1)
     print("🔄 手動歸零執行")
     return jsonify({"status": "ok", "message": "已手動歸零"}), 200
@@ -757,6 +779,30 @@ def go_previous():
         return jsonify({"status": "ok", "message": f"已返回前一號 {previous_number}"}), 200
     else:
         return jsonify({"error": "目前沒有正在叫號"}), 400
+
+@app.route("/mark/<int:number>", methods=["POST"])
+def mark_number(number):
+    """標記號碼 API"""
+    marked = get_state_value('marked', [])
+    if number not in marked:
+        marked.append(number)
+        set_state_value('marked', marked)
+        print(f"⭐ 標記號碼：{number}")
+        return "", 204
+    else:
+        return "", 204  # 已經標記，不做改變
+
+@app.route("/unmark/<int:number>", methods=["DELETE"])
+def unmark_number(number):
+    """取消標記號碼 API"""
+    marked = get_state_value('marked', [])
+    try:
+        marked.remove(number)
+        set_state_value('marked', marked)
+        print(f"❌ 取消標記號碼：{number}")
+        return "", 204
+    except ValueError:
+        abort(404, description="not found")
 
 
 
@@ -813,8 +859,23 @@ if __name__ == "__main__":
             print(f"⚠️ 無效的PORT值: '{port_str}'，使用預設端口8080")
             port = 8080
 
-        print(f"🌐 啟動web服務器，端口: {port}")
-        app.run(host="0.0.0.0", port=port)
+        # 嘗試啟動服務器，如果端口被佔用則嘗試其他端口
+        max_attempts = 10
+        for attempt in range(max_attempts):
+            try:
+                print(f"🌐 嘗試啟動web服務器，端口: {port}")
+                app.run(host="0.0.0.0", port=port, debug=False)
+                break  # 成功啟動，跳出循環
+            except OSError as e:
+                if "Address already in use" in str(e) or "address already in use" in str(e).lower():
+                    if attempt < max_attempts - 1:
+                        port += 1
+                        print(f"⚠️ 端口 {port - 1} 已被佔用，嘗試端口 {port}...")
+                    else:
+                        print(f"❌ 已嘗試 {max_attempts} 個端口，均被佔用。請手動指定可用端口。")
+                        raise
+                else:
+                    raise
 
     except Exception as e:
         print(f"❌ 應用啟動失敗: {e}")

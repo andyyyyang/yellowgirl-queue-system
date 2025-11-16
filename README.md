@@ -56,3 +56,6 @@ python main.py
 ## 前端
 
 前端文件位於 `public/` 目錄中，Railway 會自動提供靜態文件服務。
+
+
+
