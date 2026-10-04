@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>黃毛丫頭叫號系統</title>
+  <style>
+    :root {
+      --primary-yellow: #ffe066;
+      --secondary-yellow: #fff8e1;
+      --accent-brown: #8B4513;
+      --text-dark: #523834;
+      --text-light: #8B7355;
+      --white: #FFFFFF;
+      --shadow-light: rgba(139, 69, 19, 0.1);
+      --shadow-medium: rgba(139, 69, 19, 0.15);
+      --shadow-heavy: rgba(139, 69, 19, 0.2);
+      --border-radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--secondary-yellow);
+      min-height: 100vh;
+      color: var(--text-dark);
+      line-height: 1;
+    }
+
+    /* Header 設計 */
+    header {
+      background: var(--primary-yellow);
+      padding: 1rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 12px var(--shadow-light);
+      position: sticky;
+      top: 0;
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      width: 50%;
+      height: auto;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 1px 4px var(--shadow-light));
+    }
+
+    .title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* 主要內容容器 */
+    .landscape-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 0.5rem;
+    }
+
+    /* 左側區域 - SVG 和號碼 */
+    .landscape-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-top: 4rem;
+    }
+
+    /* SVG 容器 */
+    .svg-wrap {
+      width: 80%;
+      max-width: 300px;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      background: transparent;
+      padding: 0;
+      z-index: 10;
+      position: relative;
+      cursor: pointer;
+      margin-bottom: -40px;
+    }
+
+    .duck-container {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* 彈性過渡，平滑銜接 */
+      z-index: 5;
+      will-change: transform;
+    }
+
+    .duck-container:hover {
+      transform: scale(1.05);
+    }
+
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      overflow: visible;
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px !important;
+      height: auto;
+      max-width: none;
+      will-change: transform;
+    }
+
+    @keyframes duckBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(-5deg); }
+      50% { transform: scale(1.05) rotate(5deg); }
+      75% { transform: scale(1.1) rotate(-3deg); }
+    }
+
+
+    .eye-part {
+      animation: pixelBlink 3s ease-in-out infinite;
+    }
+
+    /* 垂直排列的眼睛需要配合動畫 - 眼瞼從上往下閉合 */
+    /* 閉眼：第一顆先閉，第二顆緊接著閉 */
+    /* 睜眼：第二顆先開，第一顆再開 */
+    #eyePart1 {
+      animation-delay: 0s; /* 第一顆先閉眼 */
+    }
+
+    #eyePart2 {
+      animation-delay: 0.25s; /* 第二顆延遲閉眼，但先睜眼（延遲更長，效果更明顯） */
+    }
+
+    @keyframes pixelBlink {
+      0%, 90% {
+        height: 20.68px; /* 2個方塊 - 睜眼 */
+        transform: translateY(0);
+      }
+      92% {
+        height: 10.34px; /* 1個方塊 - 半閉眼 */
+        transform: translateY(10.34px); /* 向下移動，從頂部縮小 */
+      }
+      94% {
+        height: 0px; /* 0個方塊 - 完全閉眼 */
+        transform: translateY(20.68px); /* 繼續向下移動 */
+      }
+      96% {
+        height: 10.34px; /* 1個方塊 - 半閉眼 */
+        transform: translateY(10.34px); /* 向上移動 */
+      }
+      98%, 100% {
+        height: 20.68px; /* 2個方塊 - 睜眼 */
+        transform: translateY(0); /* 回到原位 */
+      }
+    }
+
+    .duck-container.blinking .eye-part {
+      animation: pixelBlinkFast 0.3s ease-in-out;
+      animation-fill-mode: none; /* 動畫結束後不保留狀態，允許立即重新觸發 */
+    }
+
+    /* 點擊時也保持延遲效果 */
+    .duck-container.blinking #eyePart1 {
+      animation-delay: 0s; /* 第一顆先閉眼 */
+    }
+
+    .duck-container.blinking #eyePart2 {
+      animation-delay: 0.1s; /* 第二顆延遲閉眼，但先睜眼（快速眨眼時延遲較短） */
+    }
+
+    @keyframes pixelBlinkFast {
+      0% {
+        height: 20.68px; /* 2個方塊 */
+        transform: translateY(0);
+      }
+      33% {
+        height: 10.34px; /* 1個方塊 */
+        transform: translateY(10.34px); /* 向下移動，從頂部縮小 */
+      }
+      66% {
+        height: 0px; /* 0個方塊 */
+        transform: translateY(20.68px); /* 繼續向下移動 */
+      }
+      100% {
+        height: 20.68px; /* 2個方塊 */
+        transform: translateY(0); /* 回到原位 */
+      }
+    }
+
+    .svg-wrap svg {
+      width: 100%;
+      height: auto;
+      max-width: 300px;
+      display: block;
+    }
+
+
+         /* 當前號碼顯示 */
+         .current-number {
+           font-size: 4rem;
+           font-weight: 800;
+           color: var(--text-dark);
+           background: var(--white);
+           padding: 1rem 2rem;
+           border-radius: var(--border-radius);
+           box-shadow: 0 12px 40px var(--shadow-medium);
+           text-align: center;
+           min-width: 200px;
+           position: relative;
+           margin: 2rem auto 0 auto;
+           z-index: 1;
+         }
+
+
+
+    /* 右側區域 - 標籤和列表 */
+    .landscape-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* 標籤切換 */
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      background: var(--white);
+      padding: 0.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 16px var(--shadow-light);
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: var(--text-light);
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: calc(var(--border-radius) - 4px);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .tab:hover {
+      color: var(--text-dark);
+      background: var(--secondary-yellow);
+    }
+
+    .tab.active {
+      color: var(--text-dark);
+      background: var(--primary-yellow);
+      box-shadow: 0 2px 8px var(--shadow-medium);
+    }
+
+    /* 摘要資訊 */
+    .summary {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* 列表容器 */
+    .list {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    /* 列表項目 */
+    .item {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 16px var(--shadow-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: var(--transition);
+      border-left: 4px solid var(--primary-yellow);
+    }
+
+    .item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--shadow-medium);
+    }
+
+    .item span:first-child {
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    .item span:last-child {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .ad-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      background: white;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    }
+    .adsbygoogle {
+      display: block;
+      width: 100%;
+      height: 30px;
+      margin: 0 auto;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .landscape-container {
+        padding: 1rem 0.5rem;
+      }
+
+      .landscape-left {
+        padding-top: 2rem;
+      }
+
+      .svg-wrap {
+        width: 80%;
+        max-width: 200px;
+        margin-bottom: -30px;
+      }
+
+      .current-number {
+        font-size: 3rem;
+        padding: 1.5rem 2rem;
+        min-width: 160px;
+        position: relative;
+      }
+
+      .tabs {
+        gap: 0.5rem;
+        padding: 0.25rem;
+      }
+
+      .tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .item {
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* 橫屏佈局 */
+    @media (orientation: landscape) and (min-width: 768px) {
+      .landscape-container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+      }
+
+      .landscape-left {
+        flex: 0 0 45%;
+        margin-bottom: 0;
+      }
+
+      .landscape-right {
+        flex: 0 0 55%;
+      }
+
+      .svg-wrap {
+        width: 80%;
+        max-width: 250px;
+        margin-bottom: -40px;
+      }
+
+      .current-number {
+        font-size: 5rem;
+        padding: 2.5rem 4rem;
+        position: relative;
+      }
+
+      .tabs {
+        margin-bottom: 2rem;
+      }
+
+      .summary {
+        margin: 1.5rem 0 2rem 0;
+        max-width: 100%;
+      }
+
+      .list {
+        max-width: 100%;
+      }
+    }
+
+    /* 手機橫屏優化 */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .landscape-container {
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+
+      .svg-wrap {
+        width: 80%;
+        max-width: 180px;
+        margin-bottom: -30px;
+      }
+
+      .current-number {
+        font-size: 3rem;
+        padding: 1.5rem 2.5rem;
+        position: relative;
+      }
+
+      .tabs {
+        margin-bottom: 1.5rem;
+      }
+
+      .tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .item {
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* 大螢幕優化 */
+    @media (min-width: 1200px) {
+      .landscape-container {
+        max-width: 1400px;
+        padding: 2.5rem 2rem;
+      }
+
+      .svg-wrap {
+        width: 80%;
+        max-width: 300px;
+        margin-bottom: -50px;
+      }
+
+      .current-number {
+        font-size: 6rem;
+        padding: 3rem 5rem;
+        position: relative;
+      }
+
+      .tabs {
+        margin-bottom: 3rem;
+      }
+
+      .tab {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
+
+      .item {
+        padding: 1.5rem 2rem;
+        font-size: 1.2rem;
+      }
+    }
+
+    /* 動畫效果 */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .landscape-left,
+    .landscape-right {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .landscape-right {
+      animation-delay: 0.2s;
+    }
+
+    /* 懸停效果增強 */
+    .current-number:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px var(--shadow-medium);
+      transition: var(--transition);
+    }
+
+  </style>
+
+  <!-- AdSense JS 載入 -->
+</head>
+<body>
+  <header>
+    <div class="logo">
+        <svg id="_圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 772.33 100.02">
+          <path d="m28.84,71.78h-.65c-1.13,0-2.12.5-2.97,1.53-5.12,7.19-11.27,13.08-18.3,17.52l-.12.09c-.24.22-.51.64-.51,1.04,0,.67.5,1.16,1.19,1.16h.35l.13-.04c8.78-2.83,16.53-8.24,23.05-16.08l.07-.09c.47-.74.78-1.38.78-2.12,0-.51-.18-1.07-.45-1.43-.61-.99-1.57-1.58-2.57-1.58Z"/>
+          <path d="m11.24,16.02h8.82l-.02,9.29.02.87,24.62.02.87-.02v-10.16h8.82c2.99,0,5.43-2.43,5.43-5.43v-.87h-14.25v-3.59c0-3.09-2.37-5.43-5.52-5.43h-.87v9.01h-12.7v-3.59c0-3.09-2.37-5.43-5.52-5.43h-.87v9.01H5.82v.87c0,2.89,2.54,5.43,5.43,5.43Zm15.22,4.04v-4.04h12.7v4.04h-12.7Z"/>
+          <path d="m46.58,77.88c-2.77-2.54-5.91-4.63-9.32-6.21l-.27-.17-.19-.02c-.56-.07-1.09.24-1.36.82l-.41.85.74.46c1.49,1.45,3.31,3.56,5.71,6.62,2.37,3.02,4.04,5.7,4.96,7.97l.05.1c.34.6.94,1.42,2.14,1.58.24.03.48.05.7.05,1.91,0,3.12-1.07,3.6-2.07.33-.69.34-1.41.01-2.25-1.1-2.36-3.18-4.89-6.35-7.73Z"/>
+          <path d="m0,29.93c0,2.79,2.54,5.24,5.43,5.24h54.77c2.99,0,5.43-2.35,5.43-5.24v-.87H0v.87Z"/>
+          <path d="m10.92,69.17h44.45v-31.33H10.92v31.33Zm5.62-18.53v-6.99h13.11v6.99h-13.11Zm0,12.88v-7.16h13.11v7.16h-13.11Zm19.41-12.88v-6.99h13.1v6.99h-13.1Zm0,12.88v-7.16h13.1v7.16h-13.1Z"/>
+          <path d="m244.5,6.89c-1.54,0-2.72.75-3.53,2.24-4.81,9.41-10.4,17.87-16.62,25.15-.76-.38-1.61-.59-2.52-.59h-.87v59.43h.87c2.88,0,5.23-2.26,5.23-5.05v-49.33c0-.62-.1-1.21-.3-1.76,8.22-6.06,15.45-14.45,21.5-24.92.34-.58.51-1.17.51-1.77,0-.77-.35-1.55-.91-2.05-.8-.91-1.9-1.36-3.37-1.36Z"/>
+          <path d="m218.22,27.75c-3.67-7.98-9.11-14.82-16.15-20.31l-.15-.11-.54-.14-.42-.17-.35.35c-.43.27-.5.65-.5.85v.84l.18.24c5.18,6.72,9.33,13.72,12.36,20.84.62,1.24,1.56,1.84,2.87,1.84,1.6,0,2.96-1.31,2.96-2.87,0-.38-.11-.8-.21-1.21l-.05-.15Z"/>
+          <path d="m313.45,11.39c0,.26.04.51.08.76h-30.6v.87c0,2.74,2.4,5.14,5.14,5.14h20.62c2.74,0,5.05-2.35,5.05-5.14v-.03c.68,2.02,2.58,3.53,4.76,3.53h9.27l-1.03,7.43h-9.47v46.07h27.18V23.97h-13.61l3.31-7.43h9.06c2.74,0,5.05-2.35,5.05-5.14v-.87h-34.81v.87Zm9.92,25.38v-6.71h14.97v6.71h-14.97Zm0,12.72v-6.71h14.97v6.71h-14.97Zm0,14.53v-8.43h14.97v8.43h-14.97Z"/>
+          <path d="m310.02,25.06h-23.36v26.54h23.36v-26.54Zm-17.35,20.53v-14.43h11.34v14.43h-11.34Z"/>
+          <path d="m314.98,75.05l.22-.65v-.14c0-.85-.57-1.23-1.14-1.23h-.14l-.49.17c-3.61,1.67-8.04,3.3-13.15,4.86-5.31,1.62-10.32,2.9-14.88,3.79-2.68.47-2.64,2.26-2.63,2.84v.19c0,1.52,1.07,3.14,3.05,3.14h.06l.77-.11c5.3-1.21,10.4-2.95,15.61-5.33,5.06-2.31,9.28-4.79,12.54-7.38l.2-.16Z"/>
+          <path d="m325.23,72.12h-.1c-1.14.13-2.11.96-2.89,2.55-2.35,5.92-5.55,11.44-9.5,16.4l-.12.15-.21,1.15.25.26c.27.43.65.49.85.49h.75l.23-.18c2.84-2.16,5.49-4.68,7.85-7.48,2.49-2.85,4.42-5.6,5.78-8.22.3-.71.43-1.27.43-1.89,0-.68-.16-1.26-.49-1.73-.52-.97-1.52-1.5-2.83-1.5Z"/>
+          <path d="m303.2,56.56v.05c-.88,5.98-2.21,12.18-3.98,18.42l-.03.24c0,.75.48,1.23,1.23,1.23h.3l.59-.3.13-.22c3.35-5.59,5.92-11.62,7.63-17.93l.12-1.14c0-2-1.53-3.05-3.05-3.05-1.6,0-2.59.91-2.94,2.7Z"/>
+          <path d="m335.11,73.84l-.14-.11-.85-.21-.29.14c-.63.31-.76.79-.76,1.14v.54l.3.3c3.17,4.2,5.9,9.1,8.13,14.6.76,1.68,1.64,2.24,2.24,2.41.16.05.33.07.48.07s.3-.02.43-.06c.96-.02,1.81-.42,2.4-1.13l.08-.11c.29-.49.58-1.02.58-1.72,0-.46-.1-.92-.37-1.58-2.84-5.49-6.96-10.3-12.24-14.29Z"/>
+          <path d="m289.96,55.02c-.18-.18-.49-.37-.8-.42-.45-.12-.77.05-.93.16-.22.16-.48.47-.48,1.06v.35l.06.15c1.99,5.03,3.37,10.34,4.22,16.24.3,2.19,1.36,3.3,3.2,3.3h.02c1.19,0,2.96-.94,2.96-2.96l-.11-.71c-1.19-6.16-3.91-11.91-8.08-17.1l-.06-.07Z"/>
+          <path d="m159.15,86.51l-.56.07c-.03-.05-.07-.15-.12-.3l-1.85-10.35-2.01,9.38c-.27,1.3-.89,1.83-2.12,1.83h-19.46c-1.41,0-2.64-1.24-2.64-2.64v-22.12l24.52-2.98c3.04-.56,4.41-2.96,4.41-5.09v-1.52l-28.93,3.42v-15.01l17.77-2.08c2.49-.5,4.3-2.64,4.3-5.09v-1.52l-22.08,2.7v-15.46l-.43-.25c-.49-.29-1.51-.75-2.82-.55-1.3.2-2.13.93-2.5,1.34l-.23.25v15.34l-19.14,2.36.13.88c.45,3.07,2.8,4.44,4.92,4.44l14.09-1.61v15.01l-26.02,3.08.17.91c.5,2.69,2.51,4.5,5,4.5l20.85-2.33v22.18c0,4.38,3.43,7.81,7.81,7.81h23.61c3.14,0,4.96-1.58,5.28-4.56v-.05s0-.35,0-.35c-.15-1.05-.86-1.65-1.94-1.65Z"/>
+          <path d="m120.18,11.16c3.34-1.94,8.77-3.23,15.33-2.52-8.48,1.07-13.05,1.96-19.57,7.62,3.52-2.25,8.86-4.26,14.82-1.71,5.2,2.23,8.94,4.62,11.99,6.25-.84-1.28-1.26-2.9-.75-4.96,0,0-.06,1.08.67,2.67,1.01,2.21,3.11,3.75,5.51,4.04,2.4.29,4.74-.7,6.14-2.62h0C159.13,13.36,150.75-.14,134.21,0c-9.98.25-16.18,7.02-19.51,12.6-5.89,4.67-9.21,11.83-7.76,20.47.16-2.33.37-14.46,13.24-21.91Z"/>
+          <path d="m467.18,64.98c-1.54.51-4.24-.68-8.56-.74-2.02-.03-1.72.23-5.37.34-2.9.09-6.06-.06-6.06-.06-2.92-.13-7.49-.42-10.39.6-.25.09-.69.25-.99.66-.86,1.16.12,3.28.77,4.26,2.02,3.03,6.97,4.16,10.79,3.23,3.42-.84,5.71-3.05,5.71-3.05,1.2-1.16,1.64-2.13,3.15-2.76,1.38-.57,2.67-.44,3.82-.32,1.32.13,3.3.33,4.94,1.58.75.57,1.43,1.58,2.19,3.19v10.44h10V19.96h-10v45.02Z"/>
+          <rect x="486.47" y="19.96" width="10" height="62.39"/>
+          <path d="m527.84,39.09c-6.26,0-11.45,2.1-15.55,6.29-4.11,4.19-6.16,9.51-6.16,15.94s2.05,11.76,6.16,15.99c4.11,4.22,9.29,6.33,15.55,6.33s11.53-2.11,15.64-6.33c4.11-4.22,6.16-9.55,6.16-15.99s-2.05-11.75-6.16-15.94c-4.11-4.19-9.32-6.29-15.64-6.29Zm8.32,32.06c-2.27,2.36-5.04,3.53-8.32,3.53s-6.05-1.19-8.32-3.58c-2.27-2.38-3.4-5.64-3.4-9.78s1.13-7.37,3.4-9.69c2.27-2.33,5.04-3.49,8.32-3.49s6.05,1.16,8.32,3.49c2.27,2.33,3.4,5.56,3.4,9.69s-1.14,7.47-3.4,9.82Z"/>
+          <path d="m614.93,40.38h-2.83c-.86,0-1.61.57-1.85,1.39l-7.38,25.65c-.18.62-1.04.64-1.25.03l-7.77-22.78c-.88-2.57-3.29-4.29-6-4.29h-4.02c-1.07,0-2.02.68-2.37,1.69l-8.67,25.39c-.21.6-1.07.59-1.25-.03l-6.93-23.6c-.6-2.05-2.48-3.46-4.62-3.46h-4.74c-1.16,0-1.98,1.13-1.62,2.23l11.71,36.08c.71,2.18,2.74,3.66,5.04,3.66h2.79c2.16,0,4.08-1.38,4.77-3.43l8.4-24.91c.2-.59,1.04-.6,1.24,0l8.58,24.81c.73,2.12,2.73,3.54,4.97,3.54h2.47c2.25,0,4.25-1.46,4.94-3.6l10.49-32.76c.89-2.77-1.18-5.61-4.09-5.61Z"/>
+          <path d="m688.78,40.38h-2.55c-.85,0-1.54.69-1.54,1.54v3.8c-2.13-4.08-6.26-6.12-12.41-6.12-5.69,0-10.34,1.98-13.96,5.95s-5.43,8.79-5.43,14.48,1.82,10.8,5.47,14.65c3.65,3.85,8.29,5.77,13.92,5.77,2.87,0,5.37-.57,7.5-1.72,1.41-.76,2.57-1.66,3.47-2.71.41-.47,1.18-.18,1.18.45v2.26c0,8.39-3.96,12.58-11.89,12.58-2.82,0-5.18-.85-7.11-2.54-1.47-1.29-2.48-2.86-3.03-4.71-.29-.97-1.25-1.57-2.23-1.31l-4.29,1.12c-1.87.49-2.89,2.48-2.23,4.29,1.04,2.86,2.88,5.35,5.53,7.46,3.68,2.93,8.22,4.4,13.62,4.4,7.35,0,12.78-2.05,16.29-6.16,3.5-4.11,5.26-9.26,5.26-15.47v-32.44c0-3.07-2.49-5.57-5.57-5.57Zm-7.06,28.31c-1.98,2.15-4.58,3.23-7.8,3.23s-5.92-1.08-7.93-3.23c-2.01-2.15-3.02-5.04-3.02-8.66s1.02-6.42,3.06-8.57c2.04-2.15,4.67-3.23,7.89-3.23s5.74,1.08,7.76,3.23c2.01,2.15,3.02,5.01,3.02,8.57s-.99,6.51-2.97,8.66Z"/>
+          <path d="m711.49,19.1c-1.78,0-3.3.65-4.57,1.94-1.26,1.29-1.9,2.83-1.9,4.61s.63,3.3,1.9,4.57c1.26,1.26,2.79,1.9,4.57,1.9s3.39-.63,4.65-1.9c1.26-1.26,1.9-2.79,1.9-4.57s-.63-3.39-1.9-4.65c-1.26-1.26-2.82-1.9-4.65-1.9Z"/>
+          <path d="m711.45,40.38h-2.78c-1.16,0-2.09.94-2.09,2.09v35.22c0,2.57,2.09,4.66,4.66,4.66h2.79c1.36,0,2.46-1.1,2.46-2.46v-34.46c0-2.78-2.26-5.04-5.04-5.04Z"/>
+          <path d="m751.51,39.94c-.46-.05-.93-.07-1.41-.07-2.76,0-5.23.65-7.41,1.94-2.18,1.29-3.76,3.06-4.74,5.3v-2.35c0-2.41-1.96-4.37-4.37-4.37h-3.19c-1.2,0-2.17.97-2.17,2.17v38.18c0,.89.72,1.61,1.61,1.61h3.84c2.51,0,4.54-2.03,4.54-4.54v-15.45c0-8.22,3.76-12.32,11.29-12.32h.03c1.78,0,3.24-1.46,3.24-3.24v-5.46c0-.72-.54-1.32-1.26-1.4Z"/>
+          <path d="m767.33,19.96h-3.28c-.95,0-1.72.77-1.72,1.72v59.03c0,.9.73,1.64,1.64,1.64h3.36c2.76,0,5-2.24,5-5V24.96c0-2.76-2.24-5-5-5Z"/>
+          <path d="m531.93,54.18c-1.13-.02-2.4,2.05-1.97,3.72.21.8.91,1.92,1.92,1.92,1.01,0,1.71-1.13,1.92-1.92.44-1.65-.74-3.71-1.86-3.72Z"/>
+          <path d="m444.33,39.34c.17-.34.24-.86,0-1.21-.53-.76-2.19-.2-4.84,0-1.56.12-2.84.06-3.63,0-1.22-.55-3.35-1.3-6.05-1.21-1.17.04-4.29.18-7.26,2.42-2.14,1.61-3.22,3.57-3.72,4.65-2.87,6.75-5.74,13.49-8.61,20.24-.24.57-1.05.58-1.3.02-3.03-6.67-6.07-13.35-9.1-20.02-1.4-3.07-4.46-5.04-7.83-5.04h-3.86c-.88,0-1.46.91-1.09,1.71,4.95,10.66,9.9,21.32,14.86,31.98.81,1.75.74,3.78-.2,5.47-3.27,5.88-6.53,11.76-9.8,17.64-.36.66.11,1.46.86,1.46h5.56c5.35,0,10.34-2.69,13.28-7.16l.07-.1c.65-1,1.64-2.66,2.59-4.82,1.45-3.32,1.98-6,2.25-7.28,0,0,2.34-11.13,7.26-21.79.72-1.56,1.77-3.69,3.63-6.05,1.72-2.18,3.34-3.54,4.84-4.84,3.41-2.94,5.1-4.54,7.26-4.84,1.8-.25,4.21.05,4.84-1.21Z"/>
+          <path d="m437.26,55.63c.07.39.25.71.47.99.56.7,1.4,1.02,2.24,1l15.6-.52c.44-.27.97-.72,1.12-1.44.35-1.75-1.95-3.73-2.56-4.26-3.06-2.64-6.56-2.49-7.8-2.42-1.16.07-4.24.42-6.94,2.91-.92.84-2.42,2.23-2.13,3.74Z"/>
+        </svg>
+    </div>
+    <div class="title">現場候號進度</div>
+  </header>
+
+
+
+  <div class="landscape-container">
+    <div class="landscape-left">
+      <div class="svg-wrap">
+    <div class="duck-container" id="duckContainer">
+      <svg id="duckSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 947.21 537.57">
+        <defs>
+          <style>
+            .cls-1 {
+              fill: #523834;
+            }
+
+            .cls-2 {
+              fill: #fcd04f;
+            }
+
+            .cls-3 {
+              fill: #fff5d3;
+            }
+
+            .cls-4 {
+              fill: #fff;
+            }
+
+            .cls-5 {
+              fill: #fff9ef;
+            }
+
+            .cls-6 {
+              fill: #fbdeb1;
+            }
+          </style>
+        </defs>
+        <g id="duck">
+          <!-- 鴨子 --> 
+          <rect class="cls-1" x="391.18" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="411.86" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="432.54" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.22" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="473.89" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="494.57" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="165.36" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="494.57" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="494.57" y="268.75" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="268.75" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="535.93" y="268.75" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="556.61" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="577.28" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="597.96" y="268.75" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="618.64" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="618.64" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="618.64" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="618.64" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="597.96" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="597.96" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="577.28" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="556.61" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="535.93" y="454.85" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="454.85" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="475.53" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="496.21" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="494.57" y="516.89" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="473.89" y="516.89" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.22" y="516.89" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="432.54" y="516.89" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="412.12" y="516.89" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="391.44" y="516.89" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="391.44" y="496.21" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="412.12" y="475.53" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="412.12" y="454.85" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="391.44" y="454.85" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="370.76" y="454.85" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="350.09" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="329.41" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="329.41" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="329.41" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="329.41" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="329.41" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="349.82" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="370.5" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="391.18" y="268.75" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="370.5" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="349.87" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="329.24" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="308.56" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="287.88" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="287.88" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="287.88" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="308.56" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="329.15" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="349.82" y="165.37" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="349.82" y="144.69" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="370.5" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.35" y="496.21" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.35" y="475.53" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.35" y="454.85" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="474.02" y="454.89" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="474.02" y="475.53" width="20.68" height="20.68"/>
+          <rect class="cls-1 eye-part" id="eyePart1" x="453.22" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-1 eye-part" id="eyePart2" x="453.22" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="473.89" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="411.9" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="432.54" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="391.25" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="411.88" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="370.59" y="165.37" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="391.23" y="165.37" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="411.88" y="165.36" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.51" y="165.36" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="432.59" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.48" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.55" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="453.22" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.16" y="165.37" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="473.85" y="165.36" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="453.16" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-3" x="473.85" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.5" y="165.36" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="370.73" y="310.1" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="391.37" y="310.1" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="412.01" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.7" y="310.1" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.35" y="310.1" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="370.7" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="391.33" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="411.98" y="330.79" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.66" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.32" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="474.01" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.64" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="515.28" y="330.8" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="535.97" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="556.62" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="350.06" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="370.69" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="391.33" y="351.47" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="412.02" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.67" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.34" y="351.48" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="473.97" y="351.48" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.62" y="351.49" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="515.31" y="351.48" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="535.96" y="351.48" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="556.62" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="577.27" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="556.61" y="268.74" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="535.95" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="577.26" y="289.41" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="515.38" y="310.1" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="536.03" y="310.1" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="577.28" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="597.93" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="577.33" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="597.98" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="556.7" y="372.16" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.38" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="474.02" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.66" y="372.16" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="515.35" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="536" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.71" y="392.83" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="515.36" y="392.83" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="350.06" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="370.77" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="391.41" y="372.15" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="412.1" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.75" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="350.06" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="370.51" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="391.15" y="392.83" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="411.84" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.49" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="370.81" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="391.45" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="412.09" y="413.51" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.78" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.43" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="474.04" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.68" y="413.52" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="515.37" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="536.02" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="474" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.65" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="474.02" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.65" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="473.87" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="494.5" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.62" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.25" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.13" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="473.75" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="411.88" y="248.08" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.5" y="248.08" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.13" y="268.76" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="411.88" y="268.77" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.5" y="268.77" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="453.1" y="289.47" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="411.85" y="289.48" width="20.68" height="20.68"/>
+          <rect class="cls-5" x="432.48" y="289.48" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="391.18" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="370.5" y="144.69" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="411.9" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="391.18" y="248.07" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="473.89" y="268.75" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="473.89" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="494.57" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="515.25" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="391.18" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="350.09" y="330.78" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="350.06" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="370.76" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="391.44" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="412.12" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="432.73" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="453.22" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="577.28" y="268.75" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="556.61" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="556.61" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="474.02" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="494.57" y="310.11" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="597.96" y="289.43" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="597.96" y="351.46" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="577.32" y="372.14" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="577.28" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="556.61" y="413.5" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="535.93" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="515.25" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="494.57" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="473.89" y="434.18" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="473.98" y="392.83" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="453.29" y="392.83" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="556.7" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="536.02" y="392.82" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="494.57" y="144.69" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="308.56" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="308.56" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="329.15" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="349.87" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="370.53" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="432.73" y="454.85" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="494.64" y="454.89" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="474.02" y="496.21" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="494.64" y="496.21" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="412.12" y="496.21" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="432.73" y="496.21" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="349.82" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="370.53" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="391.18" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="349.87" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="432.73" y="475.53" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="494.57" y="475.53" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="329.24" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="370.5" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="391.18" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="391.23" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="411.9" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-2" x="411.86" y="227.39" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="350.09" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="391.15" y="144.69" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="411.88" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="432.48" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.22" y="144.69" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="474.04" y="144.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.25" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="536.03" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="474.04" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="494.65" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="515.34" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="453.1" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="432.48" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="411.84" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="391.45" y="124" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="370.5" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="391.19" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="411.89" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="432.58" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="515.17" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="494.55" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="473.93" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="474.04" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="494.5" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="494.82" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="515.27" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="515.5" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="535.95" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="453.3" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="432.68" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="412.06" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="391.44" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="370.81" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="391.25" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="411.9" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-6" x="412.12" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="432.78" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="432.78" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="432.42" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="453.32" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="453.27" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-4" x="473.96" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="536.03" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.5" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="536.03" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="350.09" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="350.09" y="82.65" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="370.81" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="391.45" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="411.84" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="432.8" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.43" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="474.04" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.43" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="453.43" y="62.03" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="473.75" y="41.36" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="494.82" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="515.17" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="536.03" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="556.61" y="20.68" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="556.61" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="432.42" y="103.33" width="20.68" height="20.68"/>
+          <rect class="cls-1" x="391.61" y="103.33" width="20.68" height="20.68"/>
+        </g>
+      </svg>
+      </div>
+    </div>
+
+    <div class="current-number" id="num">--</div>
+    
+    <div class="summary" id="summary">載入中...</div>
+    
+    <div class="landscape-right">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('waiting')">候位</div>
+        <div class="tab" onclick="switchTab('missed')">過號</div>
+      </div>
+
+
+      <div class="list" id="waitingList"></div>
+      <div class="list hidden" id="missedList"></div>
+    </div>
+  </div>
+
+  <!-- ✅ 廣告區：固定底部 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4233788696457830"
+       crossorigin="anonymous"></script>
+  <!-- 底部 -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:728px;height:90px"
+       data-ad-client="ca-pub-4233788696457830"
+       data-ad-slot="4034771249"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <script>
+    let currentTab = 'waiting';
+
+    // 鴨子互動功能
+    let duckContainer = null;
+    let blinkInterval = null;
+    let heartsContainer = null;
+    let hearts = []; // 存儲所有活動的愛心
+    let bounceTimeouts = []; // 追蹤動畫 timeout，用於清理
+
+    function initDuckInteraction() {
+      duckContainer = document.getElementById('duckContainer');
+      heartsContainer = document.getElementById('heartsContainer');
+
+      if (duckContainer) {
+        // 點擊事件
+        duckContainer.addEventListener('click', function(e) {
+          e.preventDefault();
+          duckClicked();
+        });
+
+        // 觸摸事件（手機優先）
+        duckContainer.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          duckClicked();
+        });
+
+        // 開始自動眨眼
+        startAutoBlink();
+      }
+
+      // 開始愛心動畫循環
+      if (heartsContainer) {
+        animateHearts();
+      }
+    }
+
+    function duckClicked() {
+      if (!duckContainer) return;
+
+      // 清除之前的動畫 timeout，讓新動畫從當前狀態平滑銜接
+      bounceTimeouts.forEach(timeout => clearTimeout(timeout));
+      bounceTimeouts = [];
+
+      // 創建彈跳動畫序列（快速點擊時會從當前狀態平滑過渡）
+      const bounceSequence = [
+        { scale: 1.12, rotate: -6, delay: 0 },
+        { scale: 1.05, rotate: 4, delay: 80 },
+        { scale: 1.1, rotate: -3, delay: 160 },
+        { scale: 1, rotate: 0, delay: 240 }
+      ];
+
+      // 執行動畫序列（使用 transition 平滑過渡）
+      bounceSequence.forEach((step) => {
+        const timeout = setTimeout(() => {
+          duckContainer.style.transform = `scale(${step.scale}) rotate(${step.rotate}deg)`;
+        }, step.delay);
+        bounceTimeouts.push(timeout);
+      });
+
+      // 觸發眨眼（允許快速點擊時多次眨眼）
+      blink();
+
+      // 添加音效（如果支持）
+      playDuckSound();
+
+      // 創建3顆愛心
+      createHearts(3);
+    }
+
+    function blink() {
+      // 如果正在眨眼，先重置動畫以允許快速連續眨眼
+      if (duckContainer.classList.contains('blinking')) {
+        duckContainer.classList.remove('blinking');
+        // 強制重排以確保動畫重置
+        void duckContainer.offsetWidth;
+      }
+
+      // 添加眨眼動畫類
+      duckContainer.classList.add('blinking');
+
+      // 使用 animationend 事件來移除類別
+      const handleBlinkEnd = (e) => {
+        if (e.animationName === 'pixelBlinkFast') {
+          duckContainer.classList.remove('blinking');
+          duckContainer.removeEventListener('animationend', handleBlinkEnd);
+        }
+      };
+      duckContainer.addEventListener('animationend', handleBlinkEnd);
+    }
+
+    function startAutoBlink() {
+      // 每3-8秒隨機眨眼
+      function scheduleBlink() {
+        const delay = 3000 + Math.random() * 5000; // 3-8秒
+        blinkInterval = setTimeout(() => {
+          blink(); // 移除 isBlinking 檢查，允許與點擊眨眼同時進行
+          scheduleBlink(); // 繼續下一個眨眼
+        }, delay);
+      }
+
+      scheduleBlink();
+    }
+
+    function playDuckSound() {
+      // 使用Web Audio API創建簡單的鴨子叫聲
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        // 鴨子叫聲頻率
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.2);
+
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.3);
+      } catch (e) {
+        // 如果音效失敗，靜默處理
+        console.log('音效播放失敗');
+      }
+    }
+
+    // 愛心SVG模板（粉紅色愛心）
+    function getHeartSVG() {
+      return `<svg class="heart" xmlns="http://www.w3.org/2000/svg" viewBox="677 180 100 80">
+        <defs>
+          <style>
+            .heart-cls-4 { fill: #ffb3d9; }
+            .heart-cls-5 { fill: #ff69b4; }
+            .heart-cls-6 { fill: #ffc0cb; }
+          </style>
+        </defs>
+        <g>
+        <rect class="heart-cls-5" x="677.76" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="761.25" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="761.25" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-4" x="711.16" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="777.95" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="761.25" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-4" x="694.46" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-4" x="694.46" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="677.76" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="694.46" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="213.62" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="247.02" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="694.46" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="247.02" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="727.85" y="263.58" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="744.55" y="246.88" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="761.25" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="777.95" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="197.06" width="16.7" height="16.7"/>
+        </g>
+      </svg>`;
+    }
+
+    // 創建愛心
+    function createHearts(count) {
+      if (!heartsContainer || !duckContainer) return;
+
+      // 獲取鴨子的位置
+      const duckRect = duckContainer.getBoundingClientRect();
+      const startX = duckRect.left + duckRect.width / 2;
+      const startY = duckRect.top + duckRect.height / 2;
+
+      for (let i = 0; i < count; i++) {
+        // 創建愛心元素
+        const heartWrapper = document.createElement('div');
+        heartWrapper.className = 'heart';
+        heartWrapper.innerHTML = getHeartSVG();
+        heartWrapper.style.position = 'absolute';
+        heartWrapper.style.left = startX + 'px';
+        heartWrapper.style.top = startY + 'px';
+        heartWrapper.style.opacity = '1';
+        heartWrapper.style.transformOrigin = 'center center';
+        
+        heartsContainer.appendChild(heartWrapper);
+
+        // 隨機初始速度（向上和側向）- 大幅增加噴射力度
+        const velocityX = (Math.random() - 0.5) * 800; // -400 到 400 (極大側向速度)
+        const velocityY = -350 - Math.random() * 150; // -500 到 -350 (適中的向上速度)
+        const rotation = (Math.random() - 0.5) * 360; // 隨機旋轉
+        const rotationSpeed = (Math.random() - 0.5) * 900; // 旋轉速度 (度/秒，-450 到 450)
+
+        // 添加到愛心數組 - 添加物理屬性
+        hearts.push({
+          element: heartWrapper,
+          x: startX,
+          y: startY,
+          velocityX: velocityX,
+          velocityY: velocityY,
+          rotation: rotation,
+          rotationSpeed: rotationSpeed,
+          gravity: 980, // 重力加速度 (px/s²) - 接近真實重力
+          airResistance: 0.98, // 空氣阻力係數 (每幀速度衰減)
+          bounceDamping: 0.7, // 彈跳阻尼係數 (0-1，增加彈跳力度)
+          rotationDamping: 0.995, // 旋轉阻尼 (旋轉會逐漸減慢)
+          opacity: 1,
+          bounceCount: 0, // 彈跳次數
+          maxBounces: 3, // 最大彈跳次數
+          size: 1, // 愛心大小（用於縮放效果）
+          age: 0, // 愛心年齡（用於淡出）
+          stoppedTime: null // 停止時間（用於淡出計算）
+        });
+      }
+    }
+
+    // 愛心動畫循環 - 優化物理效果
+    function animateHearts() {
+      const now = performance.now();
+      const deltaTime = (now - (animateHearts.lastTime || now)) / 1000; // 轉換為秒
+      animateHearts.lastTime = now;
+
+      // 獲取螢幕邊界
+      const screenHeight = window.innerHeight;
+      const screenWidth = window.innerWidth;
+      const bottomBoundary = screenHeight - 15; // 底部邊界（考慮愛心大小）
+      const heartSize = 30; // 愛心大小的一半（用於碰撞檢測）
+      
+      hearts = hearts.filter(heart => {
+        // 增加年齡
+        heart.age += deltaTime;
+
+        // 應用重力
+        heart.velocityY += heart.gravity * deltaTime;
+
+        // 應用空氣阻力（速度越大，阻力越大）
+        // 使用基於時間的阻力，確保在不同幀率下表現一致
+        const resistanceFactor = Math.pow(heart.airResistance, deltaTime * 60); // 基於60fps的阻力
+        heart.velocityX *= resistanceFactor;
+        heart.velocityY *= resistanceFactor;
+
+        // 更新位置
+        heart.x += heart.velocityX * deltaTime;
+        heart.y += heart.velocityY * deltaTime;
+
+        // 左右邊界碰撞（彈性碰撞）- 極大增強反彈效果
+        const wallBounceDamping = 0.9; // 邊界反彈阻尼（幾乎完全反彈，保留90%能量）
+        if (heart.x < heartSize) {
+          heart.x = heartSize;
+          heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
+          // 碰撞時大幅增加旋轉變化，讓反彈更明顯
+          heart.rotationSpeed += (Math.random() - 0.5) * 15;
+        } else if (heart.x > screenWidth - heartSize) {
+          heart.x = screenWidth - heartSize;
+          heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
+          heart.rotationSpeed += (Math.random() - 0.5) * 15;
+        }
+
+        // 底部碰撞（彈跳效果）
+        if (heart.y >= bottomBoundary && heart.velocityY > 0) {
+          // 只有在向下移動時才彈跳
+          if (heart.bounceCount < heart.maxBounces && Math.abs(heart.velocityY) > 50) {
+            // 彈跳：反轉速度並應用阻尼
+            heart.velocityY = -heart.velocityY * heart.bounceDamping;
+            heart.velocityX *= 0.9; // 水平速度也稍微減弱
+            heart.y = bottomBoundary;
+            heart.bounceCount++;
+            
+            // 彈跳時增加旋轉變化
+            heart.rotationSpeed += (Math.random() - 0.5) * 5;
+            
+            // 每次彈跳後減少彈跳係數（模擬能量損失）
+            heart.bounceDamping *= 0.85;
+          } else {
+            // 不再彈跳，停在底部並逐漸減速
+            heart.y = bottomBoundary;
+            heart.velocityY = 0;
+            heart.velocityX *= 0.95; // 水平摩擦力
+            if (Math.abs(heart.velocityX) < 5) {
+              heart.velocityX = 0;
+              // 記錄停止時間
+              if (heart.stoppedTime === null) {
+                heart.stoppedTime = heart.age;
+              }
+            }
+          }
+        }
+
+        // 更新旋轉（應用旋轉阻尼）
+        heart.rotation += heart.rotationSpeed * deltaTime; // rotationSpeed 已經是度/秒
+        heart.rotationSpeed *= Math.pow(heart.rotationDamping, deltaTime * 60);
+
+        // 淡出效果：基於年齡和停止時間
+        if (heart.stoppedTime !== null) {
+          // 停止後0.5秒開始淡出，1秒內完成
+          const timeSinceStop = heart.age - heart.stoppedTime;
+          if (timeSinceStop > 0.5) {
+            const fadeProgress = Math.min(1, (timeSinceStop - 0.5) / 1);
+            heart.opacity = 1 - fadeProgress;
+          }
+        } else {
+          // 正常淡出：5秒後開始淡出，2秒內完成
+          const fadeStartAge = 5;
+          const fadeDuration = 2;
+          if (heart.age > fadeStartAge) {
+            const fadeProgress = Math.min(1, (heart.age - fadeStartAge) / fadeDuration);
+            heart.opacity = 1 - fadeProgress;
+          }
+        }
+
+        // 更新元素樣式
+        heart.element.style.left = (heart.x - heartSize) + 'px';
+        heart.element.style.top = (heart.y - heartSize) + 'px';
+        heart.element.style.transform = `rotate(${heart.rotation}deg) scale(${heart.size})`;
+        heart.element.style.opacity = heart.opacity;
+
+        // 移除條件：完全透明或超出螢幕很遠
+        if (heart.opacity <= 0 || heart.y > screenHeight + 500 || heart.x < -500 || heart.x > screenWidth + 500) {
+          heart.element.remove();
+          return false;
+        }
+
+        return true;
+      });
+
+      // 繼續動畫
+      animationId = requestAnimationFrame(animateHearts);
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('.tab:nth-child(' + (tab === 'waiting' ? 1 : 2) + ')').classList.add('active');
+      document.getElementById('waitingList').classList.toggle('hidden', tab !== 'waiting');
+      document.getElementById('missedList').classList.toggle('hidden', tab !== 'missed');
+    }
+
+    async function refresh() {
+      try {
+        const r = await fetch('/status');
+        if (!r.ok) throw new Error();
+        const j = await r.json();
+
+        document.getElementById('num').textContent = j.current?.toString().padStart(3, '0') ?? '--';
+
+        const waitList = document.getElementById('waitingList');
+        waitList.innerHTML = '';
+        j.waiting.forEach((n, i) => {
+          const div = document.createElement('div');
+          div.className = 'item';
+          const eta = (i + 1) * (j.waiting.length <= 5 ? 1 : j.waiting.length <= 10 ? 2 : 3);
+          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>等候時間 ${eta} 分</span>`;
+          waitList.appendChild(div);
+        });
+
+        // 只在載入時隨機選一句，之後不再更換
+        if (!window._summaryMsgIndex) {
+          const summaryMsgs = [
+            `等候 ${j.waiting.length} 人 (｡•ᴗ•｡)♡`,
+            `還有 ${j.waiting.length} 位唷～`,
+            `排隊 ${j.waiting.length} 人，先逛逛吧！`,
+            `前面有 ${j.waiting.length} 人，請耐心等候！`,
+            `目前 ${j.waiting.length} 人在等`
+          ];
+          window._summaryMsgIndex = Math.floor(Math.random() * summaryMsgs.length);
+          window._summaryMsgs = summaryMsgs;
+        }
+        // 每次只顯示同一句
+        document.getElementById('summary').textContent = window._summaryMsgs[window._summaryMsgIndex];
+
+        const missList = document.getElementById('missedList');
+        missList.innerHTML = '';
+        j.missed.forEach(n => {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>未報到</span>`;
+          missList.appendChild(div);
+        });
+
+      } catch {
+        document.getElementById('summary').textContent = '🚫 連線失敗';
+      }
+    }
+
+    window.onload = () => {
+      refresh();
+      setInterval(refresh, 2000);
+
+      // 初始化鴨子互動
+      initDuckInteraction();
+
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.warn("AdSense 無法顯示", e);
+      }
+    };
+
+    async function refresh() {
+      try {
+        const r = await fetch('/status');
+        if (!r.ok) throw new Error();
+        const j = await r.json();
+
+        document.getElementById('num').textContent = j.current?.toString().padStart(3, '0') ?? '--';
+
+        const waitList = document.getElementById('waitingList');
+        waitList.innerHTML = '';
+        j.waiting.forEach((n, i) => {
+          const div = document.createElement('div');
+          div.className = 'item';
+          const eta = (i + 1) * (j.waiting.length <= 5 ? 1 : j.waiting.length <= 10 ? 2 : 3);
+          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>等候時間 ${eta} 分</span>`;
+          waitList.appendChild(div);
+        });
+
+        // 只在載入時隨機選一句，之後不再更換
+        if (!window._summaryMsgIndex) {
+          const summaryMsgs = [
+            `等候 ${j.waiting.length} 人 (｡•ᴗ•｡)♡`,
+            `還有 ${j.waiting.length} 位唷～`,
+            `排隊 ${j.waiting.length} 人，先逛逛吧！`,
+            `前面有 ${j.waiting.length} 人，請耐心等候！`,
+            `目前 ${j.waiting.length} 人在等`
+          ];
+          window._summaryMsgIndex = Math.floor(Math.random() * summaryMsgs.length);
+          window._summaryMsgs = summaryMsgs;
+        }
+        // 每次只顯示同一句
+        document.getElementById('summary').textContent = window._summaryMsgs[window._summaryMsgIndex];
+
+        const missList = document.getElementById('missedList');
+        missList.innerHTML = '';
+        j.missed.forEach(n => {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>未報到</span>`;
+          missList.appendChild(div);
+        });
+
+      } catch {
+        document.getElementById('summary').textContent = '🚫 連線失敗';
+      }
+    }
+
+    window.onload = () => {
+      refresh();
+      setInterval(refresh, 2000);
+
+      // 初始化鴨子互動
+      initDuckInteraction();
+
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.warn("AdSense 無法顯示", e);
+      }
+    };
+  </script>
+  
+  <!-- 愛心容器 - 放在 body 層級，覆蓋整個螢幕 -->
+  <div class="hearts-container" id="heartsContainer"></div>
+
+</body>
+</html>
