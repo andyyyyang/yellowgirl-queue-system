@@ -79,7 +79,7 @@
       width: 100%;
       margin-bottom: 1.5rem;
       position: relative;
-      padding-top: 60px;
+      padding-top: 4rem;
     }
 
     /* SVG 容器 */
@@ -89,32 +89,148 @@
       height: auto;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
       background: transparent;
       padding: 0;
       z-index: 10;
+      position: relative;
+      cursor: pointer;
+      margin-bottom: -40px;
+    }
+
+    .duck-container {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* 彈性過渡，平滑銜接 */
+      z-index: 5;
+      will-change: transform;
+    }
+
+    .duck-container:hover {
+      transform: scale(1.05);
+    }
+
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      overflow: visible;
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px !important;
+      height: auto;
+      max-width: none;
+      will-change: transform;
+    }
+
+    @keyframes duckBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(-5deg); }
+      50% { transform: scale(1.05) rotate(5deg); }
+      75% { transform: scale(1.1) rotate(-3deg); }
+    }
+
+
+    .eye-part {
+      animation: pixelBlink 3s ease-in-out infinite;
+    }
+
+    /* 垂直排列的眼睛需要配合動畫 - 眼瞼從上往下閉合 */
+    /* 閉眼：第一顆先閉，第二顆緊接著閉 */
+    /* 睜眼：第二顆先開，第一顆再開 */
+    #eyePart1 {
+      animation-delay: 0s; /* 第一顆先閉眼 */
+    }
+
+    #eyePart2 {
+      animation-delay: 0.25s; /* 第二顆延遲閉眼，但先睜眼（延遲更長，效果更明顯） */
+    }
+
+    @keyframes pixelBlink {
+      0%, 90% {
+        height: 20.68px; /* 2個方塊 - 睜眼 */
+        transform: translateY(0);
+      }
+      92% {
+        height: 10.34px; /* 1個方塊 - 半閉眼 */
+        transform: translateY(10.34px); /* 向下移動，從頂部縮小 */
+      }
+      94% {
+        height: 0px; /* 0個方塊 - 完全閉眼 */
+        transform: translateY(20.68px); /* 繼續向下移動 */
+      }
+      96% {
+        height: 10.34px; /* 1個方塊 - 半閉眼 */
+        transform: translateY(10.34px); /* 向上移動 */
+      }
+      98%, 100% {
+        height: 20.68px; /* 2個方塊 - 睜眼 */
+        transform: translateY(0); /* 回到原位 */
+      }
+    }
+
+    .duck-container.blinking .eye-part {
+      animation: pixelBlinkFast 0.3s ease-in-out;
+      animation-fill-mode: none; /* 動畫結束後不保留狀態，允許立即重新觸發 */
+    }
+
+    /* 點擊時也保持延遲效果 */
+    .duck-container.blinking #eyePart1 {
+      animation-delay: 0s; /* 第一顆先閉眼 */
+    }
+
+    .duck-container.blinking #eyePart2 {
+      animation-delay: 0.1s; /* 第二顆延遲閉眼，但先睜眼（快速眨眼時延遲較短） */
+    }
+
+    @keyframes pixelBlinkFast {
+      0% {
+        height: 20.68px; /* 2個方塊 */
+        transform: translateY(0);
+      }
+      33% {
+        height: 10.34px; /* 1個方塊 */
+        transform: translateY(10.34px); /* 向下移動，從頂部縮小 */
+      }
+      66% {
+        height: 0px; /* 0個方塊 */
+        transform: translateY(20.68px); /* 繼續向下移動 */
+      }
+      100% {
+        height: 20.68px; /* 2個方塊 */
+        transform: translateY(0); /* 回到原位 */
+      }
     }
 
     .svg-wrap svg {
       width: 100%;
       height: auto;
-      max-width: 200px;
+      max-width: 300px;
+      display: block;
     }
 
-    /* 當前號碼顯示 */
-    .current-number {
-      font-size: 4rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      background: var(--white);
-      padding: 1rem 2rem;
-      border-radius: var(--border-radius);
-      box-shadow: 0 12px 40px var(--shadow-medium);
-      text-align: center;
-      min-width: 200px;
-      position: relative;
-      margin: 0rem 0;
-    }
+
+         /* 當前號碼顯示 */
+         .current-number {
+           font-size: 4rem;
+           font-weight: 800;
+           color: var(--text-dark);
+           background: var(--white);
+           padding: 1rem 2rem;
+           border-radius: var(--border-radius);
+           box-shadow: 0 12px 40px var(--shadow-medium);
+           text-align: center;
+           min-width: 200px;
+           position: relative;
+           margin: 2rem auto 0 auto;
+           z-index: 1;
+         }
 
 
 
@@ -165,6 +281,7 @@
     .summary {
       font-size: 1.1rem;
       color: var(--text-light);
+      margin-top: 1rem;
       margin-bottom: 1.5rem;
       text-align: center;
       font-weight: 500;
@@ -235,19 +352,20 @@
       }
 
       .landscape-left {
-        padding-top: 60px;
+        padding-top: 2rem;
       }
 
       .svg-wrap {
         width: 80%;
         max-width: 200px;
-        top: -60px;
+        margin-bottom: -30px;
       }
 
       .current-number {
         font-size: 3rem;
         padding: 1.5rem 2rem;
         min-width: 160px;
+        position: relative;
       }
 
       .tabs {
@@ -287,11 +405,13 @@
       .svg-wrap {
         width: 80%;
         max-width: 250px;
+        margin-bottom: -40px;
       }
 
       .current-number {
         font-size: 5rem;
         padding: 2.5rem 4rem;
+        position: relative;
       }
 
       .tabs {
@@ -318,12 +438,13 @@
       .svg-wrap {
         width: 80%;
         max-width: 180px;
-        top: -70px;
+        margin-bottom: -30px;
       }
 
       .current-number {
         font-size: 3rem;
         padding: 1.5rem 2.5rem;
+        position: relative;
       }
 
       .tabs {
@@ -351,11 +472,13 @@
       .svg-wrap {
         width: 80%;
         max-width: 300px;
+        margin-bottom: -50px;
       }
 
       .current-number {
         font-size: 6rem;
         padding: 3rem 5rem;
+        position: relative;
       }
 
       .tabs {
@@ -400,6 +523,7 @@
       box-shadow: 0 16px 48px var(--shadow-medium);
       transition: var(--transition);
     }
+
   </style>
 
   <!-- AdSense JS 載入 -->
@@ -446,36 +570,37 @@
   <div class="landscape-container">
     <div class="landscape-left">
       <div class="svg-wrap">
-    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 947.21 537.57">
-      <defs>
-        <style>
-          .cls-1 {
-            fill: #523834;
-          }
+    <div class="duck-container" id="duckContainer">
+      <svg id="duckSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 947.21 537.57">
+        <defs>
+          <style>
+            .cls-1 {
+              fill: #523834;
+            }
 
-          .cls-2 {
-            fill: #fcd04f;
-          }
+            .cls-2 {
+              fill: #fcd04f;
+            }
 
-          .cls-3 {
-            fill: #fff5d3;
-          }
+            .cls-3 {
+              fill: #fff5d3;
+            }
 
-          .cls-4 {
-            fill: #fff;
-          }
+            .cls-4 {
+              fill: #fff;
+            }
 
-          .cls-5 {
-            fill: #fff9ef;
-          }
+            .cls-5 {
+              fill: #fff9ef;
+            }
 
-          .cls-6 {
-            fill: #fbdeb1;
-          }
-        </style>
-      </defs>
-      <g id="_圖層_1" data-name="圖層 1">
-        <g>
+            .cls-6 {
+              fill: #fbdeb1;
+            }
+          </style>
+        </defs>
+        <g id="duck">
+          <!-- 鴨子 --> 
           <rect class="cls-1" x="391.18" y="103.33" width="20.68" height="20.68"/>
           <rect class="cls-1" x="411.86" y="103.33" width="20.68" height="20.68"/>
           <rect class="cls-1" x="432.54" y="103.33" width="20.68" height="20.68"/>
@@ -543,8 +668,8 @@
           <rect class="cls-1" x="453.35" y="454.85" width="20.68" height="20.68"/>
           <rect class="cls-1" x="474.02" y="454.89" width="20.68" height="20.68"/>
           <rect class="cls-1" x="474.02" y="475.53" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.22" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.22" y="206.72" width="20.68" height="20.68"/>
+          <rect class="cls-1 eye-part" id="eyePart1" x="453.22" y="186.04" width="20.68" height="20.68"/>
+          <rect class="cls-1 eye-part" id="eyePart2" x="453.22" y="206.72" width="20.68" height="20.68"/>
           <rect class="cls-6" x="473.89" y="124" width="20.68" height="20.68"/>
           <rect class="cls-3" x="411.9" y="124" width="20.68" height="20.68"/>
           <rect class="cls-3" x="432.54" y="124" width="20.68" height="20.68"/>
@@ -766,128 +891,11 @@
           <rect class="cls-1" x="432.42" y="103.33" width="20.68" height="20.68"/>
           <rect class="cls-1" x="391.61" y="103.33" width="20.68" height="20.68"/>
         </g>
-        <g>
-          <rect class="cls-5" x="677.76" y="213.76" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="761.25" y="180.36" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="744.55" y="180.36" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="744.55" y="197.06" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="761.25" y="197.06" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="711.16" y="180.36" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="711.16" y="197.06" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="777.95" y="197.06" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="761.25" y="213.76" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="694.46" y="180.36" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="694.46" y="197.06" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="677.76" y="197.06" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="694.46" y="213.76" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="711.16" y="213.62" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="727.85" y="213.76" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="744.55" y="213.76" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="711.16" y="230.32" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="727.85" y="230.32" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="744.55" y="230.32" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="727.85" y="247.02" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="694.46" y="230.32" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="711.16" y="247.02" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="727.85" y="263.58" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="744.55" y="246.88" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="761.25" y="230.32" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="777.95" y="213.76" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="727.85" y="197.06" width="16.7" height="16.7"/>
-        </g>
-        <g>
-          <rect class="cls-5" y="155.6" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="83.5" y="122.2" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="66.8" y="122.2" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="66.8" y="138.9" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="83.5" y="138.9" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="33.4" y="122.2" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="33.4" y="138.9" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="100.2" y="138.9" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="83.5" y="155.6" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="16.7" y="122.2" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="16.7" y="138.9" width="16.7" height="16.7"/>
-          <rect class="cls-5" y="138.9" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="16.7" y="155.6" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="33.4" y="155.46" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="50.1" y="155.6" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="66.8" y="155.6" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="33.4" y="172.16" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="50.1" y="172.16" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="66.8" y="172.16" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="50.1" y="188.86" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="16.7" y="172.16" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="33.4" y="188.86" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="50.1" y="205.42" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="66.8" y="188.72" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="83.5" y="172.16" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="100.2" y="155.6" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="50.1" y="138.9" width="16.7" height="16.7"/>
-        </g>
-        <g>
-          <rect class="cls-5" x="135.97" y="317.7" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="219.47" y="284.3" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="202.77" y="284.3" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="202.77" y="301" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="219.47" y="301" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="169.37" y="284.3" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="169.37" y="301" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="236.17" y="301" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="219.47" y="317.7" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="152.67" y="284.3" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="152.67" y="301" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="135.97" y="301" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="152.67" y="317.7" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="169.37" y="317.56" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="186.07" y="317.7" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="202.77" y="317.7" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="169.37" y="334.26" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="186.07" y="334.26" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="202.77" y="334.26" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="186.07" y="350.96" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="152.67" y="334.26" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="169.37" y="350.96" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="186.07" y="367.53" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="202.77" y="350.83" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="219.47" y="334.26" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="236.17" y="317.7" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="186.07" y="301" width="16.7" height="16.7"/>
-        </g>
-        <g>
-          <rect class="cls-5" x="830.31" y="35.88" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="913.81" y="2.48" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="897.11" y="2.48" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="897.11" y="19.18" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="913.81" y="19.18" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="863.71" y="2.48" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="863.71" y="19.18" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="930.51" y="19.18" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="913.81" y="35.88" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="847.01" y="2.48" width="16.7" height="16.7"/>
-          <rect class="cls-4" x="847.01" y="19.18" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="830.31" y="19.18" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="847.01" y="35.88" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="863.71" y="35.75" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="880.41" y="35.88" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="897.11" y="35.88" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="863.71" y="52.45" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="880.41" y="52.45" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="897.11" y="52.45" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="880.41" y="69.15" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="847.01" y="52.45" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="863.71" y="69.15" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="880.41" y="85.71" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="897.11" y="69.01" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="913.81" y="52.45" width="16.7" height="16.7"/>
-          <rect class="cls-6" x="930.51" y="35.88" width="16.7" height="16.7"/>
-          <rect class="cls-5" x="880.41" y="19.18" width="16.7" height="16.7"/>
-        </g>
-      </g>
-    </svg>
+      </svg>
       </div>
-
-      <div class="current-number" id="num">--</div>
     </div>
+
+    <div class="current-number" id="num">--</div>
     
     <div class="summary" id="summary">載入中...</div>
     
@@ -918,6 +926,351 @@
   <script>
     let currentTab = 'waiting';
 
+    // 鴨子互動功能
+    let duckContainer = null;
+    let blinkInterval = null;
+    let heartsContainer = null;
+    let hearts = []; // 存儲所有活動的愛心
+    let bounceTimeouts = []; // 追蹤動畫 timeout，用於清理
+
+    function initDuckInteraction() {
+      duckContainer = document.getElementById('duckContainer');
+      heartsContainer = document.getElementById('heartsContainer');
+
+      if (duckContainer) {
+        // 點擊事件
+        duckContainer.addEventListener('click', function(e) {
+          e.preventDefault();
+          duckClicked();
+        });
+
+        // 觸摸事件（手機優先）
+        duckContainer.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          duckClicked();
+        });
+
+        // 開始自動眨眼
+        startAutoBlink();
+      }
+
+      // 開始愛心動畫循環
+      if (heartsContainer) {
+        animateHearts();
+      }
+    }
+
+    function duckClicked() {
+      if (!duckContainer) return;
+
+      // 清除之前的動畫 timeout，讓新動畫從當前狀態平滑銜接
+      bounceTimeouts.forEach(timeout => clearTimeout(timeout));
+      bounceTimeouts = [];
+
+      // 創建彈跳動畫序列（快速點擊時會從當前狀態平滑過渡）
+      const bounceSequence = [
+        { scale: 1.12, rotate: -6, delay: 0 },
+        { scale: 1.05, rotate: 4, delay: 80 },
+        { scale: 1.1, rotate: -3, delay: 160 },
+        { scale: 1, rotate: 0, delay: 240 }
+      ];
+
+      // 執行動畫序列（使用 transition 平滑過渡）
+      bounceSequence.forEach((step) => {
+        const timeout = setTimeout(() => {
+          duckContainer.style.transform = `scale(${step.scale}) rotate(${step.rotate}deg)`;
+        }, step.delay);
+        bounceTimeouts.push(timeout);
+      });
+
+      // 觸發眨眼（允許快速點擊時多次眨眼）
+      blink();
+
+      // 添加音效（如果支持）
+      playDuckSound();
+
+      // 創建3顆愛心
+      createHearts(3);
+    }
+
+    function blink() {
+      // 如果正在眨眼，先重置動畫以允許快速連續眨眼
+      if (duckContainer.classList.contains('blinking')) {
+        duckContainer.classList.remove('blinking');
+        // 強制重排以確保動畫重置
+        void duckContainer.offsetWidth;
+      }
+
+      // 添加眨眼動畫類
+      duckContainer.classList.add('blinking');
+
+      // 使用 animationend 事件來移除類別
+      const handleBlinkEnd = (e) => {
+        if (e.animationName === 'pixelBlinkFast') {
+          duckContainer.classList.remove('blinking');
+          duckContainer.removeEventListener('animationend', handleBlinkEnd);
+        }
+      };
+      duckContainer.addEventListener('animationend', handleBlinkEnd);
+    }
+
+    function startAutoBlink() {
+      // 每3-8秒隨機眨眼
+      function scheduleBlink() {
+        const delay = 3000 + Math.random() * 5000; // 3-8秒
+        blinkInterval = setTimeout(() => {
+          blink(); // 移除 isBlinking 檢查，允許與點擊眨眼同時進行
+          scheduleBlink(); // 繼續下一個眨眼
+        }, delay);
+      }
+
+      scheduleBlink();
+    }
+
+    function playDuckSound() {
+      // 使用Web Audio API創建鈴鐺聲
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // 創建多個振盪器模擬鈴鐺的諧波
+        const frequencies = [1200, 1800, 2400]; // 鈴鐺的基頻和諧波
+        const oscillators = [];
+        
+        frequencies.forEach((freq, index) => {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+          
+          // 鈴鐺聲的增益：基頻較強，諧波逐漸減弱
+          const baseGain = 0.15 / (index + 1);
+          gainNode.gain.setValueAtTime(baseGain, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillators.push({osc: oscillator, gain: gainNode});
+        });
+        
+        // 啟動所有振盪器
+        oscillators.forEach(({osc}) => {
+          osc.start(audioContext.currentTime);
+          osc.stop(audioContext.currentTime + 0.5);
+        });
+      } catch (e) {
+        // 如果音效失敗，靜默處理
+        console.log('音效播放失敗');
+      }
+    }
+
+    // 愛心SVG模板（粉紅色愛心）
+    function getHeartSVG() {
+      return `<svg class="heart" xmlns="http://www.w3.org/2000/svg" viewBox="677 180 100 80">
+        <defs>
+          <style>
+            .heart-cls-4 { fill: #ffb3d9; }
+            .heart-cls-5 { fill: #ff69b4; }
+            .heart-cls-6 { fill: #ffc0cb; }
+          </style>
+        </defs>
+        <g>
+        <rect class="heart-cls-5" x="677.76" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="761.25" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="761.25" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-4" x="711.16" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="777.95" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="761.25" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-4" x="694.46" y="180.36" width="16.7" height="16.7"/>
+        <rect class="heart-cls-4" x="694.46" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="677.76" y="197.06" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="694.46" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="213.62" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="744.55" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="247.02" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="694.46" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="711.16" y="247.02" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="727.85" y="263.58" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="744.55" y="246.88" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="761.25" y="230.32" width="16.7" height="16.7"/>
+        <rect class="heart-cls-6" x="777.95" y="213.76" width="16.7" height="16.7"/>
+        <rect class="heart-cls-5" x="727.85" y="197.06" width="16.7" height="16.7"/>
+        </g>
+      </svg>`;
+    }
+
+    // 創建愛心
+    function createHearts(count) {
+      if (!heartsContainer || !duckContainer) return;
+
+      // 獲取鴨子的位置
+      const duckRect = duckContainer.getBoundingClientRect();
+      const startX = duckRect.left + duckRect.width / 2;
+      const startY = duckRect.top + duckRect.height / 2;
+
+      for (let i = 0; i < count; i++) {
+        // 創建愛心元素
+        const heartWrapper = document.createElement('div');
+        heartWrapper.className = 'heart';
+        heartWrapper.innerHTML = getHeartSVG();
+        heartWrapper.style.position = 'absolute';
+        heartWrapper.style.left = startX + 'px';
+        heartWrapper.style.top = startY + 'px';
+        heartWrapper.style.opacity = '1';
+        heartWrapper.style.transformOrigin = 'center center';
+        
+        heartsContainer.appendChild(heartWrapper);
+
+        // 隨機初始速度（向上和側向）- 大幅增加噴射力度
+        const velocityX = (Math.random() - 0.5) * 800; // -400 到 400 (極大側向速度)
+        const velocityY = -350 - Math.random() * 150; // -500 到 -350 (適中的向上速度)
+        const rotation = (Math.random() - 0.5) * 360; // 隨機旋轉
+        const rotationSpeed = (Math.random() - 0.5) * 900; // 旋轉速度 (度/秒，-450 到 450)
+
+        // 添加到愛心數組 - 添加物理屬性
+        hearts.push({
+          element: heartWrapper,
+          x: startX,
+          y: startY,
+          velocityX: velocityX,
+          velocityY: velocityY,
+          rotation: rotation,
+          rotationSpeed: rotationSpeed,
+          gravity: 980, // 重力加速度 (px/s²) - 接近真實重力
+          airResistance: 0.98, // 空氣阻力係數 (每幀速度衰減)
+          bounceDamping: 0.7, // 彈跳阻尼係數 (0-1，增加彈跳力度)
+          rotationDamping: 0.995, // 旋轉阻尼 (旋轉會逐漸減慢)
+          opacity: 1,
+          bounceCount: 0, // 彈跳次數
+          maxBounces: 3, // 最大彈跳次數
+          size: 1, // 愛心大小（用於縮放效果）
+          age: 0, // 愛心年齡（用於淡出）
+          stoppedTime: null // 停止時間（用於淡出計算）
+        });
+      }
+    }
+
+    // 愛心動畫循環 - 優化物理效果
+    function animateHearts() {
+      const now = performance.now();
+      const deltaTime = (now - (animateHearts.lastTime || now)) / 1000; // 轉換為秒
+      animateHearts.lastTime = now;
+
+      // 獲取螢幕邊界
+      const screenHeight = window.innerHeight;
+      const screenWidth = window.innerWidth;
+      const bottomBoundary = screenHeight - 15; // 底部邊界（考慮愛心大小）
+      const heartSize = 30; // 愛心大小的一半（用於碰撞檢測）
+      
+      hearts = hearts.filter(heart => {
+        // 增加年齡
+        heart.age += deltaTime;
+
+        // 應用重力
+        heart.velocityY += heart.gravity * deltaTime;
+
+        // 應用空氣阻力（速度越大，阻力越大）
+        // 使用基於時間的阻力，確保在不同幀率下表現一致
+        const resistanceFactor = Math.pow(heart.airResistance, deltaTime * 60); // 基於60fps的阻力
+        heart.velocityX *= resistanceFactor;
+        heart.velocityY *= resistanceFactor;
+
+        // 更新位置
+        heart.x += heart.velocityX * deltaTime;
+        heart.y += heart.velocityY * deltaTime;
+
+        // 左右邊界碰撞（彈性碰撞）- 極大增強反彈效果
+        const wallBounceDamping = 0.9; // 邊界反彈阻尼（幾乎完全反彈，保留90%能量）
+        if (heart.x < heartSize) {
+          heart.x = heartSize;
+          heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
+          // 碰撞時大幅增加旋轉變化，讓反彈更明顯
+          heart.rotationSpeed += (Math.random() - 0.5) * 15;
+        } else if (heart.x > screenWidth - heartSize) {
+          heart.x = screenWidth - heartSize;
+          heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
+          heart.rotationSpeed += (Math.random() - 0.5) * 15;
+        }
+
+        // 底部碰撞（彈跳效果）
+        if (heart.y >= bottomBoundary && heart.velocityY > 0) {
+          // 只有在向下移動時才彈跳
+          if (heart.bounceCount < heart.maxBounces && Math.abs(heart.velocityY) > 50) {
+            // 彈跳：反轉速度並應用阻尼
+            heart.velocityY = -heart.velocityY * heart.bounceDamping;
+            heart.velocityX *= 0.9; // 水平速度也稍微減弱
+            heart.y = bottomBoundary;
+            heart.bounceCount++;
+            
+            // 彈跳時增加旋轉變化
+            heart.rotationSpeed += (Math.random() - 0.5) * 5;
+            
+            // 每次彈跳後減少彈跳係數（模擬能量損失）
+            heart.bounceDamping *= 0.85;
+          } else {
+            // 不再彈跳，停在底部並逐漸減速
+            heart.y = bottomBoundary;
+            heart.velocityY = 0;
+            heart.velocityX *= 0.95; // 水平摩擦力
+            if (Math.abs(heart.velocityX) < 5) {
+              heart.velocityX = 0;
+              // 記錄停止時間
+              if (heart.stoppedTime === null) {
+                heart.stoppedTime = heart.age;
+              }
+            }
+          }
+        }
+
+        // 更新旋轉（應用旋轉阻尼）
+        heart.rotation += heart.rotationSpeed * deltaTime; // rotationSpeed 已經是度/秒
+        heart.rotationSpeed *= Math.pow(heart.rotationDamping, deltaTime * 60);
+
+        // 淡出效果：基於年齡和停止時間
+        if (heart.stoppedTime !== null) {
+          // 停止後0.5秒開始淡出，1秒內完成
+          const timeSinceStop = heart.age - heart.stoppedTime;
+          if (timeSinceStop > 0.5) {
+            const fadeProgress = Math.min(1, (timeSinceStop - 0.5) / 1);
+            heart.opacity = 1 - fadeProgress;
+          }
+        } else {
+          // 正常淡出：5秒後開始淡出，2秒內完成
+          const fadeStartAge = 5;
+          const fadeDuration = 2;
+          if (heart.age > fadeStartAge) {
+            const fadeProgress = Math.min(1, (heart.age - fadeStartAge) / fadeDuration);
+            heart.opacity = 1 - fadeProgress;
+          }
+        }
+
+        // 更新元素樣式
+        heart.element.style.left = (heart.x - heartSize) + 'px';
+        heart.element.style.top = (heart.y - heartSize) + 'px';
+        heart.element.style.transform = `rotate(${heart.rotation}deg) scale(${heart.size})`;
+        heart.element.style.opacity = heart.opacity;
+
+        // 移除條件：完全透明或超出螢幕很遠
+        if (heart.opacity <= 0 || heart.y > screenHeight + 500 || heart.x < -500 || heart.x > screenWidth + 500) {
+          heart.element.remove();
+          return false;
+        }
+
+        return true;
+      });
+
+      // 繼續動畫
+      animationId = requestAnimationFrame(animateHearts);
+    }
+
     function switchTab(tab) {
       currentTab = tab;
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -944,20 +1297,21 @@
           waitList.appendChild(div);
         });
 
-        // 只在載入時隨機選一句，之後不再更換
+        // 每次更新都重新生成摘要信息
         if (!window._summaryMsgIndex) {
-          const summaryMsgs = [
-            `等候 ${j.waiting.length} 人 (｡•ᴗ•｡)♡`,
-            `還有 ${j.waiting.length} 位唷～`,
-            `排隊 ${j.waiting.length} 人，先逛逛吧！`,
-            `前面有 ${j.waiting.length} 人，請耐心等候！`,
-            `目前 ${j.waiting.length} 人在等`
-          ];
-          window._summaryMsgIndex = Math.floor(Math.random() * summaryMsgs.length);
-          window._summaryMsgs = summaryMsgs;
+          window._summaryMsgIndex = Math.floor(Math.random() * 5); // 隨機選擇訊息模板
         }
-        // 每次只顯示同一句
-        document.getElementById('summary').textContent = window._summaryMsgs[window._summaryMsgIndex];
+
+        const summaryMsgs = [
+          `等候 ${j.waiting.length} 人 (｡•ᴗ•｡)♡`,
+          `還有 ${j.waiting.length} 位唷～`,
+          `排隊 ${j.waiting.length} 人，先逛逛吧！`,
+          `前面有 ${j.waiting.length} 人，請耐心等候！`,
+          `目前 ${j.waiting.length} 人在等`
+        ];
+
+        // 每次都更新摘要信息，包含最新的等待人數
+        document.getElementById('summary').textContent = summaryMsgs[window._summaryMsgIndex];
 
         const missList = document.getElementById('missedList');
         missList.innerHTML = '';
@@ -976,6 +1330,24 @@
     window.onload = () => {
       refresh();
       setInterval(refresh, 2000);
+
+      // 初始化鴨子互動
+      initDuckInteraction();
+
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.warn("AdSense 無法顯示", e);
+      }
+    };
+
+    window.onload = () => {
+      refresh();
+      setInterval(refresh, 2000);
+
+      // 初始化鴨子互動
+      initDuckInteraction();
+
       try {
         (adsbygoogle = window.adsbygoogle || []).push({});
       } catch (e) {
@@ -983,5 +1355,9 @@
       }
     };
   </script>
+  
+  <!-- 愛心容器 - 放在 body 層級，覆蓋整個螢幕 -->
+  <div class="hearts-container" id="heartsContainer"></div>
+
 </body>
 </html>

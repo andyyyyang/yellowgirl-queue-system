@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.5 200">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #8ac740;
+      }
+
+      .cls-2 {
+        fill: #ef9b42;
+      }
+
+      .cls-3 {
+        fill: #eb1021;
+      }
+
+      .cls-4 {
+        fill: #e88023;
+      }
+    </style>
+  </defs>
+  <g id="OBJECTS">
+    <g>
+      <path class="cls-2" d="M50,0h12.5v12.5h-12.5V0Z"/>
+      <path class="cls-2" d="M62.5,0h12.5v12.5h-12.5V0Z"/>
+      <path class="cls-2" d="M75,0h12.5v12.5h-12.5V0Z"/>
+      <path class="cls-2" d="M87.5,0h12.5v12.5h-12.5V0Z"/>
+      <path class="cls-4" d="M100,0h12.5v12.5h-12.5V0Z"/>
+      <path class="cls-2" d="M37.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M75,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M112.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M37.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M75,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M112.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M25,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M37.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path d="M50,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M75,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path d="M100,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M112.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M125,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M25,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M37.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M62.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M75,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M87.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M112.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M125,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M37.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M75,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M112.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M12.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M50,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M75,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M100,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M137.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M0,87.5h12.5v12.5H0v-12.5Z"/>
+      <path class="cls-2" d="M12.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M25,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M37.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M75,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M112.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M125,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M137.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M150,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M0,100h12.5v12.5H0v-12.5Z"/>
+      <path class="cls-4" d="M12.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M25,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M37.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-1" d="M75,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M112.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M125,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M137.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M150,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M75,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-1" d="M75,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M62.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M75,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M87.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M62.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M87.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M50,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M62.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M87.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-3" d="M100,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M37.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M62.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M87.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M112.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M37.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M50,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M62.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-4" d="M87.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M100,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path class="cls-2" d="M112.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+    </g>
+  </g>
+</svg>

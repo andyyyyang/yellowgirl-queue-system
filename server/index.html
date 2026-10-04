@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>黃毛丫頭叫號系統</title>
   <style>
     :root {
-      --primary-yellow: #ffe066;
+      --primary-yellow: #f0a090;
       --secondary-yellow: #fff8e1;
       --accent-brown: #8B4513;
       --text-dark: #523834;
       --text-light: #8B7355;
-      --white: #FFFFFF;
+      --white: #fefcf5;
       --shadow-light: rgba(139, 69, 19, 0.1);
       --shadow-medium: rgba(139, 69, 19, 0.15);
       --shadow-heavy: rgba(139, 69, 19, 0.2);
@@ -26,7 +27,32 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--secondary-yellow);
+      background: linear-gradient(135deg, #fefcf5 0%, #fff8e1 50%, #fefcf5 100%);
+      background-image:
+        /* 雪花圖案 */
+        radial-gradient(circle at 10% 20%, rgba(240, 160, 144, 0.6) 1px, transparent 2px),
+        radial-gradient(circle at 20% 40%, rgba(221, 123, 89, 0.4) 1px, transparent 2px),
+        radial-gradient(circle at 30% 60%, rgba(240, 160, 144, 0.5) 1px, transparent 2px),
+        radial-gradient(circle at 40% 80%, rgba(221, 123, 89, 0.3) 1px, transparent 2px),
+        radial-gradient(circle at 50% 10%, rgba(240, 160, 144, 0.4) 1px, transparent 2px),
+        radial-gradient(circle at 60% 30%, rgba(221, 123, 89, 0.5) 1px, transparent 2px),
+        radial-gradient(circle at 70% 50%, rgba(240, 160, 144, 0.3) 1px, transparent 2px),
+        radial-gradient(circle at 80% 70%, rgba(221, 123, 89, 0.4) 1px, transparent 2px),
+        radial-gradient(circle at 90% 90%, rgba(240, 160, 144, 0.5) 1px, transparent 2px),
+        /* 淺黃色雪花點 */
+        radial-gradient(circle at 15% 35%, rgba(255, 248, 225, 0.7) 1.5px, transparent 3px),
+        radial-gradient(circle at 35% 15%, rgba(255, 248, 225, 0.6) 1px, transparent 2px),
+        radial-gradient(circle at 55% 45%, rgba(255, 248, 225, 0.8) 1.2px, transparent 2.5px),
+        radial-gradient(circle at 75% 25%, rgba(255, 248, 225, 0.65) 1px, transparent 2px),
+        radial-gradient(circle at 25% 65%, rgba(255, 248, 225, 0.75) 1.3px, transparent 2.5px),
+        radial-gradient(circle at 45% 85%, rgba(255, 248, 225, 0.6) 1px, transparent 2px),
+        radial-gradient(circle at 65% 5%, rgba(255, 248, 225, 0.7) 1.1px, transparent 2.2px),
+        radial-gradient(circle at 85% 55%, rgba(255, 248, 225, 0.65) 1px, transparent 2px),
+        /* 雪地陰影效果 */
+        linear-gradient(to bottom, rgba(221, 123, 89, 0.1) 0%, transparent 30%),
+        linear-gradient(to right, rgba(240, 160, 144, 0.05) 0%, transparent 20%);
+      background-size: 150px 150px, 120px 120px, 180px 180px, 100px 100px, 140px 140px, 160px 160px, 130px 130px, 170px 170px, 110px 110px, 135px 135px, 95px 95px, 165px 165px, 105px 105px, 155px 155px, 125px 125px, 145px 145px, 115px 115px, 100% 50%, 100% 100%;
+      background-attachment: fixed;
       min-height: 100vh;
       color: var(--text-dark);
       line-height: 1;
@@ -34,10 +60,20 @@
 
     /* Header 設計 */
     header {
-      background: var(--primary-yellow);
+      background: linear-gradient(135deg, rgba(254, 252, 245, 0.95) 0%, rgba(255, 248, 225, 0.95) 100%);
+      background-image:
+        linear-gradient(to bottom, rgba(254, 252, 245, 0.6) 0%, rgba(255, 248, 225, 0.4) 40%, rgba(254, 252, 245, 0.2) 70%, transparent 100%),
+        radial-gradient(circle at 20% 30%, rgba(221, 123, 89, 0.2) 1px, transparent 2px),
+        radial-gradient(circle at 70% 60%, rgba(240, 160, 144, 0.15) 1px, transparent 2px),
+        radial-gradient(circle at 90% 80%, rgba(221, 123, 89, 0.1) 1px, transparent 2px),
+        linear-gradient(to bottom, rgba(221, 123, 89, 0.05) 0%, transparent 100%);
+      background-size: 80px 80px, 100px 100px, 60px 60px, 100% 100%;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
       padding: 1rem 1rem;
       text-align: center;
-      box-shadow: 0 2px 12px var(--shadow-light);
       position: sticky;
       top: 0;
       z-index: 120;
@@ -53,11 +89,17 @@
       filter: drop-shadow(0 1px 4px var(--shadow-light));
     }
 
+    .logo svg {
+      fill: #dd7b59;
+      filter: drop-shadow(0 1px 3px rgba(221, 123, 89, 0.4));
+    }
+
     .title {
       font-size: 1.25rem;
       font-weight: 600;
-      color: var(--text-dark);
+      color: #dd7b59;
       margin: 0;
+      text-shadow: 0 1px 2px rgba(221, 123, 89, 0.3);
     }
 
     /* 主要內容容器 */
@@ -101,7 +143,8 @@
     .duck-container {
       position: relative;
       display: inline-block;
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* 彈性過渡，平滑銜接 */
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* 彈性過渡，平滑銜接 */
       z-index: 5;
       will-change: transform;
     }
@@ -130,10 +173,23 @@
     }
 
     @keyframes duckBounce {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      25% { transform: scale(1.1) rotate(-5deg); }
-      50% { transform: scale(1.05) rotate(5deg); }
-      75% { transform: scale(1.1) rotate(-3deg); }
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      25% {
+        transform: scale(1.1) rotate(-5deg);
+      }
+
+      50% {
+        transform: scale(1.05) rotate(5deg);
+      }
+
+      75% {
+        transform: scale(1.1) rotate(-3deg);
+      }
     }
 
 
@@ -145,66 +201,97 @@
     /* 閉眼：第一顆先閉，第二顆緊接著閉 */
     /* 睜眼：第二顆先開，第一顆再開 */
     #eyePart1 {
-      animation-delay: 0s; /* 第一顆先閉眼 */
+      animation-delay: 0s;
+      /* 第一顆先閉眼 */
     }
 
     #eyePart2 {
-      animation-delay: 0.25s; /* 第二顆延遲閉眼，但先睜眼（延遲更長，效果更明顯） */
+      animation-delay: 0.25s;
+      /* 第二顆延遲閉眼，但先睜眼（延遲更長，效果更明顯） */
     }
 
     @keyframes pixelBlink {
-      0%, 90% {
-        height: 20.68px; /* 2個方塊 - 睜眼 */
+
+      0%,
+      90% {
+        height: 20.68px;
+        /* 2個方塊 - 睜眼 */
         transform: translateY(0);
       }
+
       92% {
-        height: 10.34px; /* 1個方塊 - 半閉眼 */
-        transform: translateY(10.34px); /* 向下移動，從頂部縮小 */
+        height: 10.34px;
+        /* 1個方塊 - 半閉眼 */
+        transform: translateY(10.34px);
+        /* 向下移動，從頂部縮小 */
       }
+
       94% {
-        height: 0px; /* 0個方塊 - 完全閉眼 */
-        transform: translateY(20.68px); /* 繼續向下移動 */
+        height: 0px;
+        /* 0個方塊 - 完全閉眼 */
+        transform: translateY(20.68px);
+        /* 繼續向下移動 */
       }
+
       96% {
-        height: 10.34px; /* 1個方塊 - 半閉眼 */
-        transform: translateY(10.34px); /* 向上移動 */
+        height: 10.34px;
+        /* 1個方塊 - 半閉眼 */
+        transform: translateY(10.34px);
+        /* 向上移動 */
       }
-      98%, 100% {
-        height: 20.68px; /* 2個方塊 - 睜眼 */
-        transform: translateY(0); /* 回到原位 */
+
+      98%,
+      100% {
+        height: 20.68px;
+        /* 2個方塊 - 睜眼 */
+        transform: translateY(0);
+        /* 回到原位 */
       }
     }
 
     .duck-container.blinking .eye-part {
       animation: pixelBlinkFast 0.3s ease-in-out;
-      animation-fill-mode: none; /* 動畫結束後不保留狀態，允許立即重新觸發 */
+      animation-fill-mode: none;
+      /* 動畫結束後不保留狀態，允許立即重新觸發 */
     }
 
     /* 點擊時也保持延遲效果 */
     .duck-container.blinking #eyePart1 {
-      animation-delay: 0s; /* 第一顆先閉眼 */
+      animation-delay: 0s;
+      /* 第一顆先閉眼 */
     }
 
     .duck-container.blinking #eyePart2 {
-      animation-delay: 0.1s; /* 第二顆延遲閉眼，但先睜眼（快速眨眼時延遲較短） */
+      animation-delay: 0.1s;
+      /* 第二顆延遲閉眼，但先睜眼（快速眨眼時延遲較短） */
     }
 
     @keyframes pixelBlinkFast {
       0% {
-        height: 20.68px; /* 2個方塊 */
+        height: 20.68px;
+        /* 2個方塊 */
         transform: translateY(0);
       }
+
       33% {
-        height: 10.34px; /* 1個方塊 */
-        transform: translateY(10.34px); /* 向下移動，從頂部縮小 */
+        height: 10.34px;
+        /* 1個方塊 */
+        transform: translateY(10.34px);
+        /* 向下移動，從頂部縮小 */
       }
+
       66% {
-        height: 0px; /* 0個方塊 */
-        transform: translateY(20.68px); /* 繼續向下移動 */
+        height: 0px;
+        /* 0個方塊 */
+        transform: translateY(20.68px);
+        /* 繼續向下移動 */
       }
+
       100% {
-        height: 20.68px; /* 2個方塊 */
-        transform: translateY(0); /* 回到原位 */
+        height: 20.68px;
+        /* 2個方塊 */
+        transform: translateY(0);
+        /* 回到原位 */
       }
     }
 
@@ -216,21 +303,21 @@
     }
 
 
-         /* 當前號碼顯示 */
-         .current-number {
-           font-size: 4rem;
-           font-weight: 800;
-           color: var(--text-dark);
-           background: var(--white);
-           padding: 1rem 2rem;
-           border-radius: var(--border-radius);
-           box-shadow: 0 12px 40px var(--shadow-medium);
-           text-align: center;
-           min-width: 200px;
-           position: relative;
-           margin: 2rem auto 0 auto;
-           z-index: 1;
-         }
+    /* 當前號碼顯示 */
+    .current-number {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      background: var(--white);
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 12px 40px var(--shadow-medium);
+      text-align: center;
+      min-width: 200px;
+      position: relative;
+      margin: 2rem auto 0 auto;
+      z-index: 1;
+    }
 
 
 
@@ -298,31 +385,169 @@
 
     /* 列表項目 */
     .item {
-      background: var(--white);
-      border-radius: var(--border-radius);
-      box-shadow: 0 4px 16px var(--shadow-light);
+      background: linear-gradient(135deg, rgba(240, 160, 144, 0.95) 0%, rgba(221, 123, 89, 0.85) 100%);
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 1.1rem;
       font-weight: 600;
       transition: var(--transition);
-      border-left: 4px solid var(--primary-yellow);
+      padding: 1rem 1.5rem;
+      margin: 0.3rem 0;
+      border-radius: 12% 8% 6% 14%;
+      box-shadow:
+        0 8px 25px rgba(180, 80, 70, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5),
+        inset -3px -3px 5px rgba(150, 60, 50, 0.2),
+        0 0 0 1px rgba(120, 40, 30, 0.3);
+      border: 2px solid rgba(221, 123, 89, 0.4);
+      transform: rotate(-1.5deg) translateX(1px) translateY(0px) scale(0.95);
+    }
+
+    /* 隨機變化 */
+    .item:nth-child(2) {
+      transform: rotate(1.2deg) translateX(-0.6px) translateY(0.3px) scale(1.01);
+      border-radius: 8% 14% 10% 6%;
+    }
+
+    .item:nth-child(3) {
+      transform: rotate(-0.4deg) translateX(0.8px) translateY(-0.3px) scale(0.98);
+      border-radius: 14% 6% 12% 8%;
+    }
+
+    .item:nth-child(4) {
+      transform: rotate(0.8deg) translateX(-0.5px) translateY(0.6px) scale(1.02);
+      border-radius: 10% 12% 8% 14%;
+    }
+
+    .item:nth-child(5) {
+      transform: rotate(-1.0deg) translateX(0.7px) translateY(-0.5px) scale(0.99);
+      border-radius: 6% 10% 14% 8%;
+    }
+
+    .item:nth-child(6) {
+      transform: rotate(0.6deg) translateX(-0.8px) translateY(0.4px) scale(1.00);
+      border-radius: 12% 8% 6% 16%;
+    }
+
+    .item:nth-child(7) {
+      transform: rotate(-0.7deg) translateX(0.5px) translateY(-0.6px) scale(0.99);
+      border-radius: 16% 10% 8% 12%;
+    }
+
+    .item:nth-child(8) {
+      transform: rotate(1.0deg) translateX(-0.4px) translateY(0.5px) scale(1.01);
+      border-radius: 8% 16% 12% 6%;
+    }
+
+    .item:nth-child(9) {
+      transform: rotate(-0.3deg) translateX(0.6px) translateY(-0.4px) scale(0.98);
+      border-radius: 14% 8% 16% 10%;
+    }
+
+    .item:nth-child(10) {
+      transform: rotate(1.3deg) translateX(-0.7px) translateY(0.7px) scale(1.02);
+      border-radius: 10% 14% 6% 12%;
+    }
+
+    .item:nth-child(11) {
+      transform: rotate(-0.8deg) translateX(0.9px) translateY(-0.4px) scale(0.99);
+      border-radius: 12% 6% 14% 8%;
+    }
+
+    .item:nth-child(12) {
+      transform: rotate(0.5deg) translateX(-0.5px) translateY(0.3px) scale(1.01);
+      border-radius: 8% 12% 10% 14%;
+    }
+
+    .item:nth-child(13) {
+      transform: rotate(-1.1deg) translateX(0.4px) translateY(-0.7px) scale(0.98);
+      border-radius: 16% 8% 12% 6%;
+    }
+
+    .item:nth-child(14) {
+      transform: rotate(0.9deg) translateX(-0.8px) translateY(0.5px) scale(1.02);
+      border-radius: 6% 16% 8% 12%;
+    }
+
+    .item:nth-child(15) {
+      transform: rotate(-0.4deg) translateX(0.6px) translateY(-0.5px) scale(0.99);
+      border-radius: 12% 10% 16% 8%;
+    }
+
+    .item:nth-child(16) {
+      transform: rotate(1.1deg) translateX(-0.6px) translateY(0.6px) scale(1.01);
+      border-radius: 10% 6% 12% 16%;
+    }
+
+    .item:nth-child(17) {
+      transform: rotate(-0.7deg) translateX(0.8px) translateY(-0.3px) scale(0.98);
+      border-radius: 14% 12% 6% 10%;
+    }
+
+    .item:nth-child(18) {
+      transform: rotate(0.4deg) translateX(-0.4px) translateY(0.4px) scale(1.00);
+      border-radius: 8% 14% 10% 12%;
+    }
+
+    .item:nth-child(19) {
+      transform: rotate(-1.0deg) translateX(0.5px) translateY(-0.6px) scale(0.97);
+      border-radius: 12% 8% 14% 6%;
+    }
+
+    .item:nth-child(20) {
+      transform: rotate(0.9deg) translateX(-0.7px) translateY(0.5px) scale(1.01);
+      border-radius: 6% 12% 8% 16%;
+    }
+
+    .item::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .item::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, rgba(221, 123, 89, 0.2), transparent, rgba(240, 160, 144, 0.2));
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0.6;
     }
 
     .item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px var(--shadow-medium);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow:
+        0 10px 30px rgba(150, 60, 50, 0.5),
+        inset 0 2px 4px rgba(100, 30, 20, 0.3),
+        inset 0 -2px 4px rgba(255, 255, 255, 0.3),
+        inset 2px 0 4px rgba(100, 30, 20, 0.2),
+        inset -2px 0 4px rgba(255, 255, 255, 0.2);
     }
 
     .item span:first-child {
-      color: var(--text-dark);
+      color: #fefcf5;
+      font-family: 'Brush Script MT', 'Lucida Handwriting', 'Apple Chancery', cursive;
       font-weight: 700;
+      font-size: 1.2em;
     }
 
     .item span:last-child {
-      color: var(--text-light);
+      color: #fefcf5;
+      font-family: 'Brush Script MT', 'Lucida Handwriting', 'Apple Chancery', cursive;
       font-weight: 500;
+      font-size: 0.9em;
     }
 
     .hidden {
@@ -335,16 +560,17 @@
       left: 0;
       width: 100%;
       z-index: 999;
-      background: white;
-      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      background: #fefcf5;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     }
+
     .adsbygoogle {
       display: block;
       width: 100%;
       height: 30px;
       margin: 0 auto;
     }
-    
+
     /* 響應式設計 */
     @media (max-width: 768px) {
       .landscape-container {
@@ -502,6 +728,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -524,769 +751,2384 @@
       transition: var(--transition);
     }
 
+    /* Lucky Draw Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 248, 225, 0.95);
+      /* Light background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: transparent;
+      padding: 4rem 3rem 3rem 3rem;
+      border-radius: 0;
+      text-align: center;
+      width: 100%;
+      min-height: 700px;
+      box-shadow: none;
+      transform: scale(0.8);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    /* ... (wheel styles remain mostly same, check text color) ... */
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: #523834;
+      /* Dark text for light background */
+      margin-bottom: 1rem;
+      font-weight: bold;
+      text-shadow: none;
+    }
+
+    .modal-message {
+      font-size: 1.2rem;
+      color: #523834;
+      /* Dark text for light background */
+      text-shadow: none;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .wheel-container {
+      width: 90vw;
+      height: 90vw;
+      max-width: 380px;
+      max-height: 380px;
+      position: relative;
+      border-radius: 50%;
+      border: 8px solid #fff;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+      overflow: visible;
+      /* Allow pointer/duck to overlap if needed */
+    }
+
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(#ff6b6b 0% 30deg, #fff8e1 30deg 60deg,
+          #ff6b6b 60deg 90deg, #fff8e1 90deg 120deg,
+          #ff6b6b 120deg 150deg, #fff8e1 150deg 180deg,
+          #ff6b6b 180deg 210deg, #fff8e1 210deg 240deg,
+          #ff6b6b 240deg 270deg, #fff8e1 270deg 300deg,
+          #ff6b6b 300deg 330deg, #fff8e1 330deg 360deg);
+      transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 40px solid #ff5252;
+      z-index: 20;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 60%;
+      background: transparent;
+      border-radius: 50%;
+      z-index: 15;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: none;
+      border: none;
+    }
+
+    .wheel-duck {
+      width: 140%;
+      height: 140%;
+    }
+
+    .wheel-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 45%; /* 調整寬度，讓 emoji 更靠近外側 */
+      padding-right: 0;
+      box-sizing: border-box;
+      transform-origin: 0 50%;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #523834;
+      margin-top: -8px;
+      white-space: nowrap;
+      overflow: visible;
+      text-overflow: ellipsis;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+      line-height: 1;
+      letter-spacing: 0;
+      z-index: 20; /* 確保文字在中心 duck 之上 */
+      pointer-events: none; /* 不阻擋點擊事件 */
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; /* 讓 emoji 靠右（外側） */
+    }
+    
+    .wheel-text .emoji-icon {
+      font-size: 1.6em;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 6px;
+      line-height: 1;
+    }
+    
+    .wheel-text .prize-name-text {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: #523834;
+      /* Dark text for light background */
+      margin-bottom: 1rem;
+      font-weight: bold;
+      text-shadow: none;
+    }
+
+    .modal-message {
+      font-size: 1.2rem;
+      color: #523834;
+      /* Dark text for light background */
+      text-shadow: none;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .draw-btn {
+      background: var(--primary-yellow);
+      color: var(--text-dark);
+      border: none;
+      padding: 1.2rem 3rem;
+      font-size: 1.3rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 6px 20px var(--shadow-medium);
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+
+    .draw-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .draw-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+      background: none;
+      border: none;
+    }
+
+    /* 抽獎畫面響應式設計 */
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 2rem 1.5rem 2rem 1.5rem;
+        min-height: 600px;
+        gap: 1.5rem;
+      }
+
+      .wheel-container {
+        width: 85vw;
+        height: 85vw;
+        max-width: 320px;
+        max-height: 320px;
+      }
+
+      .modal-message {
+        font-size: 1.1rem;
+      }
+
+      .draw-btn {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+      }
+
+      #drawInitial {
+        gap: 2rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .modal-content {
+        padding: 1.5rem 1rem 1.5rem 1rem;
+        min-height: 550px;
+        gap: 1rem;
+      }
+
+      .wheel-container {
+        width: 90vw;
+        height: 90vw;
+        max-width: 280px;
+        max-height: 280px;
+      }
+
+      .modal-message {
+        font-size: 1rem;
+      }
+
+      .draw-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 1.1rem;
+      }
+
+      #drawInitial {
+        gap: 1.5rem !important;
+      }
+    }
+
+    /* Snow Animation Styles */
+    .snow-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0; /* 設置為最下層 */
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active .snow-container {
+      opacity: 1;
+    }
+
+    .snowflake {
+      position: absolute;
+      opacity: 0; /* 初始狀態為透明，避免在頂端閃現 */
+      top: -100px; /* 初始位置在視窗外 */
+      animation: fall linear infinite;
+    }
+
+    .snowflake:nth-child(1) { animation-duration: 8s; animation-delay: 0s; }
+    .snowflake:nth-child(2) { animation-duration: 12s; animation-delay: 2s; }
+    .snowflake:nth-child(3) { animation-duration: 10s; animation-delay: 4s; }
+    .snowflake:nth-child(4) { animation-duration: 14s; animation-delay: 1s; }
+    .snowflake:nth-child(5) { animation-duration: 9s; animation-delay: 3s; }
+    .snowflake:nth-child(6) { animation-duration: 11s; animation-delay: 5s; }
+    .snowflake:nth-child(7) { animation-duration: 13s; animation-delay: 0.5s; }
+    .snowflake:nth-child(8) { animation-duration: 7s; animation-delay: 6s; }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .snowflake svg {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
   </style>
 
   <!-- AdSense JS 載入 -->
 </head>
+
 <body>
   <header>
     <div class="logo">
-        <svg id="_圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 772.33 100.02">
-          <path d="m28.84,71.78h-.65c-1.13,0-2.12.5-2.97,1.53-5.12,7.19-11.27,13.08-18.3,17.52l-.12.09c-.24.22-.51.64-.51,1.04,0,.67.5,1.16,1.19,1.16h.35l.13-.04c8.78-2.83,16.53-8.24,23.05-16.08l.07-.09c.47-.74.78-1.38.78-2.12,0-.51-.18-1.07-.45-1.43-.61-.99-1.57-1.58-2.57-1.58Z"/>
-          <path d="m11.24,16.02h8.82l-.02,9.29.02.87,24.62.02.87-.02v-10.16h8.82c2.99,0,5.43-2.43,5.43-5.43v-.87h-14.25v-3.59c0-3.09-2.37-5.43-5.52-5.43h-.87v9.01h-12.7v-3.59c0-3.09-2.37-5.43-5.52-5.43h-.87v9.01H5.82v.87c0,2.89,2.54,5.43,5.43,5.43Zm15.22,4.04v-4.04h12.7v4.04h-12.7Z"/>
-          <path d="m46.58,77.88c-2.77-2.54-5.91-4.63-9.32-6.21l-.27-.17-.19-.02c-.56-.07-1.09.24-1.36.82l-.41.85.74.46c1.49,1.45,3.31,3.56,5.71,6.62,2.37,3.02,4.04,5.7,4.96,7.97l.05.1c.34.6.94,1.42,2.14,1.58.24.03.48.05.7.05,1.91,0,3.12-1.07,3.6-2.07.33-.69.34-1.41.01-2.25-1.1-2.36-3.18-4.89-6.35-7.73Z"/>
-          <path d="m0,29.93c0,2.79,2.54,5.24,5.43,5.24h54.77c2.99,0,5.43-2.35,5.43-5.24v-.87H0v.87Z"/>
-          <path d="m10.92,69.17h44.45v-31.33H10.92v31.33Zm5.62-18.53v-6.99h13.11v6.99h-13.11Zm0,12.88v-7.16h13.11v7.16h-13.11Zm19.41-12.88v-6.99h13.1v6.99h-13.1Zm0,12.88v-7.16h13.1v7.16h-13.1Z"/>
-          <path d="m244.5,6.89c-1.54,0-2.72.75-3.53,2.24-4.81,9.41-10.4,17.87-16.62,25.15-.76-.38-1.61-.59-2.52-.59h-.87v59.43h.87c2.88,0,5.23-2.26,5.23-5.05v-49.33c0-.62-.1-1.21-.3-1.76,8.22-6.06,15.45-14.45,21.5-24.92.34-.58.51-1.17.51-1.77,0-.77-.35-1.55-.91-2.05-.8-.91-1.9-1.36-3.37-1.36Z"/>
-          <path d="m218.22,27.75c-3.67-7.98-9.11-14.82-16.15-20.31l-.15-.11-.54-.14-.42-.17-.35.35c-.43.27-.5.65-.5.85v.84l.18.24c5.18,6.72,9.33,13.72,12.36,20.84.62,1.24,1.56,1.84,2.87,1.84,1.6,0,2.96-1.31,2.96-2.87,0-.38-.11-.8-.21-1.21l-.05-.15Z"/>
-          <path d="m313.45,11.39c0,.26.04.51.08.76h-30.6v.87c0,2.74,2.4,5.14,5.14,5.14h20.62c2.74,0,5.05-2.35,5.05-5.14v-.03c.68,2.02,2.58,3.53,4.76,3.53h9.27l-1.03,7.43h-9.47v46.07h27.18V23.97h-13.61l3.31-7.43h9.06c2.74,0,5.05-2.35,5.05-5.14v-.87h-34.81v.87Zm9.92,25.38v-6.71h14.97v6.71h-14.97Zm0,12.72v-6.71h14.97v6.71h-14.97Zm0,14.53v-8.43h14.97v8.43h-14.97Z"/>
-          <path d="m310.02,25.06h-23.36v26.54h23.36v-26.54Zm-17.35,20.53v-14.43h11.34v14.43h-11.34Z"/>
-          <path d="m314.98,75.05l.22-.65v-.14c0-.85-.57-1.23-1.14-1.23h-.14l-.49.17c-3.61,1.67-8.04,3.3-13.15,4.86-5.31,1.62-10.32,2.9-14.88,3.79-2.68.47-2.64,2.26-2.63,2.84v.19c0,1.52,1.07,3.14,3.05,3.14h.06l.77-.11c5.3-1.21,10.4-2.95,15.61-5.33,5.06-2.31,9.28-4.79,12.54-7.38l.2-.16Z"/>
-          <path d="m325.23,72.12h-.1c-1.14.13-2.11.96-2.89,2.55-2.35,5.92-5.55,11.44-9.5,16.4l-.12.15-.21,1.15.25.26c.27.43.65.49.85.49h.75l.23-.18c2.84-2.16,5.49-4.68,7.85-7.48,2.49-2.85,4.42-5.6,5.78-8.22.3-.71.43-1.27.43-1.89,0-.68-.16-1.26-.49-1.73-.52-.97-1.52-1.5-2.83-1.5Z"/>
-          <path d="m303.2,56.56v.05c-.88,5.98-2.21,12.18-3.98,18.42l-.03.24c0,.75.48,1.23,1.23,1.23h.3l.59-.3.13-.22c3.35-5.59,5.92-11.62,7.63-17.93l.12-1.14c0-2-1.53-3.05-3.05-3.05-1.6,0-2.59.91-2.94,2.7Z"/>
-          <path d="m335.11,73.84l-.14-.11-.85-.21-.29.14c-.63.31-.76.79-.76,1.14v.54l.3.3c3.17,4.2,5.9,9.1,8.13,14.6.76,1.68,1.64,2.24,2.24,2.41.16.05.33.07.48.07s.3-.02.43-.06c.96-.02,1.81-.42,2.4-1.13l.08-.11c.29-.49.58-1.02.58-1.72,0-.46-.1-.92-.37-1.58-2.84-5.49-6.96-10.3-12.24-14.29Z"/>
-          <path d="m289.96,55.02c-.18-.18-.49-.37-.8-.42-.45-.12-.77.05-.93.16-.22.16-.48.47-.48,1.06v.35l.06.15c1.99,5.03,3.37,10.34,4.22,16.24.3,2.19,1.36,3.3,3.2,3.3h.02c1.19,0,2.96-.94,2.96-2.96l-.11-.71c-1.19-6.16-3.91-11.91-8.08-17.1l-.06-.07Z"/>
-          <path d="m159.15,86.51l-.56.07c-.03-.05-.07-.15-.12-.3l-1.85-10.35-2.01,9.38c-.27,1.3-.89,1.83-2.12,1.83h-19.46c-1.41,0-2.64-1.24-2.64-2.64v-22.12l24.52-2.98c3.04-.56,4.41-2.96,4.41-5.09v-1.52l-28.93,3.42v-15.01l17.77-2.08c2.49-.5,4.3-2.64,4.3-5.09v-1.52l-22.08,2.7v-15.46l-.43-.25c-.49-.29-1.51-.75-2.82-.55-1.3.2-2.13.93-2.5,1.34l-.23.25v15.34l-19.14,2.36.13.88c.45,3.07,2.8,4.44,4.92,4.44l14.09-1.61v15.01l-26.02,3.08.17.91c.5,2.69,2.51,4.5,5,4.5l20.85-2.33v22.18c0,4.38,3.43,7.81,7.81,7.81h23.61c3.14,0,4.96-1.58,5.28-4.56v-.05s0-.35,0-.35c-.15-1.05-.86-1.65-1.94-1.65Z"/>
-          <path d="m120.18,11.16c3.34-1.94,8.77-3.23,15.33-2.52-8.48,1.07-13.05,1.96-19.57,7.62,3.52-2.25,8.86-4.26,14.82-1.71,5.2,2.23,8.94,4.62,11.99,6.25-.84-1.28-1.26-2.9-.75-4.96,0,0-.06,1.08.67,2.67,1.01,2.21,3.11,3.75,5.51,4.04,2.4.29,4.74-.7,6.14-2.62h0C159.13,13.36,150.75-.14,134.21,0c-9.98.25-16.18,7.02-19.51,12.6-5.89,4.67-9.21,11.83-7.76,20.47.16-2.33.37-14.46,13.24-21.91Z"/>
-          <path d="m467.18,64.98c-1.54.51-4.24-.68-8.56-.74-2.02-.03-1.72.23-5.37.34-2.9.09-6.06-.06-6.06-.06-2.92-.13-7.49-.42-10.39.6-.25.09-.69.25-.99.66-.86,1.16.12,3.28.77,4.26,2.02,3.03,6.97,4.16,10.79,3.23,3.42-.84,5.71-3.05,5.71-3.05,1.2-1.16,1.64-2.13,3.15-2.76,1.38-.57,2.67-.44,3.82-.32,1.32.13,3.3.33,4.94,1.58.75.57,1.43,1.58,2.19,3.19v10.44h10V19.96h-10v45.02Z"/>
-          <rect x="486.47" y="19.96" width="10" height="62.39"/>
-          <path d="m527.84,39.09c-6.26,0-11.45,2.1-15.55,6.29-4.11,4.19-6.16,9.51-6.16,15.94s2.05,11.76,6.16,15.99c4.11,4.22,9.29,6.33,15.55,6.33s11.53-2.11,15.64-6.33c4.11-4.22,6.16-9.55,6.16-15.99s-2.05-11.75-6.16-15.94c-4.11-4.19-9.32-6.29-15.64-6.29Zm8.32,32.06c-2.27,2.36-5.04,3.53-8.32,3.53s-6.05-1.19-8.32-3.58c-2.27-2.38-3.4-5.64-3.4-9.78s1.13-7.37,3.4-9.69c2.27-2.33,5.04-3.49,8.32-3.49s6.05,1.16,8.32,3.49c2.27,2.33,3.4,5.56,3.4,9.69s-1.14,7.47-3.4,9.82Z"/>
-          <path d="m614.93,40.38h-2.83c-.86,0-1.61.57-1.85,1.39l-7.38,25.65c-.18.62-1.04.64-1.25.03l-7.77-22.78c-.88-2.57-3.29-4.29-6-4.29h-4.02c-1.07,0-2.02.68-2.37,1.69l-8.67,25.39c-.21.6-1.07.59-1.25-.03l-6.93-23.6c-.6-2.05-2.48-3.46-4.62-3.46h-4.74c-1.16,0-1.98,1.13-1.62,2.23l11.71,36.08c.71,2.18,2.74,3.66,5.04,3.66h2.79c2.16,0,4.08-1.38,4.77-3.43l8.4-24.91c.2-.59,1.04-.6,1.24,0l8.58,24.81c.73,2.12,2.73,3.54,4.97,3.54h2.47c2.25,0,4.25-1.46,4.94-3.6l10.49-32.76c.89-2.77-1.18-5.61-4.09-5.61Z"/>
-          <path d="m688.78,40.38h-2.55c-.85,0-1.54.69-1.54,1.54v3.8c-2.13-4.08-6.26-6.12-12.41-6.12-5.69,0-10.34,1.98-13.96,5.95s-5.43,8.79-5.43,14.48,1.82,10.8,5.47,14.65c3.65,3.85,8.29,5.77,13.92,5.77,2.87,0,5.37-.57,7.5-1.72,1.41-.76,2.57-1.66,3.47-2.71.41-.47,1.18-.18,1.18.45v2.26c0,8.39-3.96,12.58-11.89,12.58-2.82,0-5.18-.85-7.11-2.54-1.47-1.29-2.48-2.86-3.03-4.71-.29-.97-1.25-1.57-2.23-1.31l-4.29,1.12c-1.87.49-2.89,2.48-2.23,4.29,1.04,2.86,2.88,5.35,5.53,7.46,3.68,2.93,8.22,4.4,13.62,4.4,7.35,0,12.78-2.05,16.29-6.16,3.5-4.11,5.26-9.26,5.26-15.47v-32.44c0-3.07-2.49-5.57-5.57-5.57Zm-7.06,28.31c-1.98,2.15-4.58,3.23-7.8,3.23s-5.92-1.08-7.93-3.23c-2.01-2.15-3.02-5.04-3.02-8.66s1.02-6.42,3.06-8.57c2.04-2.15,4.67-3.23,7.89-3.23s5.74,1.08,7.76,3.23c2.01,2.15,3.02,5.01,3.02,8.57s-.99,6.51-2.97,8.66Z"/>
-          <path d="m711.49,19.1c-1.78,0-3.3.65-4.57,1.94-1.26,1.29-1.9,2.83-1.9,4.61s.63,3.3,1.9,4.57c1.26,1.26,2.79,1.9,4.57,1.9s3.39-.63,4.65-1.9c1.26-1.26,1.9-2.79,1.9-4.57s-.63-3.39-1.9-4.65c-1.26-1.26-2.82-1.9-4.65-1.9Z"/>
-          <path d="m711.45,40.38h-2.78c-1.16,0-2.09.94-2.09,2.09v35.22c0,2.57,2.09,4.66,4.66,4.66h2.79c1.36,0,2.46-1.1,2.46-2.46v-34.46c0-2.78-2.26-5.04-5.04-5.04Z"/>
-          <path d="m751.51,39.94c-.46-.05-.93-.07-1.41-.07-2.76,0-5.23.65-7.41,1.94-2.18,1.29-3.76,3.06-4.74,5.3v-2.35c0-2.41-1.96-4.37-4.37-4.37h-3.19c-1.2,0-2.17.97-2.17,2.17v38.18c0,.89.72,1.61,1.61,1.61h3.84c2.51,0,4.54-2.03,4.54-4.54v-15.45c0-8.22,3.76-12.32,11.29-12.32h.03c1.78,0,3.24-1.46,3.24-3.24v-5.46c0-.72-.54-1.32-1.26-1.4Z"/>
-          <path d="m767.33,19.96h-3.28c-.95,0-1.72.77-1.72,1.72v59.03c0,.9.73,1.64,1.64,1.64h3.36c2.76,0,5-2.24,5-5V24.96c0-2.76-2.24-5-5-5Z"/>
-          <path d="m531.93,54.18c-1.13-.02-2.4,2.05-1.97,3.72.21.8.91,1.92,1.92,1.92,1.01,0,1.71-1.13,1.92-1.92.44-1.65-.74-3.71-1.86-3.72Z"/>
-          <path d="m444.33,39.34c.17-.34.24-.86,0-1.21-.53-.76-2.19-.2-4.84,0-1.56.12-2.84.06-3.63,0-1.22-.55-3.35-1.3-6.05-1.21-1.17.04-4.29.18-7.26,2.42-2.14,1.61-3.22,3.57-3.72,4.65-2.87,6.75-5.74,13.49-8.61,20.24-.24.57-1.05.58-1.3.02-3.03-6.67-6.07-13.35-9.1-20.02-1.4-3.07-4.46-5.04-7.83-5.04h-3.86c-.88,0-1.46.91-1.09,1.71,4.95,10.66,9.9,21.32,14.86,31.98.81,1.75.74,3.78-.2,5.47-3.27,5.88-6.53,11.76-9.8,17.64-.36.66.11,1.46.86,1.46h5.56c5.35,0,10.34-2.69,13.28-7.16l.07-.1c.65-1,1.64-2.66,2.59-4.82,1.45-3.32,1.98-6,2.25-7.28,0,0,2.34-11.13,7.26-21.79.72-1.56,1.77-3.69,3.63-6.05,1.72-2.18,3.34-3.54,4.84-4.84,3.41-2.94,5.1-4.54,7.26-4.84,1.8-.25,4.21.05,4.84-1.21Z"/>
-          <path d="m437.26,55.63c.07.39.25.71.47.99.56.7,1.4,1.02,2.24,1l15.6-.52c.44-.27.97-.72,1.12-1.44.35-1.75-1.95-3.73-2.56-4.26-3.06-2.64-6.56-2.49-7.8-2.42-1.16.07-4.24.42-6.94,2.91-.92.84-2.42,2.23-2.13,3.74Z"/>
-        </svg>
+      <svg id="_圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 772.33 100.02">
+        <path
+          d="m28.84,71.78h-.65c-1.13,0-2.12.5-2.97,1.53-5.12,7.19-11.27,13.08-18.3,17.52l-.12.09c-.24.22-.51.64-.51,1.04,0,.67.5,1.16,1.19,1.16h.35l.13-.04c8.78-2.83,16.53-8.24,23.05-16.08l.07-.09c.47-.74.78-1.38.78-2.12,0-.51-.18-1.07-.45-1.43-.61-.99-1.57-1.58-2.57-1.58Z" />
+        <path
+          d="m11.24,16.02h8.82l-.02,9.29.02.87,24.62.02.87-.02v-10.16h8.82c2.99,0,5.43-2.43,5.43-5.43v-.87h-14.25v-3.59c0-3.09-2.37-5.43-5.52-5.43h-.87v9.01h-12.7v-3.59c0-3.09-2.37-5.43-5.52-5.43h-.87v9.01H5.82v.87c0,2.89,2.54,5.43,5.43,5.43Zm15.22,4.04v-4.04h12.7v4.04h-12.7Z" />
+        <path
+          d="m46.58,77.88c-2.77-2.54-5.91-4.63-9.32-6.21l-.27-.17-.19-.02c-.56-.07-1.09.24-1.36.82l-.41.85.74.46c1.49,1.45,3.31,3.56,5.71,6.62,2.37,3.02,4.04,5.7,4.96,7.97l.05.1c.34.6.94,1.42,2.14,1.58.24.03.48.05.7.05,1.91,0,3.12-1.07,3.6-2.07.33-.69.34-1.41.01-2.25-1.1-2.36-3.18-4.89-6.35-7.73Z" />
+        <path d="m0,29.93c0,2.79,2.54,5.24,5.43,5.24h54.77c2.99,0,5.43-2.35,5.43-5.24v-.87H0v.87Z" />
+        <path
+          d="m10.92,69.17h44.45v-31.33H10.92v31.33Zm5.62-18.53v-6.99h13.11v6.99h-13.11Zm0,12.88v-7.16h13.11v7.16h-13.11Zm19.41-12.88v-6.99h13.1v6.99h-13.1Zm0,12.88v-7.16h13.1v7.16h-13.1Z" />
+        <path
+          d="m244.5,6.89c-1.54,0-2.72.75-3.53,2.24-4.81,9.41-10.4,17.87-16.62,25.15-.76-.38-1.61-.59-2.52-.59h-.87v59.43h.87c2.88,0,5.23-2.26,5.23-5.05v-49.33c0-.62-.1-1.21-.3-1.76,8.22-6.06,15.45-14.45,21.5-24.92.34-.58.51-1.17.51-1.77,0-.77-.35-1.55-.91-2.05-.8-.91-1.9-1.36-3.37-1.36Z" />
+        <path
+          d="m218.22,27.75c-3.67-7.98-9.11-14.82-16.15-20.31l-.15-.11-.54-.14-.42-.17-.35.35c-.43.27-.5.65-.5.85v.84l.18.24c5.18,6.72,9.33,13.72,12.36,20.84.62,1.24,1.56,1.84,2.87,1.84,1.6,0,2.96-1.31,2.96-2.87,0-.38-.11-.8-.21-1.21l-.05-.15Z" />
+        <path
+          d="m313.45,11.39c0,.26.04.51.08.76h-30.6v.87c0,2.74,2.4,5.14,5.14,5.14h20.62c2.74,0,5.05-2.35,5.05-5.14v-.03c.68,2.02,2.58,3.53,4.76,3.53h9.27l-1.03,7.43h-9.47v46.07h27.18V23.97h-13.61l3.31-7.43h9.06c2.74,0,5.05-2.35,5.05-5.14v-.87h-34.81v.87Zm9.92,25.38v-6.71h14.97v6.71h-14.97Zm0,12.72v-6.71h14.97v6.71h-14.97Zm0,14.53v-8.43h14.97v8.43h-14.97Z" />
+        <path d="m310.02,25.06h-23.36v26.54h23.36v-26.54Zm-17.35,20.53v-14.43h11.34v14.43h-11.34Z" />
+        <path
+          d="m314.98,75.05l.22-.65v-.14c0-.85-.57-1.23-1.14-1.23h-.14l-.49.17c-3.61,1.67-8.04,3.3-13.15,4.86-5.31,1.62-10.32,2.9-14.88,3.79-2.68.47-2.64,2.26-2.63,2.84v.19c0,1.52,1.07,3.14,3.05,3.14h.06l.77-.11c5.3-1.21,10.4-2.95,15.61-5.33,5.06-2.31,9.28-4.79,12.54-7.38l.2-.16Z" />
+        <path
+          d="m325.23,72.12h-.1c-1.14.13-2.11.96-2.89,2.55-2.35,5.92-5.55,11.44-9.5,16.4l-.12.15-.21,1.15.25.26c.27.43.65.49.85.49h.75l.23-.18c2.84-2.16,5.49-4.68,7.85-7.48,2.49-2.85,4.42-5.6,5.78-8.22.3-.71.43-1.27.43-1.89,0-.68-.16-1.26-.49-1.73-.52-.97-1.52-1.5-2.83-1.5Z" />
+        <path
+          d="m303.2,56.56v.05c-.88,5.98-2.21,12.18-3.98,18.42l-.03.24c0,.75.48,1.23,1.23,1.23h.3l.59-.3.13-.22c3.35-5.59,5.92-11.62,7.63-17.93l.12-1.14c0-2-1.53-3.05-3.05-3.05-1.6,0-2.59.91-2.94,2.7Z" />
+        <path
+          d="m335.11,73.84l-.14-.11-.85-.21-.29.14c-.63.31-.76.79-.76,1.14v.54l.3.3c3.17,4.2,5.9,9.1,8.13,14.6.76,1.68,1.64,2.24,2.24,2.41.16.05.33.07.48.07s.3-.02.43-.06c.96-.02,1.81-.42,2.4-1.13l.08-.11c.29-.49.58-1.02.58-1.72,0-.46-.1-.92-.37-1.58-2.84-5.49-6.96-10.3-12.24-14.29Z" />
+        <path
+          d="m289.96,55.02c-.18-.18-.49-.37-.8-.42-.45-.12-.77.05-.93.16-.22.16-.48.47-.48,1.06v.35l.06.15c1.99,5.03,3.37,10.34,4.22,16.24.3,2.19,1.36,3.3,3.2,3.3h.02c1.19,0,2.96-.94,2.96-2.96l-.11-.71c-1.19-6.16-3.91-11.91-8.08-17.1l-.06-.07Z" />
+        <path
+          d="m159.15,86.51l-.56.07c-.03-.05-.07-.15-.12-.3l-1.85-10.35-2.01,9.38c-.27,1.3-.89,1.83-2.12,1.83h-19.46c-1.41,0-2.64-1.24-2.64-2.64v-22.12l24.52-2.98c3.04-.56,4.41-2.96,4.41-5.09v-1.52l-28.93,3.42v-15.01l17.77-2.08c2.49-.5,4.3-2.64,4.3-5.09v-1.52l-22.08,2.7v-15.46l-.43-.25c-.49-.29-1.51-.75-2.82-.55-1.3.2-2.13.93-2.5,1.34l-.23.25v15.34l-19.14,2.36.13.88c.45,3.07,2.8,4.44,4.92,4.44l14.09-1.61v15.01l-26.02,3.08.17.91c.5,2.69,2.51,4.5,5,4.5l20.85-2.33v22.18c0,4.38,3.43,7.81,7.81,7.81h23.61c3.14,0,4.96-1.58,5.28-4.56v-.05s0-.35,0-.35c-.15-1.05-.86-1.65-1.94-1.65Z" />
+        <path
+          d="m120.18,11.16c3.34-1.94,8.77-3.23,15.33-2.52-8.48,1.07-13.05,1.96-19.57,7.62,3.52-2.25,8.86-4.26,14.82-1.71,5.2,2.23,8.94,4.62,11.99,6.25-.84-1.28-1.26-2.9-.75-4.96,0,0-.06,1.08.67,2.67,1.01,2.21,3.11,3.75,5.51,4.04,2.4.29,4.74-.7,6.14-2.62h0C159.13,13.36,150.75-.14,134.21,0c-9.98.25-16.18,7.02-19.51,12.6-5.89,4.67-9.21,11.83-7.76,20.47.16-2.33.37-14.46,13.24-21.91Z" />
+        <path
+          d="m467.18,64.98c-1.54.51-4.24-.68-8.56-.74-2.02-.03-1.72.23-5.37.34-2.9.09-6.06-.06-6.06-.06-2.92-.13-7.49-.42-10.39.6-.25.09-.69.25-.99.66-.86,1.16.12,3.28.77,4.26,2.02,3.03,6.97,4.16,10.79,3.23,3.42-.84,5.71-3.05,5.71-3.05,1.2-1.16,1.64-2.13,3.15-2.76,1.38-.57,2.67-.44,3.82-.32,1.32.13,3.3.33,4.94,1.58.75.57,1.43,1.58,2.19,3.19v10.44h10V19.96h-10v45.02Z" />
+        <rect x="486.47" y="19.96" width="10" height="62.39" />
+        <path
+          d="m527.84,39.09c-6.26,0-11.45,2.1-15.55,6.29-4.11,4.19-6.16,9.51-6.16,15.94s2.05,11.76,6.16,15.99c4.11,4.22,9.29,6.33,15.55,6.33s11.53-2.11,15.64-6.33c4.11-4.22,6.16-9.55,6.16-15.99s-2.05-11.75-6.16-15.94c-4.11-4.19-9.32-6.29-15.64-6.29Zm8.32,32.06c-2.27,2.36-5.04,3.53-8.32,3.53s-6.05-1.19-8.32-3.58c-2.27-2.38-3.4-5.64-3.4-9.78s1.13-7.37,3.4-9.69c2.27-2.33,5.04-3.49,8.32-3.49s6.05,1.16,8.32,3.49c2.27,2.33,3.4,5.56,3.4,9.69s-1.14,7.47-3.4,9.82Z" />
+        <path
+          d="m614.93,40.38h-2.83c-.86,0-1.61.57-1.85,1.39l-7.38,25.65c-.18.62-1.04.64-1.25.03l-7.77-22.78c-.88-2.57-3.29-4.29-6-4.29h-4.02c-1.07,0-2.02.68-2.37,1.69l-8.67,25.39c-.21.6-1.07.59-1.25-.03l-6.93-23.6c-.6-2.05-2.48-3.46-4.62-3.46h-4.74c-1.16,0-1.98,1.13-1.62,2.23l11.71,36.08c.71,2.18,2.74,3.66,5.04,3.66h2.79c2.16,0,4.08-1.38,4.77-3.43l8.4-24.91c.2-.59,1.04-.6,1.24,0l8.58,24.81c.73,2.12,2.73,3.54,4.97,3.54h2.47c2.25,0,4.25-1.46,4.94-3.6l10.49-32.76c.89-2.77-1.18-5.61-4.09-5.61Z" />
+        <path
+          d="m688.78,40.38h-2.55c-.85,0-1.54.69-1.54,1.54v3.8c-2.13-4.08-6.26-6.12-12.41-6.12-5.69,0-10.34,1.98-13.96,5.95s-5.43,8.79-5.43,14.48,1.82,10.8,5.47,14.65c3.65,3.85,8.29,5.77,13.92,5.77,2.87,0,5.37-.57,7.5-1.72,1.41-.76,2.57-1.66,3.47-2.71.41-.47,1.18-.18,1.18.45v2.26c0,8.39-3.96,12.58-11.89,12.58-2.82,0-5.18-.85-7.11-2.54-1.47-1.29-2.48-2.86-3.03-4.71-.29-.97-1.25-1.57-2.23-1.31l-4.29,1.12c-1.87.49-2.89,2.48-2.23,4.29,1.04,2.86,2.88,5.35,5.53,7.46,3.68,2.93,8.22,4.4,13.62,4.4,7.35,0,12.78-2.05,16.29-6.16,3.5-4.11,5.26-9.26,5.26-15.47v-32.44c0-3.07-2.49-5.57-5.57-5.57Zm-7.06,28.31c-1.98,2.15-4.58,3.23-7.8,3.23s-5.92-1.08-7.93-3.23c-2.01-2.15-3.02-5.04-3.02-8.66s1.02-6.42,3.06-8.57c2.04-2.15,4.67-3.23,7.89-3.23s5.74,1.08,7.76,3.23c2.01,2.15,3.02,5.01,3.02,8.57s-.99,6.51-2.97,8.66Z" />
+        <path
+          d="m711.49,19.1c-1.78,0-3.3.65-4.57,1.94-1.26,1.29-1.9,2.83-1.9,4.61s.63,3.3,1.9,4.57c1.26,1.26,2.79,1.9,4.57,1.9s3.39-.63,4.65-1.9c1.26-1.26,1.9-2.79,1.9-4.57s-.63-3.39-1.9-4.65c-1.26-1.26-2.82-1.9-4.65-1.9Z" />
+        <path
+          d="m711.45,40.38h-2.78c-1.16,0-2.09.94-2.09,2.09v35.22c0,2.57,2.09,4.66,4.66,4.66h2.79c1.36,0,2.46-1.1,2.46-2.46v-34.46c0-2.78-2.26-5.04-5.04-5.04Z" />
+        <path
+          d="m751.51,39.94c-.46-.05-.93-.07-1.41-.07-2.76,0-5.23.65-7.41,1.94-2.18,1.29-3.76,3.06-4.74,5.3v-2.35c0-2.41-1.96-4.37-4.37-4.37h-3.19c-1.2,0-2.17.97-2.17,2.17v38.18c0,.89.72,1.61,1.61,1.61h3.84c2.51,0,4.54-2.03,4.54-4.54v-15.45c0-8.22,3.76-12.32,11.29-12.32h.03c1.78,0,3.24-1.46,3.24-3.24v-5.46c0-.72-.54-1.32-1.26-1.4Z" />
+        <path
+          d="m767.33,19.96h-3.28c-.95,0-1.72.77-1.72,1.72v59.03c0,.9.73,1.64,1.64,1.64h3.36c2.76,0,5-2.24,5-5V24.96c0-2.76-2.24-5-5-5Z" />
+        <path
+          d="m531.93,54.18c-1.13-.02-2.4,2.05-1.97,3.72.21.8.91,1.92,1.92,1.92,1.01,0,1.71-1.13,1.92-1.92.44-1.65-.74-3.71-1.86-3.72Z" />
+        <path
+          d="m444.33,39.34c.17-.34.24-.86,0-1.21-.53-.76-2.19-.2-4.84,0-1.56.12-2.84.06-3.63,0-1.22-.55-3.35-1.3-6.05-1.21-1.17.04-4.29.18-7.26,2.42-2.14,1.61-3.22,3.57-3.72,4.65-2.87,6.75-5.74,13.49-8.61,20.24-.24.57-1.05.58-1.3.02-3.03-6.67-6.07-13.35-9.1-20.02-1.4-3.07-4.46-5.04-7.83-5.04h-3.86c-.88,0-1.46.91-1.09,1.71,4.95,10.66,9.9,21.32,14.86,31.98.81,1.75.74,3.78-.2,5.47-3.27,5.88-6.53,11.76-9.8,17.64-.36.66.11,1.46.86,1.46h5.56c5.35,0,10.34-2.69,13.28-7.16l.07-.1c.65-1,1.64-2.66,2.59-4.82,1.45-3.32,1.98-6,2.25-7.28,0,0,2.34-11.13,7.26-21.79.72-1.56,1.77-3.69,3.63-6.05,1.72-2.18,3.34-3.54,4.84-4.84,3.41-2.94,5.1-4.54,7.26-4.84,1.8-.25,4.21.05,4.84-1.21Z" />
+        <path
+          d="m437.26,55.63c.07.39.25.71.47.99.56.7,1.4,1.02,2.24,1l15.6-.52c.44-.27.97-.72,1.12-1.44.35-1.75-1.95-3.73-2.56-4.26-3.06-2.64-6.56-2.49-7.8-2.42-1.16.07-4.24.42-6.94,2.91-.92.84-2.42,2.23-2.13,3.74Z" />
+      </svg>
     </div>
     <div class="title">現場候號進度</div>
   </header>
+
+  <!-- Lucky Draw Modal -->
+  <div class="modal-overlay" id="luckyDrawModal">
+    <!-- Snow Animation Container - Only active when modal is open -->
+    <div class="snow-container"></div>
+    <button class="close-modal" onclick="closeLuckyDraw()">×</button>
+    <div class="modal-content">
+
+      <!-- Initial View -->
+      <div id="drawInitial" style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 3rem;">
+        <!-- <div class="modal-title">🎉 每日幸運轉盤 🎉</div> -->
+        <!-- Reuse the duck SVG for decoration if possible, or just use text/emoji -->
+        <div class="wheel-container" style="margin-top: 1rem;">
+          <div class="wheel-pointer"></div>
+          <div class="wheel" id="wheel"></div>
+          <div class="wheel-center">
+            <svg class="wheel-duck">
+              <use href="#duckSvg"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="modal-message" id="drawMessage" style="margin: 1rem 0;">今天運氣如何呢？</div>
+        <button class="draw-btn" id="drawBtn" onclick="startDraw()" style="margin-top: 1rem;">開始抽獎</button>
+      </div>
+
+      <!-- Result View (Removed, result shown on wheel) -->
+      <!-- <div id="drawResult" class="result-container"> ... </div> -->
+
+    </div>
+  </div>
 
 
 
   <div class="landscape-container">
     <div class="landscape-left">
       <div class="svg-wrap">
-    <div class="duck-container" id="duckContainer">
-      <svg id="duckSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 947.21 537.57">
-        <defs>
-          <style>
-            .cls-1 {
-              fill: #523834;
-            }
+        <div class="duck-container" id="duckContainer">
+          <svg id="duckSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 947.21 537.57">
+            <defs>
+              <style>
+                .st0 {
+                  fill: #ff5252;
+                  stroke: #ff5252;
+                }
 
-            .cls-2 {
-              fill: #fcd04f;
-            }
+                .st0,
+                .st1,
+                .st2,
+                .st3,
+                .st4,
+                .st5,
+                .st6 {
+                  stroke-miterlimit: 10;
+                  stroke-width: .4px;
+                }
 
-            .cls-3 {
-              fill: #fff5d3;
-            }
+                .st1 {
+                  fill: #ff8989;
+                  stroke: #ff8989;
+                }
 
-            .cls-4 {
-              fill: #fff;
-            }
+                .st2 {
+                  fill: #ccc;
+                  stroke: #ccc;
+                }
 
-            .cls-5 {
-              fill: #fff9ef;
-            }
+                .st7 {
+                  fill: #523834;
+                }
 
-            .cls-6 {
-              fill: #fbdeb1;
-            }
-          </style>
-        </defs>
-        <g id="duck">
-          <!-- 鴨子 --> 
-          <rect class="cls-1" x="391.18" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="411.86" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="432.54" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.22" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="473.89" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="494.57" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="165.36" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="494.57" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="494.57" y="268.75" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="268.75" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="535.93" y="268.75" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="556.61" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="577.28" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="597.96" y="268.75" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="618.64" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="618.64" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="618.64" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="618.64" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="597.96" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="597.96" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="577.28" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="556.61" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="535.93" y="454.85" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="454.85" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="475.53" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="496.21" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="494.57" y="516.89" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="473.89" y="516.89" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.22" y="516.89" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="432.54" y="516.89" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="412.12" y="516.89" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="391.44" y="516.89" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="391.44" y="496.21" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="412.12" y="475.53" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="412.12" y="454.85" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="391.44" y="454.85" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="370.76" y="454.85" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="350.09" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="329.41" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="329.41" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="329.41" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="329.41" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="329.41" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="349.82" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="370.5" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="391.18" y="268.75" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="370.5" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="349.87" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="329.24" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="308.56" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="287.88" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="287.88" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="287.88" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="308.56" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="329.15" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="349.82" y="165.37" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="349.82" y="144.69" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="370.5" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.35" y="496.21" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.35" y="475.53" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.35" y="454.85" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="474.02" y="454.89" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="474.02" y="475.53" width="20.68" height="20.68"/>
-          <rect class="cls-1 eye-part" id="eyePart1" x="453.22" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-1 eye-part" id="eyePart2" x="453.22" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="473.89" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="411.9" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="432.54" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="391.25" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="411.88" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="370.59" y="165.37" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="391.23" y="165.37" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="411.88" y="165.36" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.51" y="165.36" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="432.59" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.48" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.55" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="453.22" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.16" y="165.37" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="473.85" y="165.36" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="453.16" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-3" x="473.85" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.5" y="165.36" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="370.73" y="310.1" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="391.37" y="310.1" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="412.01" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.7" y="310.1" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.35" y="310.1" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="370.7" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="391.33" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="411.98" y="330.79" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.66" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.32" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="474.01" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.64" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="515.28" y="330.8" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="535.97" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="556.62" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="350.06" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="370.69" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="391.33" y="351.47" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="412.02" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.67" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.34" y="351.48" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="473.97" y="351.48" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.62" y="351.49" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="515.31" y="351.48" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="535.96" y="351.48" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="556.62" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="577.27" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="556.61" y="268.74" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="535.95" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="577.26" y="289.41" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="515.38" y="310.1" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="536.03" y="310.1" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="577.28" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="597.93" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="577.33" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="597.98" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="556.7" y="372.16" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.38" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="474.02" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.66" y="372.16" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="515.35" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="536" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.71" y="392.83" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="515.36" y="392.83" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="350.06" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="370.77" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="391.41" y="372.15" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="412.1" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.75" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="350.06" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="370.51" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="391.15" y="392.83" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="411.84" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.49" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="370.81" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="391.45" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="412.09" y="413.51" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.78" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.43" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="474.04" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.68" y="413.52" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="515.37" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="536.02" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="474" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.65" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="474.02" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.65" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="473.87" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="494.5" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.62" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.25" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.13" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="473.75" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="411.88" y="248.08" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.5" y="248.08" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.13" y="268.76" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="411.88" y="268.77" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.5" y="268.77" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="453.1" y="289.47" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="411.85" y="289.48" width="20.68" height="20.68"/>
-          <rect class="cls-5" x="432.48" y="289.48" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="391.18" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="370.5" y="144.69" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="411.9" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="391.18" y="248.07" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="473.89" y="268.75" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="473.89" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="494.57" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="515.25" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="391.18" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="350.09" y="330.78" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="350.06" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="370.76" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="391.44" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="412.12" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="432.73" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="453.22" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="577.28" y="268.75" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="556.61" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="556.61" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="474.02" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="494.57" y="310.11" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="597.96" y="289.43" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="597.96" y="351.46" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="577.32" y="372.14" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="577.28" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="556.61" y="413.5" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="535.93" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="515.25" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="494.57" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="473.89" y="434.18" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="473.98" y="392.83" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="453.29" y="392.83" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="556.7" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="536.02" y="392.82" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="494.57" y="144.69" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="308.56" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="308.56" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="329.15" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="349.87" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="370.53" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="432.73" y="454.85" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="494.64" y="454.89" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="474.02" y="496.21" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="494.64" y="496.21" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="412.12" y="496.21" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="432.73" y="496.21" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="349.82" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="370.53" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="391.18" y="186.04" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="349.87" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="432.73" y="475.53" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="494.57" y="475.53" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="329.24" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="370.5" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="391.18" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="391.23" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="411.9" y="206.72" width="20.68" height="20.68"/>
-          <rect class="cls-2" x="411.86" y="227.39" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="350.09" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="391.15" y="144.69" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="411.88" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="432.48" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.22" y="144.69" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="474.04" y="144.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.25" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="536.03" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="474.04" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="494.65" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="515.34" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="453.1" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="432.48" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="411.84" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="391.45" y="124" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="370.5" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="391.19" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="411.89" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="432.58" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="515.17" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="494.55" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="473.93" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="474.04" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="494.5" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="494.82" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="515.27" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="515.5" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="535.95" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="453.3" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="432.68" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="412.06" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="391.44" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="370.81" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="391.25" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="411.9" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-6" x="412.12" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="432.78" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="432.78" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="432.42" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="453.32" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="453.27" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-4" x="473.96" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="536.03" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.5" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="536.03" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="350.09" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="350.09" y="82.65" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="370.81" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="391.45" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="411.84" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="432.8" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.43" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="474.04" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.43" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="453.43" y="62.03" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="473.75" y="41.36" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="494.82" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="515.17" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="536.03" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="556.61" y="20.68" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="556.61" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="432.42" y="103.33" width="20.68" height="20.68"/>
-          <rect class="cls-1" x="391.61" y="103.33" width="20.68" height="20.68"/>
-        </g>
-      </svg>
+                .st3 {
+                  fill: #f82727;
+                  stroke: #f82727;
+                }
+
+                .st8 {
+                  fill: #fcd04f;
+                }
+
+                .st4 {
+                  stroke: #fff;
+                }
+
+                .st4,
+                .st9 {
+                  fill: #fff;
+                }
+
+                .st5 {
+                  fill: #e6e6e6;
+                  stroke: #e6e6e6;
+                }
+
+                .st10 {
+                  fill: #fff5d3;
+                }
+
+                .st11 {
+                  fill: #fff9ef;
+                }
+
+                .st6 {
+                  fill: #ca0606;
+                  stroke: #ca0606;
+                }
+
+                .st12 {
+                  fill: #fbdeb1;
+                }
+              </style>
+            </defs>
+            <g id="duck">
+              <rect class="st7" x="391.2" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="411.9" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="432.5" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="453.2" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="473.9" y="103.3" width="20.7" height="20.7" />
+              <rect class="st2" x="494.6" y="124" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="144.7" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="165.4" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="186" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="206.7" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="227.4" width="20.7" height="20.7" />
+              <rect class="st7" x="494.6" y="248.1" width="20.7" height="20.7" />
+              <rect class="st7" x="494.6" y="268.8" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="268.8" width="20.7" height="20.7" />
+              <rect class="st7" x="535.9" y="268.8" width="20.7" height="20.7" />
+              <rect class="st7" x="556.6" y="248.1" width="20.7" height="20.7" />
+              <rect class="st7" x="577.3" y="248.1" width="20.7" height="20.7" />
+              <rect class="st7" x="598" y="268.8" width="20.7" height="20.7" />
+              <rect class="st7" x="618.6" y="289.4" width="20.7" height="20.7" />
+              <rect class="st7" x="618.6" y="310.1" width="20.7" height="20.7" />
+              <rect class="st7" x="618.6" y="330.8" width="20.7" height="20.7" />
+              <rect class="st7" x="618.6" y="351.5" width="20.7" height="20.7" />
+              <rect class="st7" x="598" y="372.1" width="20.7" height="20.7" />
+              <rect class="st7" x="598" y="392.8" width="20.7" height="20.7" />
+              <rect class="st7" x="577.3" y="413.5" width="20.7" height="20.7" />
+              <rect class="st7" x="556.6" y="434.2" width="20.7" height="20.7" />
+              <rect class="st7" x="535.9" y="454.9" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="454.9" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="475.5" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="496.2" width="20.7" height="20.7" />
+              <rect class="st7" x="494.6" y="516.9" width="20.7" height="20.7" />
+              <rect class="st7" x="473.9" y="516.9" width="20.7" height="20.7" />
+              <rect class="st7" x="453.2" y="516.9" width="20.7" height="20.7" />
+              <rect class="st7" x="432.5" y="516.9" width="20.7" height="20.7" />
+              <rect class="st7" x="412.1" y="516.9" width="20.7" height="20.7" />
+              <rect class="st7" x="391.4" y="516.9" width="20.7" height="20.7" />
+              <rect class="st7" x="391.4" y="496.2" width="20.7" height="20.7" />
+              <rect class="st7" x="412.1" y="475.5" width="20.7" height="20.7" />
+              <rect class="st7" x="412.1" y="454.9" width="20.7" height="20.7" />
+              <rect class="st7" x="391.4" y="454.9" width="20.7" height="20.7" />
+              <rect class="st7" x="370.8" y="454.9" width="20.7" height="20.7" />
+              <rect class="st7" x="350.1" y="434.2" width="20.7" height="20.7" />
+              <rect class="st7" x="329.4" y="413.5" width="20.7" height="20.7" />
+              <rect class="st7" x="329.4" y="392.8" width="20.7" height="20.7" />
+              <rect class="st7" x="329.4" y="372.1" width="20.7" height="20.7" />
+              <rect class="st7" x="329.4" y="351.5" width="20.7" height="20.7" />
+              <rect class="st7" x="329.4" y="330.8" width="20.7" height="20.7" />
+              <rect class="st7" x="349.8" y="310.1" width="20.7" height="20.7" />
+              <rect class="st7" x="370.5" y="289.4" width="20.7" height="20.7" />
+              <rect class="st7" x="391.2" y="268.8" width="20.7" height="20.7" />
+              <rect class="st7" x="370.5" y="248.1" width="20.7" height="20.7" />
+              <rect class="st7" x="349.9" y="248.1" width="20.7" height="20.7" />
+              <rect class="st7" x="329.2" y="248.1" width="20.7" height="20.7" />
+              <rect class="st7" x="308.6" y="248.1" width="20.7" height="20.7" />
+              <rect class="st7" x="287.9" y="227.4" width="20.7" height="20.7" />
+              <rect class="st7" x="287.9" y="206.7" width="20.7" height="20.7" />
+              <rect class="st7" x="287.9" y="186" width="20.7" height="20.7" />
+              <rect class="st7" x="308.6" y="186" width="20.7" height="20.7" />
+              <rect class="st7" x="329.1" y="186" width="20.7" height="20.7" />
+              <rect class="st7" x="349.8" y="165.4" width="20.7" height="20.7" />
+              <rect class="st7" x="349.8" y="144.7" width="20.7" height="20.7" />
+              <rect class="st5" x="370.5" y="124" width="20.7" height="20.7" />
+              <rect class="st7" x="453.4" y="496.2" width="20.7" height="20.7" />
+              <rect class="st7" x="453.4" y="475.5" width="20.7" height="20.7" />
+              <rect class="st7" x="453.4" y="454.9" width="20.7" height="20.7" />
+              <rect class="st7" x="474" y="454.9" width="20.7" height="20.7" />
+              <rect class="st7" x="474" y="475.5" width="20.7" height="20.7" />
+              <rect id="eyePart1" class="st7 eye-part" x="453.2" y="186" width="20.7" height="20.7" />
+              <rect id="eyePart2" class="st7 eye-part" x="453.2" y="206.7" width="20.7" height="20.7" />
+              <rect class="st12" x="473.9" y="124" width="20.7" height="20.7" />
+              <rect class="st10" x="411.9" y="124" width="20.7" height="20.7" />
+              <rect class="st10" x="432.5" y="124" width="20.7" height="20.7" />
+              <rect class="st10" x="391.2" y="144.7" width="20.7" height="20.7" />
+              <rect class="st10" x="411.9" y="144.7" width="20.7" height="20.7" />
+              <rect class="st11" x="370.6" y="165.4" width="20.7" height="20.7" />
+              <rect class="st11" x="391.2" y="165.4" width="20.7" height="20.7" />
+              <rect class="st11" x="411.9" y="165.4" width="20.7" height="20.7" />
+              <rect class="st11" x="432.5" y="165.4" width="20.7" height="20.7" />
+              <rect class="st10" x="432.6" y="144.7" width="20.7" height="20.7" />
+              <rect class="st11" x="432.5" y="206.7" width="20.7" height="20.7" />
+              <rect class="st11" x="432.5" y="186" width="20.7" height="20.7" />
+              <rect class="st10" x="453.2" y="144.7" width="20.7" height="20.7" />
+              <rect class="st11" x="453.2" y="165.4" width="20.7" height="20.7" />
+              <rect class="st11" x="473.9" y="165.4" width="20.7" height="20.7" />
+              <rect class="st10" x="453.2" y="124" width="20.7" height="20.7" />
+              <rect class="st10" x="473.9" y="144.7" width="20.7" height="20.7" />
+              <rect class="st11" x="494.5" y="165.4" width="20.7" height="20.7" />
+              <rect class="st11" x="370.7" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="391.4" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="412" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="432.7" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="453.4" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="370.7" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="391.3" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="412" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="432.7" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="453.3" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="474" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="494.6" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="515.3" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="536" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="556.6" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="350.1" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="370.7" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="391.3" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="412" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="432.7" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="453.3" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="474" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="494.6" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="515.3" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="536" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="556.6" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="577.3" y="351.5" width="20.7" height="20.7" />
+              <rect class="st11" x="556.6" y="268.7" width="20.7" height="20.7" />
+              <rect class="st11" x="536" y="289.4" width="20.7" height="20.7" />
+              <rect class="st11" x="577.3" y="289.4" width="20.7" height="20.7" />
+              <rect class="st11" x="515.4" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="536" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="577.3" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="597.9" y="310.1" width="20.7" height="20.7" />
+              <rect class="st11" x="577.3" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="598" y="330.8" width="20.7" height="20.7" />
+              <rect class="st11" x="556.7" y="372.2" width="20.7" height="20.7" />
+              <rect class="st11" x="453.4" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="474" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="494.7" y="372.2" width="20.7" height="20.7" />
+              <rect class="st11" x="515.3" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="536" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="494.7" y="392.8" width="20.7" height="20.7" />
+              <rect class="st11" x="515.4" y="392.8" width="20.7" height="20.7" />
+              <rect class="st11" x="350.1" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="370.8" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="391.4" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="412.1" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="432.8" y="372.1" width="20.7" height="20.7" />
+              <rect class="st11" x="350.1" y="392.8" width="20.7" height="20.7" />
+              <rect class="st11" x="370.5" y="392.8" width="20.7" height="20.7" />
+              <rect class="st11" x="391.1" y="392.8" width="20.7" height="20.7" />
+              <rect class="st11" x="411.8" y="392.8" width="20.7" height="20.7" />
+              <rect class="st11" x="432.5" y="392.8" width="20.7" height="20.7" />
+              <rect class="st11" x="370.8" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="391.5" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="412.1" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="432.8" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="453.4" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="474" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="494.7" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="515.4" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="536" y="413.5" width="20.7" height="20.7" />
+              <rect class="st11" x="474" y="186" width="20.7" height="20.7" />
+              <rect class="st11" x="494.6" y="186" width="20.7" height="20.7" />
+              <rect class="st11" x="474" y="206.7" width="20.7" height="20.7" />
+              <rect class="st11" x="494.6" y="206.7" width="20.7" height="20.7" />
+              <rect class="st11" x="473.9" y="227.4" width="20.7" height="20.7" />
+              <rect class="st11" x="494.5" y="227.4" width="20.7" height="20.7" />
+              <rect class="st11" x="432.6" y="227.4" width="20.7" height="20.7" />
+              <rect class="st11" x="453.2" y="227.4" width="20.7" height="20.7" />
+              <rect class="st11" x="453.1" y="248.1" width="20.7" height="20.7" />
+              <rect class="st11" x="473.8" y="248.1" width="20.7" height="20.7" />
+              <rect class="st11" x="411.9" y="248.1" width="20.7" height="20.7" />
+              <rect class="st11" x="432.5" y="248.1" width="20.7" height="20.7" />
+              <rect class="st11" x="453.1" y="268.8" width="20.7" height="20.7" />
+              <rect class="st11" x="411.9" y="268.8" width="20.7" height="20.7" />
+              <rect class="st11" x="432.5" y="268.8" width="20.7" height="20.7" />
+              <rect class="st11" x="453.1" y="289.5" width="20.7" height="20.7" />
+              <rect class="st11" x="411.9" y="289.5" width="20.7" height="20.7" />
+              <rect class="st11" x="432.5" y="289.5" width="20.7" height="20.7" />
+              <rect class="st12" x="391.2" y="124" width="20.7" height="20.7" />
+              <rect class="st7" x="370.5" y="144.7" width="20.7" height="20.7" />
+              <rect class="st12" x="411.9" y="186" width="20.7" height="20.7" />
+              <rect class="st12" x="391.2" y="248.1" width="20.7" height="20.7" />
+              <rect class="st12" x="473.9" y="268.8" width="20.7" height="20.7" />
+              <rect class="st12" x="473.9" y="289.4" width="20.7" height="20.7" />
+              <rect class="st12" x="494.6" y="289.4" width="20.7" height="20.7" />
+              <rect class="st12" x="515.2" y="289.4" width="20.7" height="20.7" />
+              <rect class="st12" x="391.2" y="289.4" width="20.7" height="20.7" />
+              <rect class="st12" x="350.1" y="330.8" width="20.7" height="20.7" />
+              <rect class="st12" x="350.1" y="413.5" width="20.7" height="20.7" />
+              <rect class="st12" x="370.8" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="391.4" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="412.1" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="432.7" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="453.2" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="577.3" y="268.8" width="20.7" height="20.7" />
+              <rect class="st12" x="556.6" y="289.4" width="20.7" height="20.7" />
+              <rect class="st12" x="556.6" y="310.1" width="20.7" height="20.7" />
+              <rect class="st12" x="474" y="310.1" width="20.7" height="20.7" />
+              <rect class="st12" x="494.6" y="310.1" width="20.7" height="20.7" />
+              <rect class="st12" x="598" y="289.4" width="20.7" height="20.7" />
+              <rect class="st12" x="598" y="351.5" width="20.7" height="20.7" />
+              <rect class="st12" x="577.3" y="372.1" width="20.7" height="20.7" />
+              <rect class="st12" x="577.3" y="392.8" width="20.7" height="20.7" />
+              <rect class="st12" x="556.6" y="413.5" width="20.7" height="20.7" />
+              <rect class="st12" x="535.9" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="515.2" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="494.6" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="473.9" y="434.2" width="20.7" height="20.7" />
+              <rect class="st12" x="474" y="392.8" width="20.7" height="20.7" />
+              <rect class="st12" x="453.3" y="392.8" width="20.7" height="20.7" />
+              <rect class="st12" x="556.7" y="392.8" width="20.7" height="20.7" />
+              <rect class="st12" x="536" y="392.8" width="20.7" height="20.7" />
+              <rect class="st7" x="494.6" y="144.7" width="20.7" height="20.7" />
+              <rect class="st8" x="308.6" y="206.7" width="20.7" height="20.7" />
+              <rect class="st8" x="308.6" y="227.4" width="20.7" height="20.7" />
+              <rect class="st8" x="329.1" y="227.4" width="20.7" height="20.7" />
+              <rect class="st8" x="349.9" y="227.4" width="20.7" height="20.7" />
+              <rect class="st8" x="370.5" y="206.7" width="20.7" height="20.7" />
+              <rect class="st8" x="432.7" y="454.9" width="20.7" height="20.7" />
+              <rect class="st8" x="494.6" y="454.9" width="20.7" height="20.7" />
+              <rect class="st8" x="474" y="496.2" width="20.7" height="20.7" />
+              <rect class="st8" x="494.6" y="496.2" width="20.7" height="20.7" />
+              <rect class="st8" x="412.1" y="496.2" width="20.7" height="20.7" />
+              <rect class="st8" x="432.7" y="496.2" width="20.7" height="20.7" />
+              <rect class="st8" x="349.8" y="186" width="20.7" height="20.7" />
+              <rect class="st8" x="370.5" y="186" width="20.7" height="20.7" />
+              <rect class="st12" x="391.2" y="186" width="20.7" height="20.7" />
+              <rect class="st8" x="349.9" y="206.7" width="20.7" height="20.7" />
+              <rect class="st8" x="432.7" y="475.5" width="20.7" height="20.7" />
+              <rect class="st8" x="494.6" y="475.5" width="20.7" height="20.7" />
+              <rect class="st8" x="329.2" y="206.7" width="20.7" height="20.7" />
+              <rect class="st8" x="370.5" y="227.4" width="20.7" height="20.7" />
+              <rect class="st8" x="391.2" y="227.4" width="20.7" height="20.7" />
+              <rect class="st8" x="391.2" y="206.7" width="20.7" height="20.7" />
+              <rect class="st8" x="411.9" y="206.7" width="20.7" height="20.7" />
+              <rect class="st8" x="411.9" y="227.4" width="20.7" height="20.7" />
+              <rect class="st5" x="350.1" y="124" width="20.7" height="20.7" />
+              <rect class="st7" x="329.4" y="124" width="20.7" height="20.7" />
+              <rect class="st7" x="391.1" y="144.7" width="20.7" height="20.7" />
+              <rect class="st7" x="411.9" y="144.7" width="20.7" height="20.7" />
+              <rect class="st7" x="432.5" y="144.7" width="20.7" height="20.7" />
+              <rect class="st7" x="453.2" y="144.7" width="20.7" height="20.7" />
+              <rect class="st7" x="474" y="144.7" width="20.7" height="20.7" />
+              <rect class="st2" x="515.2" y="124" width="20.7" height="20.7" />
+              <rect class="st7" x="536" y="103.3" width="20.7" height="20.7" />
+              <rect class="st2" x="474" y="124" width="20.7" height="20.7" />
+              <rect class="st9" x="494.6" y="103.3" width="20.7" height="20.7" />
+              <rect class="st2" x="515.3" y="103.3" width="20.7" height="20.7" />
+              <rect class="st2" x="453.1" y="124" width="20.7" height="20.7" />
+              <rect class="st2" x="432.5" y="124" width="20.7" height="20.7" />
+              <rect class="st2" x="411.8" y="124" width="20.7" height="20.7" />
+              <rect class="st2" x="391.5" y="124" width="20.7" height="20.7" />
+              <rect class="st4" x="370.5" y="103.3" width="20.7" height="20.7" />
+              <rect class="st9" x="391.2" y="103.3" width="20.7" height="20.7" />
+              <rect class="st4" x="411.9" y="103.3" width="20.7" height="20.7" />
+              <rect class="st9" x="432.6" y="103.3" width="20.7" height="20.7" />
+              <rect class="st6" x="515.2" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="494.5" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="473.9" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="474" y="62" width="20.7" height="20.7" />
+              <rect class="st6" x="494.5" y="62" width="20.7" height="20.7" />
+              <rect class="st3" x="494.8" y="41.4" width="20.7" height="20.7" />
+              <rect class="st5" x="536" y="62" width="20.7" height="20.7" />
+              <rect class="st5" x="556.4" y="62" width="20.7" height="20.7" />
+              <rect class="st5" x="556.8" y="41.4" width="20.7" height="20.7" />
+              <rect class="st6" x="515.3" y="41.4" width="20.7" height="20.7" />
+              <rect class="st0" x="515.3" y="20.7" width="20.7" height="20.7" />
+              <rect class="st0" x="536" y="20.7" width="20.7" height="20.7" />
+              <rect class="st6" x="453.3" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="432.7" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="412.1" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="391.4" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="370.8" y="82.7" width="20.7" height="20.7" />
+              <rect class="st3" x="391.2" y="62" width="20.7" height="20.7" />
+              <rect class="st0" x="411.9" y="41.4" width="20.7" height="20.7" />
+              <rect class="st0" x="412.1" y="62" width="20.7" height="20.7" />
+              <rect class="st0" x="432.8" y="41.4" width="20.7" height="20.7" />
+              <rect class="st0" x="432.8" y="62" width="20.7" height="20.7" />
+              <rect class="st1" x="432.4" y="20.7" width="20.7" height="20.7" />
+              <rect class="st0" x="453.3" y="20.7" width="20.7" height="20.7" />
+              <rect class="st4" x="453.3" y="103.3" width="20.7" height="20.7" />
+              <rect class="st4" x="474" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="536" y="82.7" width="20.7" height="20.7" />
+              <rect class="st6" x="515.5" y="62" width="20.7" height="20.7" />
+              <rect class="st7" x="577.3" y="41.4" width="20.7" height="20.7" />
+              <rect class="st7" x="577.3" y="62" width="20.7" height="20.7" />
+              <rect class="st7" x="556.6" y="82.7" width="20.7" height="20.7" />
+              <rect class="st5" x="350.1" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="329.4" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="350.1" y="82.7" width="20.7" height="20.7" />
+              <rect class="st3" x="370.8" y="62" width="20.7" height="20.7" />
+              <rect class="st7" x="349.8" y="62" width="20.7" height="20.7" />
+              <rect class="st0" x="391.5" y="41.4" width="20.7" height="20.7" />
+              <rect class="st3" x="370.5" y="41.4" width="20.7" height="20.7" />
+              <rect class="st7" x="350.1" y="41.4" width="20.7" height="20.7" />
+              <rect class="st1" x="411.8" y="20.7" width="20.7" height="20.7" />
+              <rect class="st1" x="391.6" y="20.7" width="20.7" height="20.7" />
+              <rect class="st7" x="370.8" y="20.7" width="20.7" height="20.7" />
+              <rect class="st7" x="432.8" y="0" width="20.7" height="20.7" />
+              <rect class="st7" x="412.1" y="0" width="20.7" height="20.7" />
+              <rect class="st7" x="391.6" y="0" width="20.7" height="20.7" />
+              <rect class="st7" x="453.4" y="0" width="20.7" height="20.7" />
+              <rect class="st7" x="474.2" y="0" width="20.7" height="20.7" />
+              <rect class="st7" x="494.8" y="0" width="20.7" height="20.7" />
+              <rect class="st0" x="474" y="20.7" width="20.7" height="20.7" />
+              <rect class="st3" x="453.4" y="41.4" width="20.7" height="20.7" />
+              <rect class="st6" x="453.4" y="62" width="20.7" height="20.7" />
+              <rect class="st3" x="473.8" y="41.4" width="20.7" height="20.7" />
+              <rect class="st0" x="494.8" y="20.7" width="20.7" height="20.7" />
+              <rect class="st7" x="515.2" y="0" width="20.7" height="20.7" />
+              <rect class="st7" x="535.9" y="0" width="20.7" height="20.7" />
+              <rect class="st7" x="556.6" y="20.7" width="20.7" height="20.7" />
+              <rect class="st4" x="432.4" y="103.3" width="20.7" height="20.7" />
+              <rect class="st4" x="391.6" y="103.3" width="20.7" height="20.7" />
+              <rect class="st7" x="536" y="124" width="20.7" height="20.7" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="current-number" id="num">--</div>
+
+      <div class="summary" id="summary">載入中...</div>
+
+      <div class="landscape-right">
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab('waiting')">候位</div>
+          <div class="tab" onclick="switchTab('missed')">過號</div>
+        </div>
+
+
+        <div class="list" id="waitingList"></div>
+        <div class="list hidden" id="missedList"></div>
       </div>
     </div>
 
-    <div class="current-number" id="num">--</div>
-    
-    <div class="summary" id="summary">載入中...</div>
-    
-    <div class="landscape-right">
-      <div class="tabs">
-        <div class="tab active" onclick="switchTab('waiting')">候位</div>
-        <div class="tab" onclick="switchTab('missed')">過號</div>
-      </div>
+    <!-- ✅ 廣告區：固定底部 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4233788696457830"
+      crossorigin="anonymous"></script>
+    <!-- 底部 -->
+    <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+      data-ad-client="ca-pub-4233788696457830" data-ad-slot="4034771249"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <script>
+      let currentTab = 'waiting';
+
+      // 鴨子互動功能
+      // let duckContainer = null; // Removed duplicate declaration
+      let blinkInterval = null;
+      let heartsContainer = null;
+      let hearts = []; // 存儲所有活動的愛心
+      let bounceTimeouts = []; // 追蹤動畫 timeout，用於清理
+
+      // Lucky Draw Logic Variables
+      let clickCount = 0;
+      let lastClickTime = 0;
+      let snowfallActive = false; // 雪花動畫狀態
+      let snowfallInterval = null; // 雪花動畫間隔 ID
+      const luckyDrawModal = document.getElementById('luckyDrawModal');
+      const wheel = document.getElementById('wheel');
+      const drawBtn = document.getElementById('drawBtn');
+      const drawMessage = document.getElementById('drawMessage');
+      const drawInitial = document.getElementById('drawInitial');
+      const drawResult = document.getElementById('drawResult'); // 可能為 null（已被註釋掉）
+      const prizeNameDisplay = document.getElementById('prizeNameDisplay'); // 可能為 null
+      // duckContainer is already defined in the global scope or will be defined below. 
+      // To avoid redeclaration issues, we will assign it inside DOMContentLoaded or ensure it's unique.
+      // However, looking at the file, it seems we are in a script block.
+      // Let's use a different name or just use the element directly in the event listener.
+
+      // duckContainer is already defined in the global scope or will be defined below. 
+      // To avoid redeclaration issues, we will assign it inside DOMContentLoaded or ensure it's unique.
+      // However, looking at the file, it seems we are in a script block.
+      // Let's use a different name or just use the element directly in the event listener.
+
+      // Logic moved to duckClicked() to support both click and touchstart events.
 
 
-      <div class="list" id="waitingList"></div>
-      <div class="list hidden" id="missedList"></div>
-    </div>
-  </div>
+      function checkAndOpenLuckyDraw() {
+        // 先檢查轉盤模式是否開啟
+        fetch('/api/wheel-mode')
+          .then(r => r.json())
+          .then(data => {
+            if (!data.enabled) {
+              console.log('轉盤模式已關閉，不打開轉盤');
+              return; // 轉盤模式關閉，不執行任何操作
+            }
+            
+            // 轉盤模式開啟，繼續執行原有邏輯
+            const lastDrawTimestamp = localStorage.getItem('lastDrawTimestamp');
+            const lastPrizeId = localStorage.getItem('lastPrizeId');
+            const lastPrizeIndex = localStorage.getItem('lastPrizeIndex');
+            
+            // 檢查8小時內是否抽過獎
+            const cacheHours = 8;
+            const cacheMs = cacheHours * 60 * 60 * 1000;
+            const now = new Date().getTime();
+            const canDraw = !lastDrawTimestamp || (now - parseInt(lastDrawTimestamp)) >= cacheMs;
 
-  <!-- ✅ 廣告區：固定底部 -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4233788696457830"
-       crossorigin="anonymous"></script>
-  <!-- 底部 -->
-  <ins class="adsbygoogle"
-       style="display:inline-block;width:728px;height:90px"
-       data-ad-client="ca-pub-4233788696457830"
-       data-ad-slot="4034771249"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+            if (!canDraw && lastPrizeId) {
+              // Already played today - 從最新列表獲取獎品信息
+              fetch('/prizes')
+                .then(r => r.json())
+                .then(prizes => {
+                  // 根據ID找到獎品（使用最新的名稱和emoji）
+                  const prize = prizes.find(p => p.id === parseInt(lastPrizeId));
+                  if (prize) {
+                    // 使用最新的獎品信息
+                    const targetIndex = prizes.findIndex(p => p.id === parseInt(lastPrizeId));
+                    openLuckyDraw(targetIndex !== -1 ? targetIndex : lastPrizeIndex, null, prize.id);
+                    showResultScreen(prize.name, prize.description || '');
+                  } else {
+                    // 如果找不到（可能被刪除），使用保存的索引
+                    openLuckyDraw(lastPrizeIndex);
+                    showResultScreen('獎品', '');
+                  }
+                })
+                .catch(e => {
+                  console.error('獲取獎品列表失敗:', e);
+                  openLuckyDraw(lastPrizeIndex);
+                  showResultScreen('獎品');
+                });
+            } else {
+              // New game
+              openLuckyDraw();
+            }
+          })
+          .catch(e => {
+            console.error('檢查轉盤模式狀態失敗:', e);
+            // 如果檢查失敗，預設開啟轉盤（向後兼容）
+            const lastDrawTimestamp = localStorage.getItem('lastDrawTimestamp');
+            const lastPrizeId = localStorage.getItem('lastPrizeId');
+            const lastPrizeIndex = localStorage.getItem('lastPrizeIndex');
+            
+            // 檢查8小時內是否抽過獎
+            const cacheHours = 8;
+            const cacheMs = cacheHours * 60 * 60 * 1000;
+            const now = new Date().getTime();
+            const canDraw = !lastDrawTimestamp || (now - parseInt(lastDrawTimestamp)) >= cacheMs;
 
-  <script>
-    let currentTab = 'waiting';
-
-    // 鴨子互動功能
-    let duckContainer = null;
-    let blinkInterval = null;
-    let heartsContainer = null;
-    let hearts = []; // 存儲所有活動的愛心
-    let bounceTimeouts = []; // 追蹤動畫 timeout，用於清理
-
-    function initDuckInteraction() {
-      duckContainer = document.getElementById('duckContainer');
-      heartsContainer = document.getElementById('heartsContainer');
-
-      if (duckContainer) {
-        // 點擊事件
-        duckContainer.addEventListener('click', function(e) {
-          e.preventDefault();
-          duckClicked();
-        });
-
-        // 觸摸事件（手機優先）
-        duckContainer.addEventListener('touchstart', function(e) {
-          e.preventDefault();
-          duckClicked();
-        });
-
-        // 開始自動眨眼
-        startAutoBlink();
+            if (!canDraw && lastPrizeId) {
+              fetch('/prizes')
+                .then(r => r.json())
+                .then(prizes => {
+                  const prize = prizes.find(p => p.id === parseInt(lastPrizeId));
+                  if (prize) {
+                    const targetIndex = prizes.findIndex(p => p.id === parseInt(lastPrizeId));
+                    openLuckyDraw(targetIndex !== -1 ? targetIndex : lastPrizeIndex, null, prize.id);
+                    showResultScreen(prize.name, prize.description || '');
+                  } else {
+                    openLuckyDraw(lastPrizeIndex);
+                    showResultScreen('獎品', '');
+                  }
+                })
+                .catch(e => {
+                  console.error('獲取獎品列表失敗:', e);
+                  openLuckyDraw(lastPrizeIndex);
+                  showResultScreen('獎品');
+                });
+            } else {
+              openLuckyDraw();
+            }
+          });
       }
 
-      // 開始愛心動畫循環
-      if (heartsContainer) {
-        animateHearts();
+      function openLuckyDraw(savedIndex = null, savedName = null, savedPrizeId = null) {
+        luckyDrawModal.classList.add('active');
+        if (drawInitial) drawInitial.style.display = 'flex';
+        if (drawResult) drawResult.classList.remove('active');
+        if (drawBtn) drawBtn.disabled = false;
+
+        // Start snowfall animation when modal opens
+        startSnowfall();
+        drawMessage.textContent = "今天運氣如何呢？";
+
+        wheel.style.transition = 'none';
+
+        // Fetch and render prizes first, then set rotation
+        fetch('/prizes')
+          .then(r => r.json())
+          .then(prizes => {
+            renderWheel(prizes);
+
+            // Restore rotation if saved state exists
+            let targetIndex = null;
+            if (savedPrizeId !== null) {
+              // 優先使用ID查找（最準確）
+              targetIndex = prizes.findIndex(p => p.id === savedPrizeId);
+            }
+            if (targetIndex === -1 && savedIndex !== null) {
+              targetIndex = parseInt(savedIndex);
+            } else if (targetIndex === -1 && savedName) {
+              // Fallback: find index by name
+              // Note: This might pick the first occurrence if multiple prizes have same name
+              const foundIndex = prizes.findIndex(p => p.name === savedName);
+              if (foundIndex !== -1) targetIndex = foundIndex;
+            }
+
+            if (targetIndex !== null && targetIndex >= 0 && targetIndex < prizes.length) {
+              // 計算轉盤角度，讓指針指向該獎品
+              const prizeCenterAngle = targetIndex * 30 + 15;
+              const angle = 360 - prizeCenterAngle;
+              wheel.style.transform = `rotate(${angle}deg)`;
+              console.log(`恢復轉盤位置: 索引=${targetIndex}, 獎品中心角度=${prizeCenterAngle}deg, 轉盤角度=${angle}deg`);
+            } else {
+              wheel.style.transform = 'rotate(0deg)';
+            }
+          })
+          .catch(e => console.error("Failed to load prizes", e));
       }
-    }
 
-    function duckClicked() {
-      if (!duckContainer) return;
-
-      // 清除之前的動畫 timeout，讓新動畫從當前狀態平滑銜接
-      bounceTimeouts.forEach(timeout => clearTimeout(timeout));
-      bounceTimeouts = [];
-
-      // 創建彈跳動畫序列（快速點擊時會從當前狀態平滑過渡）
-      const bounceSequence = [
-        { scale: 1.12, rotate: -6, delay: 0 },
-        { scale: 1.05, rotate: 4, delay: 80 },
-        { scale: 1.1, rotate: -3, delay: 160 },
-        { scale: 1, rotate: 0, delay: 240 }
-      ];
-
-      // 執行動畫序列（使用 transition 平滑過渡）
-      bounceSequence.forEach((step) => {
-        const timeout = setTimeout(() => {
-          duckContainer.style.transform = `scale(${step.scale}) rotate(${step.rotate}deg)`;
-        }, step.delay);
-        bounceTimeouts.push(timeout);
-      });
-
-      // 觸發眨眼（允許快速點擊時多次眨眼）
-      blink();
-
-      // 添加音效（如果支持）
-      playDuckSound();
-
-      // 創建3顆愛心
-      createHearts(3);
-    }
-
-    function blink() {
-      // 如果正在眨眼，先重置動畫以允許快速連續眨眼
-      if (duckContainer.classList.contains('blinking')) {
-        duckContainer.classList.remove('blinking');
-        // 強制重排以確保動畫重置
-        void duckContainer.offsetWidth;
-      }
-
-      // 添加眨眼動畫類
-      duckContainer.classList.add('blinking');
-
-      // 使用 animationend 事件來移除類別
-      const handleBlinkEnd = (e) => {
-        if (e.animationName === 'pixelBlinkFast') {
-          duckContainer.classList.remove('blinking');
-          duckContainer.removeEventListener('animationend', handleBlinkEnd);
+      function renderWheel(prizes) {
+        if (!wheel) {
+          console.error('轉盤元素不存在！');
+          return;
         }
-      };
-      duckContainer.addEventListener('animationend', handleBlinkEnd);
-    }
-
-    function startAutoBlink() {
-      // 每3-8秒隨機眨眼
-      function scheduleBlink() {
-        const delay = 3000 + Math.random() * 5000; // 3-8秒
-        blinkInterval = setTimeout(() => {
-          blink(); // 移除 isBlinking 檢查，允許與點擊眨眼同時進行
-          scheduleBlink(); // 繼續下一個眨眼
-        }, delay);
-      }
-
-      scheduleBlink();
-    }
-
-    function playDuckSound() {
-      // 使用Web Audio API創建簡單的鴨子叫聲
-      try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        // 鴨子叫聲頻率
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-        oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.2);
-
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.3);
-      } catch (e) {
-        // 如果音效失敗，靜默處理
-        console.log('音效播放失敗');
-      }
-    }
-
-    // 愛心SVG模板（粉紅色愛心）
-    function getHeartSVG() {
-      return `<svg class="heart" xmlns="http://www.w3.org/2000/svg" viewBox="677 180 100 80">
-        <defs>
-          <style>
-            .heart-cls-4 { fill: #ffb3d9; }
-            .heart-cls-5 { fill: #ff69b4; }
-            .heart-cls-6 { fill: #ffc0cb; }
-          </style>
-        </defs>
-        <g>
-        <rect class="heart-cls-5" x="677.76" y="213.76" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="761.25" y="180.36" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="744.55" y="180.36" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="744.55" y="197.06" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="761.25" y="197.06" width="16.7" height="16.7"/>
-        <rect class="heart-cls-4" x="711.16" y="180.36" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="711.16" y="197.06" width="16.7" height="16.7"/>
-        <rect class="heart-cls-6" x="777.95" y="197.06" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="761.25" y="213.76" width="16.7" height="16.7"/>
-        <rect class="heart-cls-4" x="694.46" y="180.36" width="16.7" height="16.7"/>
-        <rect class="heart-cls-4" x="694.46" y="197.06" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="677.76" y="197.06" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="694.46" y="213.76" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="711.16" y="213.62" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="727.85" y="213.76" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="744.55" y="213.76" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="711.16" y="230.32" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="727.85" y="230.32" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="744.55" y="230.32" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="727.85" y="247.02" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="694.46" y="230.32" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="711.16" y="247.02" width="16.7" height="16.7"/>
-        <rect class="heart-cls-6" x="727.85" y="263.58" width="16.7" height="16.7"/>
-        <rect class="heart-cls-6" x="744.55" y="246.88" width="16.7" height="16.7"/>
-        <rect class="heart-cls-6" x="761.25" y="230.32" width="16.7" height="16.7"/>
-        <rect class="heart-cls-6" x="777.95" y="213.76" width="16.7" height="16.7"/>
-        <rect class="heart-cls-5" x="727.85" y="197.06" width="16.7" height="16.7"/>
-        </g>
-      </svg>`;
-    }
-
-    // 創建愛心
-    function createHearts(count) {
-      if (!heartsContainer || !duckContainer) return;
-
-      // 獲取鴨子的位置
-      const duckRect = duckContainer.getBoundingClientRect();
-      const startX = duckRect.left + duckRect.width / 2;
-      const startY = duckRect.top + duckRect.height / 2;
-
-      for (let i = 0; i < count; i++) {
-        // 創建愛心元素
-        const heartWrapper = document.createElement('div');
-        heartWrapper.className = 'heart';
-        heartWrapper.innerHTML = getHeartSVG();
-        heartWrapper.style.position = 'absolute';
-        heartWrapper.style.left = startX + 'px';
-        heartWrapper.style.top = startY + 'px';
-        heartWrapper.style.opacity = '1';
-        heartWrapper.style.transformOrigin = 'center center';
         
-        heartsContainer.appendChild(heartWrapper);
+        if (!prizes || prizes.length === 0) {
+          console.error('沒有獎品數據！');
+          return;
+        }
+        
+        wheel.innerHTML = ''; // Clear existing
+        console.log('渲染轉盤，獎品數據:', prizes); // 調試用
+        console.log('轉盤元素:', wheel); // 調試用
+        
+        prizes.forEach((prize, index) => {
+          const text = document.createElement('div');
+          text.className = 'wheel-text';
 
-        // 隨機初始速度（向上和側向）- 大幅增加噴射力度
-        const velocityX = (Math.random() - 0.5) * 800; // -400 到 400 (極大側向速度)
-        const velocityY = -350 - Math.random() * 150; // -500 到 -350 (適中的向上速度)
-        const rotation = (Math.random() - 0.5) * 360; // 隨機旋轉
-        const rotationSpeed = (Math.random() - 0.5) * 900; // 旋轉速度 (度/秒，-450 到 450)
+          // 轉盤有 12 個獎品，每個佔 30 度
+          // 獎品中心角度：index * 30 + 15 (每個獎品中心在該區塊的中央)
+          // 0deg 在 conic-gradient 中是 12 點方向
+          // 但 transform rotate 的 0deg 是 3 點方向，所以需要減 90deg 來對齊到 12 點
+          const segmentAngle = index * 30 + 15; // 獎品在轉盤上的角度（從 12 點開始，順時針）
+          const textRotation = segmentAngle - 90; // 文字容器需要旋轉的角度，讓它對齊到正確位置
+          
+          text.style.transform = `rotate(${textRotation}deg)`;
 
-        // 添加到愛心數組 - 添加物理屬性
-        hearts.push({
-          element: heartWrapper,
-          x: startX,
-          y: startY,
-          velocityX: velocityX,
-          velocityY: velocityY,
-          rotation: rotation,
-          rotationSpeed: rotationSpeed,
-          gravity: 980, // 重力加速度 (px/s²) - 接近真實重力
-          airResistance: 0.98, // 空氣阻力係數 (每幀速度衰減)
-          bounceDamping: 0.7, // 彈跳阻尼係數 (0-1，增加彈跳力度)
-          rotationDamping: 0.995, // 旋轉阻尼 (旋轉會逐漸減慢)
-          opacity: 1,
-          bounceCount: 0, // 彈跳次數
-          maxBounces: 3, // 最大彈跳次數
-          size: 1, // 愛心大小（用於縮放效果）
-          age: 0, // 愛心年齡（用於淡出）
-          stoppedTime: null // 停止時間（用於淡出計算）
+          // 直接使用 API 返回的 icon（表情符號）
+          // 確保 icon 存在且不為空
+          let prizeIcon = prize.icon;
+          if (!prizeIcon || prizeIcon === null || prizeIcon === undefined || prizeIcon === '' || prizeIcon.trim() === '') {
+            prizeIcon = '🎁'; // 如果沒有 icon，使用預設值
+          }
+
+          // 計算 emoji 需要旋轉的角度，讓底部朝向圓心
+          // 從 emoji 位置指向圓心的方向 = segmentAngle 度（不是 +180，因為我們要底部朝向圓心）
+          // 因為容器已經旋轉了 textRotation，所以 emoji 相對於容器需要旋轉：
+          const emojiRotation = segmentAngle - textRotation; // 讓底部朝向圓心
+
+          // 只顯示 emoji，不顯示文字
+          // emoji 放在最外側，大小適中
+          // 每個 emoji 根據位置旋轉不同角度，讓底部朝向圓心
+          text.innerHTML = `<span style="font-size: 1.5em; display: inline-block; line-height: 1; transform: rotate(${emojiRotation}deg);">${prizeIcon}</span>`;
+          
+          console.log(`獎品 ${index}: icon="${prizeIcon}", segmentAngle=${segmentAngle}deg, textRotation=${textRotation}deg`); // 調試用
+
+          // Alternate text color for better contrast with enhanced styling
+          // Even index (Red segment): White text with shadow
+          // Odd index (Yellow segment): Dark text with shadow
+          if (index % 2 === 0) {
+            text.style.color = '#ffffff';
+            text.style.textShadow = '2px 2px 4px rgba(0,0,0,0.8), 1px 1px 2px rgba(0,0,0,0.6)';
+          } else {
+            text.style.color = '#2c1810';
+            text.style.textShadow = '2px 2px 4px rgba(255,255,255,0.8), 1px 1px 2px rgba(255,255,255,0.6)';
+          }
+
+          wheel.appendChild(text);
         });
+        
+        // 調試：檢查渲染結果
+        console.log('轉盤渲染完成，子元素數量:', wheel.children.length);
+        console.log('轉盤 HTML:', wheel.innerHTML.substring(0, 500)); // 只顯示前500個字符
       }
-    }
 
-    // 愛心動畫循環 - 優化物理效果
-    function animateHearts() {
-      const now = performance.now();
-      const deltaTime = (now - (animateHearts.lastTime || now)) / 1000; // 轉換為秒
-      animateHearts.lastTime = now;
+      function showResultScreen(prizeName, prizeDescription = '') {
+        // drawInitial.style.display = 'none'; // Keep wheel visible
+        // drawResult.classList.add('active'); // Don't switch to result view
 
-      // 獲取螢幕邊界
-      const screenHeight = window.innerHeight;
-      const screenWidth = window.innerWidth;
-      const bottomBoundary = screenHeight - 15; // 底部邊界（考慮愛心大小）
-      const heartSize = 30; // 愛心大小的一半（用於碰撞檢測）
-      
-      hearts = hearts.filter(heart => {
-        // 增加年齡
-        heart.age += deltaTime;
+        // Update message and button to show result
+        let descriptionHtml = '';
+        if (prizeDescription && prizeDescription.trim() !== '') {
+          descriptionHtml = `<div style="font-size: 0.9em; color: #999; margin-top: 8px; font-weight: normal;">${prizeDescription}</div>`;
+        }
+        drawMessage.innerHTML = `<span style="font-size: 1.5em; color: #d32f2f; font-weight: bold;">${prizeName}</span>${descriptionHtml}<br>明天再來試試手氣吧！`;
+        drawBtn.disabled = true;
+        drawBtn.textContent = "明天再來";
+      }
 
-        // 應用重力
-        heart.velocityY += heart.gravity * deltaTime;
+      function closeLuckyDraw() {
+        luckyDrawModal.classList.remove('active');
+        // Stop snowfall animation when modal closes
+        stopSnowfall();
+      }
 
-        // 應用空氣阻力（速度越大，阻力越大）
-        // 使用基於時間的阻力，確保在不同幀率下表現一致
-        const resistanceFactor = Math.pow(heart.airResistance, deltaTime * 60); // 基於60fps的阻力
-        heart.velocityX *= resistanceFactor;
-        heart.velocityY *= resistanceFactor;
+      function startDraw() {
+        drawBtn.disabled = true;
+        drawMessage.textContent = "轉動中...";
 
-        // 更新位置
-        heart.x += heart.velocityX * deltaTime;
-        heart.y += heart.velocityY * deltaTime;
+        fetch('/draw', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.id === -1) {
+              drawMessage.textContent = data.name;
+              drawBtn.disabled = false;
+              return;
+            }
 
-        // 左右邊界碰撞（彈性碰撞）- 極大增強反彈效果
-        const wallBounceDamping = 0.9; // 邊界反彈阻尼（幾乎完全反彈，保留90%能量）
-        if (heart.x < heartSize) {
-          heart.x = heartSize;
-          heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
-          // 碰撞時大幅增加旋轉變化，讓反彈更明顯
-          heart.rotationSpeed += (Math.random() - 0.5) * 15;
-        } else if (heart.x > screenWidth - heartSize) {
-          heart.x = screenWidth - heartSize;
-          heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
-          heart.rotationSpeed += (Math.random() - 0.5) * 15;
+            // 如果已經抽過，直接顯示結果
+            if (data.already_drawn) {
+              // 獲取獎品列表來找到正確的索引和最新的獎品信息
+              fetch('/prizes')
+                .then(r => r.json())
+                .then(prizes => {
+                  let prizeIndex = prizes.findIndex(p => p.id === data.id);
+                  if (prizeIndex === -1) {
+                    prizeIndex = data.id > 0 ? (data.id - 1) % prizes.length : 0;
+                  }
+                  
+                  // 從最新列表獲取獎品信息（使用最新的名稱和emoji）
+                  const prize = prizes.find(p => p.id === data.id) || prizes[prizeIndex];
+                  
+                  // 存入 localStorage 以便下次直接讀取
+                  // 只保存ID，不保存名稱和emoji，這樣後台修改後前台會顯示最新內容
+                  localStorage.setItem('lastDrawTimestamp', new Date().getTime().toString());
+                  localStorage.setItem('lastPrizeId', data.id.toString());
+                  localStorage.setItem('lastPrizeIndex', prizeIndex);
+                  // 移除舊的名稱保存（向後兼容）
+                  localStorage.removeItem('lastPrizeName');
+                  localStorage.removeItem('lastDrawDate'); // 移除舊的日期格式
+
+                  // 直接設定轉盤角度到該獎品（不轉動，直接顯示結果位置）
+                  const prizeCenterAngle = prizeIndex * 30 + 15;
+                  const angle = 360 - prizeCenterAngle;
+                  wheel.style.transition = 'none';
+                  wheel.style.transform = `rotate(${angle}deg)`;
+
+                  // 顯示結果畫面（使用最新的獎品名稱和描述）
+                  showResultScreen(prize ? prize.name : data.name, prize ? (prize.description || '') : '');
+                })
+                .catch(e => {
+                  console.error('獲取獎品列表失敗:', e);
+                  // 使用備用計算
+                  let prizeIndex = data.id > 0 ? (data.id - 1) % 12 : 0;
+                  const angle = 360 - (prizeIndex * 30 + 15);
+                  wheel.style.transition = 'none';
+                  wheel.style.transform = `rotate(${angle}deg)`;
+                  showResultScreen(data.name, '');
+                });
+              return;
+            }
+
+            // 獲取當前獎品列表，找到對應的索引
+            fetch('/prizes')
+              .then(r => r.json())
+              .then(prizes => {
+                // 找到中獎獎品在列表中的索引
+                let prizeIndex = prizes.findIndex(p => p.id === data.id);
+                if (prizeIndex === -1) {
+                  // 如果找不到，使用 ID 計算（向後兼容）
+                  prizeIndex = data.id > 0 ? (data.id - 1) % prizes.length : 0;
+                }
+
+                // 從最新列表獲取獎品信息（使用最新的名稱和emoji）
+                const prize = prizes.find(p => p.id === data.id) || prizes[prizeIndex];
+                const prizeName = prize ? prize.name : data.name;
+                const prizeDescription = prize ? (prize.description || '') : '';
+
+                console.log(`中獎獎品: ${prizeName} (ID: ${data.id}), 索引: ${prizeIndex}`);
+
+                // Save to localStorage immediately to prevent replay on refresh/close
+                // 只保存ID，不保存名稱和emoji，這樣後台修改後前台會顯示最新內容
+                if (data.id !== -1) {
+                  localStorage.setItem('lastDrawTimestamp', new Date().getTime().toString());
+                  localStorage.setItem('lastPrizeId', data.id.toString());
+                  localStorage.setItem('lastPrizeIndex', prizeIndex);
+                  // 移除舊的名稱保存（向後兼容）
+                  localStorage.removeItem('lastPrizeName');
+                  localStorage.removeItem('lastDrawDate'); // 移除舊的日期格式
+                }
+
+                // 計算轉盤需要旋轉的角度
+                // 指針在頂部（0度，12點方向）
+                // 獎品中心角度：prizeIndex * 30 + 15（每個獎品佔30度，中心在15度處）
+                // 轉盤順時針旋轉，讓指針指向獎品中心
+                // 需要旋轉的角度 = 360 - (獎品中心角度)
+                const prizeCenterAngle = prizeIndex * 30 + 15; // 獎品中心在轉盤上的角度
+                const extraSpins = 5; // 多轉幾圈增加效果
+                const finalRotate = (360 - prizeCenterAngle) + (extraSpins * 360);
+
+                console.log(`轉盤旋轉: 獎品中心角度=${prizeCenterAngle}deg, 最終旋轉=${finalRotate}deg`);
+
+                wheel.style.transition = 'transform 5s cubic-bezier(0.1, 0.7, 0.1, 1)';
+                wheel.style.transform = `rotate(${finalRotate}deg)`;
+
+                setTimeout(() => {
+                  if (data.id !== -1) {
+                    // Show result after a brief pause to see where it stopped
+                    // 使用最新的獎品名稱和描述
+                    setTimeout(() => {
+                      showResultScreen(prizeName, prizeDescription);
+                    }, 1000);
+                  } else {
+                    // Error or sold out
+                    drawMessage.textContent = prizeName;
+                  }
+                }, 5000); // Wait for animation (5s)
+              })
+              .catch(error => {
+                console.error('獲取獎品列表失敗:', error);
+                // 使用備用計算方式
+                let prizeIndex = data.id > 0 ? (data.id - 1) % 12 : 0;
+                const prizeCenterAngle = prizeIndex * 30 + 15;
+                const finalRotate = (360 - prizeCenterAngle) + (5 * 360);
+                wheel.style.transition = 'transform 5s cubic-bezier(0.1, 0.7, 0.1, 1)';
+                wheel.style.transform = `rotate(${finalRotate}deg)`;
+                
+                setTimeout(() => {
+                  if (data.id !== -1) {
+                    setTimeout(() => {
+                      showResultScreen(data.name, '');
+                    }, 1000);
+                  }
+                }, 5000);
+              });
+            
+            return; // 提前返回，避免執行下面的代碼
+
+            wheel.style.transition = 'transform 5s cubic-bezier(0.1, 0.7, 0.1, 1)';
+            wheel.style.transform = `rotate(${finalRotate}deg)`;
+
+            setTimeout(() => {
+              if (data.id !== -1) {
+                // Show result after a brief pause to see where it stopped
+                setTimeout(() => {
+                  showResultScreen(data.name);
+                }, 1000);
+              } else {
+                // Error or sold out
+                drawMessage.textContent = data.name;
+              }
+            }, 5000); // Wait for animation (5s)
+          })
+          .catch(error => {
+            console.error('Draw failed:', error);
+            drawMessage.textContent = "連線失敗，請稍後再試";
+            drawBtn.disabled = false;
+          });
+      }
+
+
+      function initDuckInteraction() {
+        duckContainer = document.getElementById('duckContainer');
+        heartsContainer = document.getElementById('heartsContainer');
+
+        if (duckContainer) {
+          // 點擊事件
+          duckContainer.addEventListener('click', function (e) {
+            e.preventDefault();
+            duckClicked();
+          });
+
+          // 觸摸事件（手機優先）
+          duckContainer.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+            duckClicked();
+          });
+
+          // 開始自動眨眼
+          startAutoBlink();
         }
 
-        // 底部碰撞（彈跳效果）
-        if (heart.y >= bottomBoundary && heart.velocityY > 0) {
-          // 只有在向下移動時才彈跳
-          if (heart.bounceCount < heart.maxBounces && Math.abs(heart.velocityY) > 50) {
-            // 彈跳：反轉速度並應用阻尼
-            heart.velocityY = -heart.velocityY * heart.bounceDamping;
-            heart.velocityX *= 0.9; // 水平速度也稍微減弱
-            heart.y = bottomBoundary;
-            heart.bounceCount++;
+        // 開始愛心動畫循環
+        if (heartsContainer) {
+          animateHearts();
+        }
+      }
+
+      function duckClicked() {
+        if (!duckContainer) return;
+
+        // 清除之前的動畫 timeout，讓新動畫從當前狀態平滑銜接
+        bounceTimeouts.forEach(timeout => clearTimeout(timeout));
+        bounceTimeouts = [];
+
+        // 創建彈跳動畫序列（快速點擊時會從當前狀態平滑過渡）
+        const bounceSequence = [
+          { scale: 1.12, rotate: -6, delay: 0 },
+          { scale: 1.05, rotate: 4, delay: 80 },
+          { scale: 1.1, rotate: -3, delay: 160 },
+          { scale: 1, rotate: 0, delay: 240 }
+        ];
+
+        // 執行動畫序列（使用 transition 平滑過渡）
+        bounceSequence.forEach((step) => {
+          const timeout = setTimeout(() => {
+            duckContainer.style.transform = `scale(${step.scale}) rotate(${step.rotate}deg)`;
+          }, step.delay);
+          bounceTimeouts.push(timeout);
+        });
+
+        // 觸發眨眼（允許快速點擊時多次眨眼）
+        blink();
+
+        // 添加音效（如果支持）
+        playDuckSound();
+
+        // 創建3顆愛心
+        createHearts(3);
+      }
+
+      function blink() {
+        // 如果正在眨眼，先重置動畫以允許快速連續眨眼
+        if (duckContainer.classList.contains('blinking')) {
+          duckContainer.classList.remove('blinking');
+          // 強制重排以確保動畫重置
+          void duckContainer.offsetWidth;
+        }
+
+        // 添加眨眼動畫類
+        duckContainer.classList.add('blinking');
+
+        // 使用 animationend 事件來移除類別
+        const handleBlinkEnd = (e) => {
+          if (e.animationName === 'pixelBlinkFast') {
+            duckContainer.classList.remove('blinking');
+            duckContainer.removeEventListener('animationend', handleBlinkEnd);
+          }
+        };
+        duckContainer.addEventListener('animationend', handleBlinkEnd);
+      }
+
+      function startAutoBlink() {
+        // 每3-8秒隨機眨眼
+        function scheduleBlink() {
+          const delay = 3000 + Math.random() * 5000; // 3-8秒
+          blinkInterval = setTimeout(() => {
+            blink(); // 移除 isBlinking 檢查，允許與點擊眨眼同時進行
+            scheduleBlink(); // 繼續下一個眨眼
+          }, delay);
+        }
+
+        scheduleBlink();
+      }
+
+      // 預先初始化 AudioContext 以減少延遲
+      let audioContext = null;
+      let jingleClickCount = 0; // 追蹤 Jingle Bell 點擊次數
+      let lastJingleClickTime = 0; // 追蹤最後一次 Jingle Bell 點擊時間
+
+      // 初始化 AudioContext（在用戶第一次交互時）
+      function initAudioContext() {
+        if (!audioContext) {
+          try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          } catch (e) {
+            console.log('無法創建 AudioContext:', e);
+          }
+        }
+        // 如果 AudioContext 被暫停（瀏覽器安全限制），嘗試恢復
+        if (audioContext && audioContext.state === 'suspended') {
+          audioContext.resume().catch(e => console.log('無法恢復 AudioContext:', e));
+        }
+        return audioContext;
+      }
+
+      function playDuckSound() {
+        // 確保 AudioContext 已初始化
+        const ctx = initAudioContext();
+        if (!ctx) {
+          return;
+        }
+        
+        // 檢查點擊間隔，如果超過2秒則重置計數
+        const currentTime = new Date().getTime();
+        if (currentTime - lastJingleClickTime > 2000) {
+          jingleClickCount = 0;
+        }
+        lastJingleClickTime = currentTime;
+        
+        // 增加點擊計數
+        jingleClickCount++;
+        
+        // Jingle Bell 第一小節的11個音符頻率："Jingle bells, jingle bells, jingle all the way"
+        // 音符：E E E, E E E, E G C D E
+        const jingleNotes = [
+          329.63,  // E (Jin-)
+          329.63,  // E (-gle)
+          329.63,  // E (bells,)
+          329.63,  // E (Jin-)
+          329.63,  // E (-gle)
+          329.63,  // E (bells,)
+          329.63,  // E (Jin-)
+          392.00,  // G (-gle)
+          523.25,  // C (all)
+          587.33,  // D (the)
+          659.25   // E (way)
+        ];
+        
+        // 根據點擊次數選擇對應的音符
+        const noteIndex = Math.min(jingleClickCount - 1, jingleNotes.length - 1);
+        const freq = jingleNotes[noteIndex];
+        
+        // 播放單次鈴鐺聲
+        playSingleBell(ctx, freq);
+        
+        // 如果點擊了11次（第一小節完成），在最後一次播放完後打開轉盤
+        if (jingleClickCount >= 11) {
+          jingleClickCount = 0; // 重置計數
+          // 鈴鐺聲持續約0.3秒，在播放完後打開轉盤
+          setTimeout(() => {
+            checkAndOpenLuckyDraw();
+          }, 300);
+        }
+      }
+
+      function playSingleBell(ctx, frequency) {
+        // 播放單次鈴鐺聲
+        try {
+          const now = ctx.currentTime;
+          const duration = 0.3; // 鈴鐺聲持續時間
+          
+          // 創建多個諧波以模擬鈴鐺的清脆聲音
+          const harmonics = [
+            { freq: frequency, gain: 0.15 },
+            { freq: frequency * 2, gain: 0.08 },
+            { freq: frequency * 3, gain: 0.04 }
+          ];
+          
+          harmonics.forEach((harmonic) => {
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
             
-            // 彈跳時增加旋轉變化
-            heart.rotationSpeed += (Math.random() - 0.5) * 5;
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(harmonic.freq, now);
             
-            // 每次彈跳後減少彈跳係數（模擬能量損失）
-            heart.bounceDamping *= 0.85;
-          } else {
-            // 不再彈跳，停在底部並逐漸減速
-            heart.y = bottomBoundary;
-            heart.velocityY = 0;
-            heart.velocityX *= 0.95; // 水平摩擦力
-            if (Math.abs(heart.velocityX) < 5) {
-              heart.velocityX = 0;
-              // 記錄停止時間
-              if (heart.stoppedTime === null) {
-                heart.stoppedTime = heart.age;
+            // 快速起音和衰減，模擬鈴鐺的清脆聲音
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(harmonic.gain, now + 0.005);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            
+            oscillator.start(now);
+            oscillator.stop(now + duration);
+          });
+          
+        } catch (e) {
+          console.log('音效播放失敗:', e);
+        }
+      }
+
+      // Asset SVG圖案模板（隨機使用Asset 5-8，使用內聯樣式避免CSS類別衝突）
+      function getHeartSVG() {
+        const assetPatterns = [
+          // Asset 5.svg - 使用內聯fill屬性避免CSS類別衝突
+          {
+            name: 'asset5',
+            svg: `<svg class="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187.5 200">
+  <g id="OBJECTS">
+    <g>
+      <path fill="#80d91d" d="M25,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#8aea18" d="M37.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#8aea18" d="M25,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8eb860" d="M37.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#80d91d" d="M50,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8aea18" d="M62.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#80d91d" d="M37.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8eb860" d="M50,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#80d91d" d="M62.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8aea18" d="M37.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#80d91d" d="M50,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8eb860" d="M62.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#80d91d" d="M75,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M100,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M87.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M100,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M112.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M62.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M75,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M75,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M87.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M100,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M112.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M125,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M37.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M162.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M37.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M162.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M37.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M50,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M62.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M87.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M100,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M112.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M137.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M150,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M162.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M37.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M50,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M62.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M75,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M87.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M100,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M125,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffefd1" d="M137.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M150,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M162.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M37.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M50,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M62.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M75,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M87.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M125,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M137.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M150,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M162.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M37.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M50,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M62.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M75,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M87.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M137.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M150,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M162.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M37.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M50,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M62.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M75,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M150,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M162.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M37.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M50,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M62.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M150,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M162.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M37.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M50,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M62.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M150,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M162.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M175,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <g>
+        <path fill="#8eb860" d="M50,87.5v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#80d91d" d="M50,75v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#80d91d" d="M37.5,87.5v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#8eb860" d="M37.5,75v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#80d91d" d="M37.5,62.5v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#80d91d" d="M25,75v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#8eb860" d="M25,62.5v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#8aea18" d="M25,50v-12.5h-12.5v12.5h12.5Z"/>
+        <path fill="#8aea18" d="M12.5,62.5v-12.5H0v12.5h12.5Z"/>
+        <path fill="#8eb860" d="M12.5,50v-12.5H0v12.5h12.5Z"/>
+      </g>
+      <path fill="#fff" d="M50,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,100h12.5v12.5h-12.5v-12.5Z"/>
+    </g>
+  </g>
+</svg>`
+          },
+
+          // Asset 6.svg - 使用內聯fill屬性避免CSS類別衝突
+          {
+            name: 'asset6',
+            svg: `<svg class="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.5 200">
+  <g id="OBJECTS">
+    <g>
+      <path fill="#ef9b42" d="M50,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#ef9b42" d="M62.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#ef9b42" d="M75,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#ef9b42" d="M87.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#e88023" d="M100,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#ef9b42" d="M37.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M75,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M112.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M37.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M75,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M112.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M25,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M37.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path d="M50,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M75,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path d="M100,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M112.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M125,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M25,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M37.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M62.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M75,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M87.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M112.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M125,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M37.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M75,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M112.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M12.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M50,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M75,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M100,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M137.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M0,87.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#ef9b42" d="M12.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M25,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M37.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M75,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M112.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M125,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M137.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M150,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M0,100h12.5v12.5H0v-12.5Z"/>
+      <path fill="#e88023" d="M12.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M25,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M37.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M75,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M112.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M125,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M137.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M150,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M75,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M75,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M62.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M75,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M87.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M62.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M87.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M50,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M62.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M87.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#eb1021" d="M100,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M37.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M62.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M87.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M112.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M37.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M50,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M62.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e88023" d="M87.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M100,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ef9b42" d="M112.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+    </g>
+  </g>
+</svg>`
+          },
+
+          // Asset 7.svg - 完整的原始內容
+          {
+            name: 'asset7',
+            svg: `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187.5 200">
+  
+  <g id="OBJECTS">
+    <g>
+      <path fill="#54dbf6" d="M62.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M75,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M87.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M100,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M112.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#fff" d="M75,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#fff" d="M87.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#fff" d="M100,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#fff" d="M112.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#54dbf6" d="M37.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M37.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M50,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M62.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M87.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M100,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M112.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M125,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M137.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M37.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M50,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M62.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M75,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffba0b" d="M87.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M112.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M125,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M137.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M25,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M25,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M25,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M12.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M37.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M62.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M75,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M87.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M100,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M112.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M137.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M150,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M25,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M37.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M50,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M62.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M75,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M87.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#72ad2a" d="M100,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M112.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M125,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M137.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M150,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M162.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M25,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M37.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M50,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M62.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M75,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#72ad2a" d="M87.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#72ad2a" d="M100,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M112.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M125,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M137.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M150,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M162.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M25,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M37.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M50,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M62.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M75,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#72ad2a" d="M87.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#72ad2a" d="M100,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#72ad2a" d="M112.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M125,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M150,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M162.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M25,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M37.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M50,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M62.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M75,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M87.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M100,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M112.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M125,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M137.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M150,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M162.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M0,62.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fff" d="M0,75h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fff" d="M0,87.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fff" d="M0,100h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fff" d="M0,112.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#9ce6fb" d="M25,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M37.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M50,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M125,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M137.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M162.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M150,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M162.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M12.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M162.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M175,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M175,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M175,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M175,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M175,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M25,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M37.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M137.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M150,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M37.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M125,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M137.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M137.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M162.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M150,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M50,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M12.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M25,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M37.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M62.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M75,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M87.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M100,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M112.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M125,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffba0b" d="M25,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffba0b" d="M37.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffba0b" d="M50,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#ffba0b" d="M62.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M75,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M87.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M100,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M112.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M125,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M137.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M150,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M12.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M25,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M37.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M50,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#f82039" d="M62.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M150,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M162.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M12.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M25,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M62.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M75,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M87.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M100,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M112.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M125,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M137.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M150,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#c6000d" d="M162.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+    </g>
+  </g>
+</svg>`
+          },
+
+          // Asset 8.svg - 完整的原始內容
+          {
+            name: 'asset8',
+            svg: `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.5 200">
+  
+  <g id="OBJECTS">
+    <g>
+      <path fill="#fea60f" d="M37.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#fea60f" d="M50,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#efefef" d="M62.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#efefef" d="M75,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#efefef" d="M87.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#efefef" d="M100,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#efefef" d="M112.5,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#efefef" d="M125,0h12.5v12.5h-12.5V0Z"/>
+      <path fill="#fea60f" d="M37.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M62.5,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M125,12.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M25,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M37.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M50,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M62.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M75,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M87.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M100,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M112.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#efefef" d="M125,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M137.5,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,25h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M25,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M37.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M50,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M62.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M75,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M87.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M100,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M112.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M125,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M137.5,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,37.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M12.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#54dbf6" d="M25,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M37.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M50,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M62.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M75,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#9ce6fb" d="M87.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M100,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M112.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M125,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M137.5,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,50h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,62.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M100,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M137.5,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,62.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,75h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M50,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M87.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M125,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,75h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,87.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M37.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M62.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M75,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M87.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M100,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fff" d="M112.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,87.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,100h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M62.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M100,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M137.5,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,100h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,112.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M50,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M62.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M87.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M125,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,112.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,125h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M37.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M62.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M75,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M112.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,125h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,137.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M62.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M100,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M137.5,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,137.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,150h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M50,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M62.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M87.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M125,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,150h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,162.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M37.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M62.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M75,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M112.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,162.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,175h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M50,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M62.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M87.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M100,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M125,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M137.5,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,175h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M0,187.5h12.5v12.5H0v-12.5Z"/>
+      <path fill="#fea60f" d="M12.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#fea60f" d="M25,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M37.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M50,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M62.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M75,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M87.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M100,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M112.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#dd5512" d="M125,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#e4000f" d="M137.5,187.5h12.5v12.5h-12.5v-12.5Z"/>
+      <path fill="#8ac740" d="M150,187.5h12.5v12.5h-12.5v-12.5Z"/>
+    </g>
+  </g>
+</svg>`
+          }
+        ];
+
+        // 隨機選擇Asset圖案
+        const pattern = assetPatterns[Math.floor(Math.random() * assetPatterns.length)];
+        return pattern.svg;
+      }
+
+      // 創建愛心
+      function createHearts(count) {
+        if (!heartsContainer || !duckContainer) return;
+
+        // 獲取鴨子的位置
+        const duckRect = duckContainer.getBoundingClientRect();
+        const startX = duckRect.left + duckRect.width / 2;
+        const startY = duckRect.top + duckRect.height / 2;
+
+        for (let i = 0; i < count; i++) {
+          // 創建愛心元素
+          const heartWrapper = document.createElement('div');
+          heartWrapper.className = 'heart';
+          heartWrapper.innerHTML = getHeartSVG();
+          heartWrapper.style.position = 'absolute';
+          heartWrapper.style.left = startX + 'px';
+          heartWrapper.style.top = startY + 'px';
+          heartWrapper.style.opacity = '1';
+          heartWrapper.style.transformOrigin = 'center center';
+
+          heartsContainer.appendChild(heartWrapper);
+
+          // 隨機初始速度（向上和側向）- 大幅增加噴射力度
+          const velocityX = (Math.random() - 0.5) * 800; // -400 到 400 (極大側向速度)
+          const velocityY = -350 - Math.random() * 150; // -500 到 -350 (適中的向上速度)
+          const rotation = (Math.random() - 0.5) * 360; // 隨機旋轉
+          const rotationSpeed = (Math.random() - 0.5) * 900; // 旋轉速度 (度/秒，-450 到 450)
+
+          // 添加到愛心數組 - 添加物理屬性
+          hearts.push({
+            element: heartWrapper,
+            x: startX,
+            y: startY,
+            velocityX: velocityX,
+            velocityY: velocityY,
+            rotation: rotation,
+            rotationSpeed: rotationSpeed,
+            gravity: 980, // 重力加速度 (px/s²) - 接近真實重力
+            airResistance: 0.98, // 空氣阻力係數 (每幀速度衰減)
+            bounceDamping: 0.7, // 彈跳阻尼係數 (0-1，增加彈跳力度)
+            rotationDamping: 0.995, // 旋轉阻尼 (旋轉會逐漸減慢)
+            opacity: 1,
+            bounceCount: 0, // 彈跳次數
+            maxBounces: 3, // 最大彈跳次數
+            size: 1, // 愛心大小（用於縮放效果）
+            age: 0, // 愛心年齡（用於淡出）
+            stoppedTime: null // 停止時間（用於淡出計算）
+          });
+        }
+      }
+
+      // 愛心動畫循環 - 優化物理效果
+      function animateHearts() {
+        const now = performance.now();
+        const deltaTime = (now - (animateHearts.lastTime || now)) / 1000; // 轉換為秒
+        animateHearts.lastTime = now;
+
+        // 獲取螢幕邊界
+        const screenHeight = window.innerHeight;
+        const screenWidth = window.innerWidth;
+        const bottomBoundary = screenHeight - 15; // 底部邊界（考慮愛心大小）
+        const heartSize = 30; // 愛心大小的一半（用於碰撞檢測）
+
+        hearts = hearts.filter(heart => {
+          // 增加年齡
+          heart.age += deltaTime;
+
+          // 應用重力
+          heart.velocityY += heart.gravity * deltaTime;
+
+          // 應用空氣阻力（速度越大，阻力越大）
+          // 使用基於時間的阻力，確保在不同幀率下表現一致
+          const resistanceFactor = Math.pow(heart.airResistance, deltaTime * 60); // 基於60fps的阻力
+          heart.velocityX *= resistanceFactor;
+          heart.velocityY *= resistanceFactor;
+
+          // 更新位置
+          heart.x += heart.velocityX * deltaTime;
+          heart.y += heart.velocityY * deltaTime;
+
+          // 左右邊界碰撞（彈性碰撞）- 極大增強反彈效果
+          const wallBounceDamping = 0.9; // 邊界反彈阻尼（幾乎完全反彈，保留90%能量）
+          if (heart.x < heartSize) {
+            heart.x = heartSize;
+            heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
+            // 碰撞時大幅增加旋轉變化，讓反彈更明顯
+            heart.rotationSpeed += (Math.random() - 0.5) * 15;
+          } else if (heart.x > screenWidth - heartSize) {
+            heart.x = screenWidth - heartSize;
+            heart.velocityX = -heart.velocityX * wallBounceDamping; // 強力反彈
+            heart.rotationSpeed += (Math.random() - 0.5) * 15;
+          }
+
+          // 底部碰撞（彈跳效果）
+          if (heart.y >= bottomBoundary && heart.velocityY > 0) {
+            // 只有在向下移動時才彈跳
+            if (heart.bounceCount < heart.maxBounces && Math.abs(heart.velocityY) > 50) {
+              // 彈跳：反轉速度並應用阻尼
+              heart.velocityY = -heart.velocityY * heart.bounceDamping;
+              heart.velocityX *= 0.9; // 水平速度也稍微減弱
+              heart.y = bottomBoundary;
+              heart.bounceCount++;
+
+              // 彈跳時增加旋轉變化
+              heart.rotationSpeed += (Math.random() - 0.5) * 5;
+
+              // 每次彈跳後減少彈跳係數（模擬能量損失）
+              heart.bounceDamping *= 0.85;
+            } else {
+              // 不再彈跳，停在底部並逐漸減速
+              heart.y = bottomBoundary;
+              heart.velocityY = 0;
+              heart.velocityX *= 0.95; // 水平摩擦力
+              if (Math.abs(heart.velocityX) < 5) {
+                heart.velocityX = 0;
+                // 記錄停止時間
+                if (heart.stoppedTime === null) {
+                  heart.stoppedTime = heart.age;
+                }
               }
             }
           }
-        }
 
-        // 更新旋轉（應用旋轉阻尼）
-        heart.rotation += heart.rotationSpeed * deltaTime; // rotationSpeed 已經是度/秒
-        heart.rotationSpeed *= Math.pow(heart.rotationDamping, deltaTime * 60);
+          // 更新旋轉（應用旋轉阻尼）
+          heart.rotation += heart.rotationSpeed * deltaTime; // rotationSpeed 已經是度/秒
+          heart.rotationSpeed *= Math.pow(heart.rotationDamping, deltaTime * 60);
 
-        // 淡出效果：基於年齡和停止時間
-        if (heart.stoppedTime !== null) {
-          // 停止後0.5秒開始淡出，1秒內完成
-          const timeSinceStop = heart.age - heart.stoppedTime;
-          if (timeSinceStop > 0.5) {
-            const fadeProgress = Math.min(1, (timeSinceStop - 0.5) / 1);
-            heart.opacity = 1 - fadeProgress;
+          // 淡出效果：基於年齡和停止時間
+          if (heart.stoppedTime !== null) {
+            // 停止後0.5秒開始淡出，1秒內完成
+            const timeSinceStop = heart.age - heart.stoppedTime;
+            if (timeSinceStop > 0.5) {
+              const fadeProgress = Math.min(1, (timeSinceStop - 0.5) / 1);
+              heart.opacity = 1 - fadeProgress;
+            }
+          } else {
+            // 正常淡出：5秒後開始淡出，2秒內完成
+            const fadeStartAge = 5;
+            const fadeDuration = 2;
+            if (heart.age > fadeStartAge) {
+              const fadeProgress = Math.min(1, (heart.age - fadeStartAge) / fadeDuration);
+              heart.opacity = 1 - fadeProgress;
+            }
           }
-        } else {
-          // 正常淡出：5秒後開始淡出，2秒內完成
-          const fadeStartAge = 5;
-          const fadeDuration = 2;
-          if (heart.age > fadeStartAge) {
-            const fadeProgress = Math.min(1, (heart.age - fadeStartAge) / fadeDuration);
-            heart.opacity = 1 - fadeProgress;
+
+          // 更新元素樣式
+          heart.element.style.left = (heart.x - heartSize) + 'px';
+          heart.element.style.top = (heart.y - heartSize) + 'px';
+          heart.element.style.transform = `rotate(${heart.rotation}deg) scale(${heart.size})`;
+          heart.element.style.opacity = heart.opacity;
+
+          // 移除條件：完全透明或超出螢幕很遠
+          if (heart.opacity <= 0 || heart.y > screenHeight + 500 || heart.x < -500 || heart.x > screenWidth + 500) {
+            heart.element.remove();
+            return false;
           }
-        }
 
-        // 更新元素樣式
-        heart.element.style.left = (heart.x - heartSize) + 'px';
-        heart.element.style.top = (heart.y - heartSize) + 'px';
-        heart.element.style.transform = `rotate(${heart.rotation}deg) scale(${heart.size})`;
-        heart.element.style.opacity = heart.opacity;
-
-        // 移除條件：完全透明或超出螢幕很遠
-        if (heart.opacity <= 0 || heart.y > screenHeight + 500 || heart.x < -500 || heart.x > screenWidth + 500) {
-          heart.element.remove();
-          return false;
-        }
-
-        return true;
-      });
-
-      // 繼續動畫
-      animationId = requestAnimationFrame(animateHearts);
-    }
-
-    function switchTab(tab) {
-      currentTab = tab;
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelector('.tab:nth-child(' + (tab === 'waiting' ? 1 : 2) + ')').classList.add('active');
-      document.getElementById('waitingList').classList.toggle('hidden', tab !== 'waiting');
-      document.getElementById('missedList').classList.toggle('hidden', tab !== 'missed');
-    }
-
-    async function refresh() {
-      try {
-        const r = await fetch('/status');
-        if (!r.ok) throw new Error();
-        const j = await r.json();
-
-        document.getElementById('num').textContent = j.current?.toString().padStart(3, '0') ?? '--';
-
-        const waitList = document.getElementById('waitingList');
-        waitList.innerHTML = '';
-        j.waiting.forEach((n, i) => {
-          const div = document.createElement('div');
-          div.className = 'item';
-          const eta = (i + 1) * (j.waiting.length <= 5 ? 1 : j.waiting.length <= 10 ? 2 : 3);
-          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>等候時間 ${eta} 分</span>`;
-          waitList.appendChild(div);
+          return true;
         });
 
-        // 只在載入時隨機選一句，之後不再更換
-        if (!window._summaryMsgIndex) {
+        // 繼續動畫
+        animationId = requestAnimationFrame(animateHearts);
+      }
+
+      function switchTab(tab) {
+        currentTab = tab;
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelector('.tab:nth-child(' + (tab === 'waiting' ? 1 : 2) + ')').classList.add('active');
+        document.getElementById('waitingList').classList.toggle('hidden', tab !== 'waiting');
+        document.getElementById('missedList').classList.toggle('hidden', tab !== 'missed');
+      }
+
+      async function refresh() {
+        try {
+          const r = await fetch('/status');
+          if (!r.ok) throw new Error();
+          const j = await r.json();
+
+          document.getElementById('num').textContent = j.current?.toString().padStart(3, '0') ?? '--';
+
+          const waitList = document.getElementById('waitingList');
+          waitList.innerHTML = '';
+          j.waiting.forEach((n, i) => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            const eta = (i + 1) * (j.waiting.length <= 5 ? 1 : j.waiting.length <= 10 ? 2 : 3);
+            div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>等候時間 ${eta} 分</span>`;
+            waitList.appendChild(div);
+          });
+
+          // 每次更新都重新生成摘要信息
+          if (!window._summaryMsgIndex) {
+            window._summaryMsgIndex = Math.floor(Math.random() * 5); // 隨機選擇訊息模板
+          }
+
           const summaryMsgs = [
             `等候 ${j.waiting.length} 人 (｡•ᴗ•｡)♡`,
             `還有 ${j.waiting.length} 位唷～`,
@@ -1294,104 +3136,134 @@
             `前面有 ${j.waiting.length} 人，請耐心等候！`,
             `目前 ${j.waiting.length} 人在等`
           ];
-          window._summaryMsgIndex = Math.floor(Math.random() * summaryMsgs.length);
-          window._summaryMsgs = summaryMsgs;
+
+          // 每次都更新摘要信息，包含最新的等待人數
+          document.getElementById('summary').textContent = summaryMsgs[window._summaryMsgIndex];
+
+          const missList = document.getElementById('missedList');
+          missList.innerHTML = '';
+          j.missed.forEach(n => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>未報到</span>`;
+            missList.appendChild(div);
+          });
+
+        } catch {
+          document.getElementById('summary').textContent = '🚫 連線失敗';
         }
-        // 每次只顯示同一句
-        document.getElementById('summary').textContent = window._summaryMsgs[window._summaryMsgIndex];
-
-        const missList = document.getElementById('missedList');
-        missList.innerHTML = '';
-        j.missed.forEach(n => {
-          const div = document.createElement('div');
-          div.className = 'item';
-          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>未報到</span>`;
-          missList.appendChild(div);
-        });
-
-      } catch {
-        document.getElementById('summary').textContent = '🚫 連線失敗';
       }
-    }
 
-    window.onload = () => {
-      refresh();
-      setInterval(refresh, 2000);
+      window.onload = () => {
+        refresh();
+        setInterval(refresh, 2000);
 
-      // 初始化鴨子互動
-      initDuckInteraction();
+        // 初始化鴨子互動
+        initDuckInteraction();
 
-      try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {
-        console.warn("AdSense 無法顯示", e);
-      }
-    };
-
-    async function refresh() {
-      try {
-        const r = await fetch('/status');
-        if (!r.ok) throw new Error();
-        const j = await r.json();
-
-        document.getElementById('num').textContent = j.current?.toString().padStart(3, '0') ?? '--';
-
-        const waitList = document.getElementById('waitingList');
-        waitList.innerHTML = '';
-        j.waiting.forEach((n, i) => {
-          const div = document.createElement('div');
-          div.className = 'item';
-          const eta = (i + 1) * (j.waiting.length <= 5 ? 1 : j.waiting.length <= 10 ? 2 : 3);
-          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>等候時間 ${eta} 分</span>`;
-          waitList.appendChild(div);
-        });
-
-        // 只在載入時隨機選一句，之後不再更換
-        if (!window._summaryMsgIndex) {
-          const summaryMsgs = [
-            `等候 ${j.waiting.length} 人 (｡•ᴗ•｡)♡`,
-            `還有 ${j.waiting.length} 位唷～`,
-            `排隊 ${j.waiting.length} 人，先逛逛吧！`,
-            `前面有 ${j.waiting.length} 人，請耐心等候！`,
-            `目前 ${j.waiting.length} 人在等`
-          ];
-          window._summaryMsgIndex = Math.floor(Math.random() * summaryMsgs.length);
-          window._summaryMsgs = summaryMsgs;
+        // 若已抽過，直接顯示上一次的結果
+        // 檢查是否有抽獎記錄（兼容舊的日期格式和新的時間戳格式）
+        const lastDrawTimestamp = localStorage.getItem('lastDrawTimestamp');
+        const lastDrawDate = localStorage.getItem('lastDrawDate');
+        if (lastDrawTimestamp || lastDrawDate) {
+          // 如果有舊的日期格式，轉換為時間戳
+          if (lastDrawDate && !lastDrawTimestamp) {
+            const oldDate = new Date(lastDrawDate);
+            localStorage.setItem('lastDrawTimestamp', oldDate.getTime().toString());
+            localStorage.removeItem('lastDrawDate');
+          }
+          checkAndOpenLuckyDraw();
         }
-        // 每次只顯示同一句
-        document.getElementById('summary').textContent = window._summaryMsgs[window._summaryMsgIndex];
 
-        const missList = document.getElementById('missedList');
-        missList.innerHTML = '';
-        j.missed.forEach(n => {
-          const div = document.createElement('div');
-          div.className = 'item';
-          div.innerHTML = `<span>${n.toString().padStart(3, '0')}</span><span>未報到</span>`;
-          missList.appendChild(div);
-        });
+        try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+          console.warn("AdSense 無法顯示", e);
+        }
+      };
 
-      } catch {
-        document.getElementById('summary').textContent = '🚫 連線失敗';
+      window.onload = () => {
+        refresh();
+        setInterval(refresh, 2000);
+
+        // 初始化鴨子互動
+        initDuckInteraction();
+
+        try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+          console.warn("AdSense 無法顯示", e);
+        }
+      };
+
+      // Snow Animation Functions
+      function startSnowfall() {
+        if (snowfallActive) return; // Already active
+
+        snowfallActive = true;
+        const snowContainer = document.querySelector('.snow-container');
+
+        // 聖誕相關的 emoji 列表
+        const christmasEmojis = ['❄️', '❄️', '❄️', '⭐', '✨', '🎄', '🎁', '🔔'];
+
+        function createSnowflake() {
+          const snowflake = document.createElement('div');
+          snowflake.className = 'snowflake';
+
+          // 隨機選擇一個聖誕 emoji
+          const randomEmoji = christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)];
+
+          // 創建 emoji 元素
+          snowflake.textContent = randomEmoji;
+          snowflake.style.fontSize = (20 + Math.random() * 15) + 'px'; // 大小在 20-35px 之間
+          
+          // Random positioning
+          snowflake.style.left = Math.random() * 100 + '%';
+          snowflake.style.animationDuration = (8 + Math.random() * 6) + 's';
+          snowflake.style.animationDelay = Math.random() * 2 + 's';
+          
+          // 確保初始狀態不可見，避免在頂端閃現
+          snowflake.style.opacity = '0';
+          snowflake.style.transform = 'translateY(-100px) rotate(0deg)';
+
+          snowContainer.appendChild(snowflake);
+
+          // Remove snowflake after animation
+          setTimeout(() => {
+            if (snowflake.parentNode) {
+              snowflake.parentNode.removeChild(snowflake);
+            }
+          }, parseFloat(snowflake.style.animationDuration) * 1000);
+        }
+
+        // Create initial snowflakes
+        for (let i = 0; i < 8; i++) {
+          setTimeout(createSnowflake, i * 500);
+        }
+
+        // Continuously create new snowflakes
+        snowfallInterval = setInterval(createSnowflake, 2000);
       }
-    }
 
-    window.onload = () => {
-      refresh();
-      setInterval(refresh, 2000);
+      function stopSnowfall() {
+        if (snowfallInterval) {
+          clearInterval(snowfallInterval);
+          snowfallInterval = null;
+        }
+        snowfallActive = false;
 
-      // 初始化鴨子互動
-      initDuckInteraction();
-
-      try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {
-        console.warn("AdSense 無法顯示", e);
+        // Clear existing snowflakes
+        const snowContainer = document.querySelector('.snow-container');
+        if (snowContainer) {
+          snowContainer.innerHTML = '';
+        }
       }
-    };
-  </script>
-  
-  <!-- 愛心容器 - 放在 body 層級，覆蓋整個螢幕 -->
-  <div class="hearts-container" id="heartsContainer"></div>
+
+    </script>
+
+    <!-- 愛心容器 - 放在 body 層級，覆蓋整個螢幕 -->
+    <div class="hearts-container" id="heartsContainer"></div>
 
 </body>
+
 </html>
