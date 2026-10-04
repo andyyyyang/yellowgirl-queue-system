@@ -1,0 +1,1044 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		533365D42E29375B00F04C6D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533365D32E29375B00F04C6D /* WidgetKit.framework */; };
+		533365D62E29375B00F04C6D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533365D52E29375B00F04C6D /* SwiftUI.framework */; };
+		533365F32E293AEB00F04C6D /* LiveTestAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533365ED2E2938AC00F04C6D /* LiveTestAttributes.swift */; };
+		53D8BC342E44FFC700843AFA /* XYSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D8BBD22E44D53D00843AFA /* XYSDK.a */; };
+		53D8BC3C2E4500FB00843AFA /* QueuePadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D8BBEF2E44FD6400843AFA /* QueuePadApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		53D8BC142E44FF4C00843AFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53C914DA2E240E9B000A37BF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 53D8BC062E44FF4900843AFA;
+			remoteInfo = QueuePad;
+		};
+		53D8BC1E2E44FF4D00843AFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53C914DA2E240E9B000A37BF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 53D8BC062E44FF4900843AFA;
+			remoteInfo = QueuePad;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		53D8BC372E44FFCE00843AFA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		533365B02E292BAD00F04C6D /* ticket.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = ticket.html; sourceTree = "<group>"; };
+		533365D12E29375B00F04C6D /* QueuePadWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QueuePadWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		533365D32E29375B00F04C6D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		533365D52E29375B00F04C6D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		533365ED2E2938AC00F04C6D /* LiveTestAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTestAttributes.swift; sourceTree = "<group>"; };
+		53C914EF2E240EA0000A37BF /* QueuePad-1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "QueuePad-1Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53C914F92E240EA0000A37BF /* QueuePad-1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "QueuePad-1UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53C915642E26897B000A37BF /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		53D8BB742E44C6AD00843AFA /* ticket_template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_template.png; sourceTree = "<group>"; };
+		53D8BBC32E44D53D00843AFA /* AsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		53D8BBC42E44D53D00843AFA /* AsyncUdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		53D8BBC52E44D53D00843AFA /* BLEManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEManager.h; sourceTree = "<group>"; };
+		53D8BBC62E44D53D00843AFA /* ImageTranster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageTranster.h; sourceTree = "<group>"; };
+		53D8BBC72E44D53D00843AFA /* libXYPrinter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libXYPrinter.h; sourceTree = "<group>"; };
+		53D8BBC82E44D53D00843AFA /* PosCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosCommand.h; sourceTree = "<group>"; };
+		53D8BBC92E44D53D00843AFA /* TscCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TscCommand.h; sourceTree = "<group>"; };
+		53D8BBCA2E44D53D00843AFA /* XYBLEManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYBLEManager.h; sourceTree = "<group>"; };
+		53D8BBCB2E44D53D00843AFA /* XYSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYSDK.h; sourceTree = "<group>"; };
+		53D8BBCC2E44D53D00843AFA /* XYWIFIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYWIFIManager.h; sourceTree = "<group>"; };
+		53D8BBCF2E44D53D00843AFA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CFNetwork.framework; sourceTree = "<group>"; };
+		53D8BBD02E44D53D00843AFA /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreBluetooth.framework; sourceTree = "<group>"; };
+		53D8BBD12E44D53D00843AFA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SystemConfiguration.framework; sourceTree = "<group>"; };
+		53D8BBD22E44D53D00843AFA /* XYSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = XYSDK.a; sourceTree = "<group>"; };
+		53D8BBEF2E44FD6400843AFA /* QueuePadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuePadApp.swift; sourceTree = "<group>"; };
+		53D8BC072E44FF4900843AFA /* QueuePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueuePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		53D8BC132E44FF4C00843AFA /* QueuePadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueuePadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		53D8BC1D2E44FF4D00843AFA /* QueuePadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueuePadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		533365EB2E29375E00F04C6D /* Exceptions for "QueuePadWidgetExtension" folder in "QueuePadWidgetExtensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 533365D02E29375B00F04C6D /* QueuePadWidgetExtensionExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		533365D72E29375B00F04C6D /* QueuePadWidgetExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				533365EB2E29375E00F04C6D /* Exceptions for "QueuePadWidgetExtension" folder in "QueuePadWidgetExtensionExtension" target */,
+			);
+			path = QueuePadWidgetExtension;
+			sourceTree = "<group>";
+		};
+		53C914FC2E240EA0000A37BF /* QueuePad-1UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "QueuePad-1UITests";
+			sourceTree = "<group>";
+		};
+		53D8BC082E44FF4900843AFA /* QueuePad */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QueuePad;
+			sourceTree = "<group>";
+		};
+		53D8BC162E44FF4C00843AFA /* QueuePadTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QueuePadTests;
+			sourceTree = "<group>";
+		};
+		53D8BC202E44FF4D00843AFA /* QueuePadUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QueuePadUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		533365CE2E29375B00F04C6D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				533365D62E29375B00F04C6D /* SwiftUI.framework in Frameworks */,
+				533365D42E29375B00F04C6D /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53C914EC2E240EA0000A37BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53C914F62E240EA0000A37BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC042E44FF4900843AFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53D8BC342E44FFC700843AFA /* XYSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC102E44FF4C00843AFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC1A2E44FF4D00843AFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		533365D22E29375B00F04C6D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				533365D32E29375B00F04C6D /* WidgetKit.framework */,
+				533365D52E29375B00F04C6D /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		53C914D92E240E9B000A37BF = {
+			isa = PBXGroup;
+			children = (
+				53D8BBEF2E44FD6400843AFA /* QueuePadApp.swift */,
+				53D8BBD32E44D53D00843AFA /* XYSDK */,
+				533365ED2E2938AC00F04C6D /* LiveTestAttributes.swift */,
+				53D8BB742E44C6AD00843AFA /* ticket_template.png */,
+				53C915642E26897B000A37BF /* AppIcon.icon */,
+				533365B02E292BAD00F04C6D /* ticket.html */,
+				53C914FC2E240EA0000A37BF /* QueuePad-1UITests */,
+				533365D72E29375B00F04C6D /* QueuePadWidgetExtension */,
+				53D8BC082E44FF4900843AFA /* QueuePad */,
+				53D8BC162E44FF4C00843AFA /* QueuePadTests */,
+				53D8BC202E44FF4D00843AFA /* QueuePadUITests */,
+				533365D22E29375B00F04C6D /* Frameworks */,
+				53C914E32E240E9B000A37BF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		53C914E32E240E9B000A37BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				53C914EF2E240EA0000A37BF /* QueuePad-1Tests.xctest */,
+				53C914F92E240EA0000A37BF /* QueuePad-1UITests.xctest */,
+				533365D12E29375B00F04C6D /* QueuePadWidgetExtensionExtension.appex */,
+				53D8BC072E44FF4900843AFA /* QueuePad.app */,
+				53D8BC132E44FF4C00843AFA /* QueuePadTests.xctest */,
+				53D8BC1D2E44FF4D00843AFA /* QueuePadUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		53D8BBCD2E44D53D00843AFA /* XYSDK */ = {
+			isa = PBXGroup;
+			children = (
+				53D8BBC32E44D53D00843AFA /* AsyncSocket.h */,
+				53D8BBC42E44D53D00843AFA /* AsyncUdpSocket.h */,
+				53D8BBC52E44D53D00843AFA /* BLEManager.h */,
+				53D8BBC62E44D53D00843AFA /* ImageTranster.h */,
+				53D8BBC72E44D53D00843AFA /* libXYPrinter.h */,
+				53D8BBC82E44D53D00843AFA /* PosCommand.h */,
+				53D8BBC92E44D53D00843AFA /* TscCommand.h */,
+				53D8BBCA2E44D53D00843AFA /* XYBLEManager.h */,
+				53D8BBCB2E44D53D00843AFA /* XYSDK.h */,
+				53D8BBCC2E44D53D00843AFA /* XYWIFIManager.h */,
+			);
+			path = XYSDK;
+			sourceTree = "<group>";
+		};
+		53D8BBCE2E44D53D00843AFA /* include */ = {
+			isa = PBXGroup;
+			children = (
+				53D8BBCD2E44D53D00843AFA /* XYSDK */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		53D8BBD32E44D53D00843AFA /* XYSDK */ = {
+			isa = PBXGroup;
+			children = (
+				53D8BBCE2E44D53D00843AFA /* include */,
+				53D8BBCF2E44D53D00843AFA /* CFNetwork.framework */,
+				53D8BBD02E44D53D00843AFA /* CoreBluetooth.framework */,
+				53D8BBD12E44D53D00843AFA /* SystemConfiguration.framework */,
+				53D8BBD22E44D53D00843AFA /* XYSDK.a */,
+			);
+			path = XYSDK;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		533365D02E29375B00F04C6D /* QueuePadWidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 533365E82E29375E00F04C6D /* Build configuration list for PBXNativeTarget "QueuePadWidgetExtensionExtension" */;
+			buildPhases = (
+				533365CD2E29375B00F04C6D /* Sources */,
+				533365CE2E29375B00F04C6D /* Frameworks */,
+				533365CF2E29375B00F04C6D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				533365D72E29375B00F04C6D /* QueuePadWidgetExtension */,
+			);
+			name = QueuePadWidgetExtensionExtension;
+			packageProductDependencies = (
+			);
+			productName = QueuePadWidgetExtensionExtension;
+			productReference = 533365D12E29375B00F04C6D /* QueuePadWidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		53C914EE2E240EA0000A37BF /* QueuePad-1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53C915062E240EA0000A37BF /* Build configuration list for PBXNativeTarget "QueuePad-1Tests" */;
+			buildPhases = (
+				53C914EB2E240EA0000A37BF /* Sources */,
+				53C914EC2E240EA0000A37BF /* Frameworks */,
+				53C914ED2E240EA0000A37BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "QueuePad-1Tests";
+			packageProductDependencies = (
+			);
+			productName = "QueuePad-1Tests";
+			productReference = 53C914EF2E240EA0000A37BF /* QueuePad-1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		53C914F82E240EA0000A37BF /* QueuePad-1UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53C915092E240EA0000A37BF /* Build configuration list for PBXNativeTarget "QueuePad-1UITests" */;
+			buildPhases = (
+				53C914F52E240EA0000A37BF /* Sources */,
+				53C914F62E240EA0000A37BF /* Frameworks */,
+				53C914F72E240EA0000A37BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				53C914FC2E240EA0000A37BF /* QueuePad-1UITests */,
+			);
+			name = "QueuePad-1UITests";
+			packageProductDependencies = (
+			);
+			productName = "QueuePad-1UITests";
+			productReference = 53C914F92E240EA0000A37BF /* QueuePad-1UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		53D8BC062E44FF4900843AFA /* QueuePad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53D8BC252E44FF4D00843AFA /* Build configuration list for PBXNativeTarget "QueuePad" */;
+			buildPhases = (
+				53D8BC032E44FF4900843AFA /* Sources */,
+				53D8BC042E44FF4900843AFA /* Frameworks */,
+				53D8BC052E44FF4900843AFA /* Resources */,
+				53D8BC372E44FFCE00843AFA /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				53D8BC082E44FF4900843AFA /* QueuePad */,
+			);
+			name = QueuePad;
+			packageProductDependencies = (
+			);
+			productName = QueuePad;
+			productReference = 53D8BC072E44FF4900843AFA /* QueuePad.app */;
+			productType = "com.apple.product-type.application";
+		};
+		53D8BC122E44FF4C00843AFA /* QueuePadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53D8BC282E44FF4D00843AFA /* Build configuration list for PBXNativeTarget "QueuePadTests" */;
+			buildPhases = (
+				53D8BC0F2E44FF4C00843AFA /* Sources */,
+				53D8BC102E44FF4C00843AFA /* Frameworks */,
+				53D8BC112E44FF4C00843AFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				53D8BC152E44FF4C00843AFA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				53D8BC162E44FF4C00843AFA /* QueuePadTests */,
+			);
+			name = QueuePadTests;
+			packageProductDependencies = (
+			);
+			productName = QueuePadTests;
+			productReference = 53D8BC132E44FF4C00843AFA /* QueuePadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		53D8BC1C2E44FF4D00843AFA /* QueuePadUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53D8BC2B2E44FF4D00843AFA /* Build configuration list for PBXNativeTarget "QueuePadUITests" */;
+			buildPhases = (
+				53D8BC192E44FF4D00843AFA /* Sources */,
+				53D8BC1A2E44FF4D00843AFA /* Frameworks */,
+				53D8BC1B2E44FF4D00843AFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				53D8BC1F2E44FF4D00843AFA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				53D8BC202E44FF4D00843AFA /* QueuePadUITests */,
+			);
+			name = QueuePadUITests;
+			packageProductDependencies = (
+			);
+			productName = QueuePadUITests;
+			productReference = 53D8BC1D2E44FF4D00843AFA /* QueuePadUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		53C914DA2E240E9B000A37BF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					533365D02E29375B00F04C6D = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					53C914EE2E240EA0000A37BF = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 53C914E12E240E9B000A37BF;
+					};
+					53C914F82E240EA0000A37BF = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 53C914E12E240E9B000A37BF;
+					};
+					53D8BC062E44FF4900843AFA = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					53D8BC122E44FF4C00843AFA = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 53D8BC062E44FF4900843AFA;
+					};
+					53D8BC1C2E44FF4D00843AFA = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 53D8BC062E44FF4900843AFA;
+					};
+				};
+			};
+			buildConfigurationList = 53C914DD2E240E9B000A37BF /* Build configuration list for PBXProject "QueuePad-1" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 53C914D92E240E9B000A37BF;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 53C914E32E240E9B000A37BF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				53D8BC062E44FF4900843AFA /* QueuePad */,
+				53C914EE2E240EA0000A37BF /* QueuePad-1Tests */,
+				53C914F82E240EA0000A37BF /* QueuePad-1UITests */,
+				533365D02E29375B00F04C6D /* QueuePadWidgetExtensionExtension */,
+				53D8BC122E44FF4C00843AFA /* QueuePadTests */,
+				53D8BC1C2E44FF4D00843AFA /* QueuePadUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		533365CF2E29375B00F04C6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53C914ED2E240EA0000A37BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53C914F72E240EA0000A37BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC052E44FF4900843AFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC112E44FF4C00843AFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC1B2E44FF4D00843AFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		533365CD2E29375B00F04C6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				533365F32E293AEB00F04C6D /* LiveTestAttributes.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53C914EB2E240EA0000A37BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53C914F52E240EA0000A37BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC032E44FF4900843AFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53D8BC3C2E4500FB00843AFA /* QueuePadApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC0F2E44FF4C00843AFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53D8BC192E44FF4D00843AFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		53D8BC152E44FF4C00843AFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 53D8BC062E44FF4900843AFA /* QueuePad */;
+			targetProxy = 53D8BC142E44FF4C00843AFA /* PBXContainerItemProxy */;
+		};
+		53D8BC1F2E44FF4D00843AFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 53D8BC062E44FF4900843AFA /* QueuePad */;
+			targetProxy = 53D8BC1E2E44FF4D00843AFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		533365E92E29375E00F04C6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				DRIVERKIT_DEPLOYMENT_TARGET = 25.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QueuePadWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QueuePadWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyyang.QueuePad2.1.QueuePadWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		533365EA2E29375E00F04C6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				DRIVERKIT_DEPLOYMENT_TARGET = 25.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QueuePadWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QueuePadWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyyang.QueuePad2.1.QueuePadWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		53C915012E240EA0000A37BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = HK7ZMKJF5J;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		53C915022E240EA0000A37BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = HK7ZMKJF5J;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		53C915072E240EA0000A37BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePad-1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QueuePad-1.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QueuePad-1";
+			};
+			name = Debug;
+		};
+		53C915082E240EA0000A37BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePad-1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QueuePad-1.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QueuePad-1";
+			};
+			name = Release;
+		};
+		53C9150A2E240EA0000A37BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePad-1UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "QueuePad-1";
+			};
+			name = Debug;
+		};
+		53C9150B2E240EA0000A37BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePad-1UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "QueuePad-1";
+			};
+			name = Release;
+		};
+		53D8BC262E44FF4D00843AFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HK7ZMKJF5J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XYSDK",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePad";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		53D8BC272E44FF4D00843AFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HK7ZMKJF5J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XYSDK",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePad";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		53D8BC292E44FF4D00843AFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePadTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QueuePad.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QueuePad";
+			};
+			name = Debug;
+		};
+		53D8BC2A2E44FF4D00843AFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePadTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QueuePad.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QueuePad";
+			};
+			name = Release;
+		};
+		53D8BC2C2E44FF4D00843AFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePadUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QueuePad;
+			};
+			name = Debug;
+		};
+		53D8BC2D2E44FF4D00843AFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CPDRKJ77T5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yellow-girl.QueuePadUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QueuePad;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		533365E82E29375E00F04C6D /* Build configuration list for PBXNativeTarget "QueuePadWidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				533365E92E29375E00F04C6D /* Debug */,
+				533365EA2E29375E00F04C6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53C914DD2E240E9B000A37BF /* Build configuration list for PBXProject "QueuePad-1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53C915012E240EA0000A37BF /* Debug */,
+				53C915022E240EA0000A37BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53C915062E240EA0000A37BF /* Build configuration list for PBXNativeTarget "QueuePad-1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53C915072E240EA0000A37BF /* Debug */,
+				53C915082E240EA0000A37BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53C915092E240EA0000A37BF /* Build configuration list for PBXNativeTarget "QueuePad-1UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53C9150A2E240EA0000A37BF /* Debug */,
+				53C9150B2E240EA0000A37BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53D8BC252E44FF4D00843AFA /* Build configuration list for PBXNativeTarget "QueuePad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53D8BC262E44FF4D00843AFA /* Debug */,
+				53D8BC272E44FF4D00843AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53D8BC282E44FF4D00843AFA /* Build configuration list for PBXNativeTarget "QueuePadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53D8BC292E44FF4D00843AFA /* Debug */,
+				53D8BC2A2E44FF4D00843AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53D8BC2B2E44FF4D00843AFA /* Build configuration list for PBXNativeTarget "QueuePadUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53D8BC2C2E44FF4D00843AFA /* Debug */,
+				53D8BC2D2E44FF4D00843AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 53C914DA2E240E9B000A37BF /* Project object */;
+}
