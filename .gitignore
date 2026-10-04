@@ -1,0 +1,23 @@
+.DS_Store
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.ipa
+*.xcarchive
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+# IDE / tooling caches
+.idea/
+.firebase/
+# Local databases
+*.db
+# Pi runtime output (regenerated automatically)
+pi-display/static/audio/*.mp3
+pi-display/static/print/ticket_*.png
+pi-display/printed.log
