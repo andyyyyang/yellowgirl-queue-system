@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.ipa
+*.xcarchive
+# Xcode export folders / scratch diffs
+TicketSystem 20*/
+Diff_*.txt
