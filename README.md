@@ -43,7 +43,7 @@ flowchart LR
 |---|---|---|
 | `server/` | Flask 伺服器，狀態存在 PostgreSQL 的 key-value 表。另有抽獎轉盤功能（`/prizes`、`/draw`、`/prize-admin`）與網頁控制台 `/control` | 現役，部署在 Railway |
 | `ios-app/` | iPad 操作 App（Xcode 專案名 TicketSystem）。取號、叫號、過號、標記、返回前一號、按鈕冷卻時間。另有 Live Activity 與 `next`、`miss` 深層連結的雛形，但尚未完成啟用 | 現役，最新版 |
-| `pi-display/` | 樹莓派程式。出單、語音、叫號顯示頁、廣告影片輪播與後台 `/ads` | 現役，以 systemd `queuepad.service` 執行 |
+| `pi-display/` | 樹莓派程式。出單（可關掉，改由 StudioX POS 的 iPad 直接印）、語音、叫號顯示頁、廣告影片輪播與後台 `/ads` | 現役，以 systemd `queuepad.service` 執行 |
 | `legacy/ios-queuepad/` | 舊版 iPad App（QueuePad-1）。用 XYSDK 藍牙直接列印，伺服器為 Cloud Run | 已被 `ios-app/` 取代 |
 | `legacy/tvos-queuepad/` | 最早的 Apple TV 叫號雛形 | 封存 |
 
@@ -71,6 +71,20 @@ flowchart LR
 
 出單機 IP、伺服器網址、QR code 網址樣板、列印張數、列印品質都存在純文字檔，也可以從 `/ads` 後台修改。
 GitHub 上的版本是 2025-09 同步的，樹莓派本機的設定可能已經更新過。
+
+## 整合進 StudioX POS
+
+StudioX POS（iPad 收銀台）的「叫號」頁取代 `ios-app/`，號碼牌改由 iPad 直接印：
+
+1. **iPad 直接出單**：POS 的出單機設定裡，把這台 XPrinter（網路 TCP 9100 或藍牙）的用途勾「號碼牌」。在這台 iPad 取號就馬上印；
+   如果別的地方（網頁控制台、另一台 iPad）也會取號，在這台打開「也印別台取的號碼」，它就照樣接手樹莓派原本的出單。
+   票面照舊：背景圖（`bg.jpg` 上傳到 POS 後台的「叫號」頁）、號碼、等候人數、QR code 的位置預設和樹莓派一模一樣。
+2. **樹莓派只負責叫號螢幕與語音**：`/ads` 後台「快速操作」把「出單」切成「不出單」（`static/print/print_enabled.txt`），
+   避免印兩張。關掉期間的號碼照樣記成印過，之後再打開也不會補印。
+3. **號碼存在哪裡**（POS 後台「叫號」頁設定）：
+   - 沿用這台伺服器（`legacy`）：POS 後台代轉到 Railway 上的 `server/`，樹莓派的網址都不用改
+   - 改用 POS 後台（`native`）：有驗證、一次一筆不會互相覆蓋。樹莓派的 `server_url.txt` 換成後台給的 `/api/pos/queue/status`、
+     `qr_url.txt` 換成後台給的客人頁網址，之後就可以停掉 Railway 上的伺服器
 
 ## 已知注意事項
 

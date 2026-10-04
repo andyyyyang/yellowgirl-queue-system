@@ -23,6 +23,7 @@ PRINTER_IP_FILE   = os.path.join(PRINT_FOLDER, "printer_ip.txt")          # 例�
 PRINT_BG_FILE     = os.path.join(PRINT_FOLDER, "bg.jpg")                  # 票面滿版背景(16:9 cover)
 SERVER_URL_FILE   = os.path.join(PRINT_FOLDER, "server_url.txt")          # 伺服器網址
 PRINT_COUNT_FILE  = os.path.join(PRINT_FOLDER, "print_count.txt")         # 預設列印張數
+PRINT_ENABLED_FILE = os.path.join(PRINT_FOLDER, "print_enabled.txt")      # on/off：StudioX POS 的 iPad 直接出單時關掉
 
 # 你的上游叫號狀態 API
 # API_URL 已被 get_server_url() 函數取代，可通過設定頁面配置
@@ -80,6 +81,13 @@ def get_voice_enabled():
 
 def set_voice_enabled(enabled: bool):
     open(VOICE_CONFIG_FILE, "w").write("on" if enabled else "off")
+
+def get_print_enabled():
+    """樹莓派要不要出單。沒設定過＝要（和以前一樣）；StudioX POS 的 iPad 直接印號碼牌時關掉，這台只負責叫號螢幕與語音"""
+    return not (os.path.exists(PRINT_ENABLED_FILE) and open(PRINT_ENABLED_FILE).read().strip() == "off")
+
+def set_print_enabled(enabled: bool):
+    open(PRINT_ENABLED_FILE, "w").write("on" if enabled else "off")
 
 def get_muted():
     return os.path.exists(CONFIG_FILE) and open(CONFIG_FILE).read().strip() == "muted"
@@ -445,10 +453,13 @@ def monitor_waiting():
             new_numbers = set(waiting) - LAST_WAITING
 
             # === 列印新號碼 (一定要查 log) ===
+            # 出單關掉時（iPad 直接印）照樣記成印過：之後再打開也不會把關掉期間的號碼補印出來
+            printing = get_print_enabled()
             for n in sorted(new_numbers):
                 if not has_printed(int(n)):
                     try:
-                        print_ticket(int(n), len(waiting))
+                        if printing:
+                            print_ticket(int(n), len(waiting))
                         PRINTED_NUMBERS.add(n)
                         save_printed_number(n)   # 寫入 log
                     except Exception as e:
@@ -977,6 +988,7 @@ def ads_page():
         files=files,
         get_muted=get_muted(),
         voice_enabled=get_voice_enabled(),
+        print_enabled=get_print_enabled(),
         qr_url=get_qr_url_template(),
         printer_ip=get_printer_ip(),
         server_url=get_server_url(),
@@ -1023,6 +1035,13 @@ def toggle_voice():
     if request.args.get("pw") != "yellowgirl":
         return "Unauthorized", 403
     set_voice_enabled(not get_voice_enabled())
+    return redirect(url_for("ads_page", pw="yellowgirl"))
+
+@app.route("/ads/toggle_print")
+def toggle_print():
+    if request.args.get("pw") != "yellowgirl":
+        return "Unauthorized", 403
+    set_print_enabled(not get_print_enabled())
     return redirect(url_for("ads_page", pw="yellowgirl"))
 
 @app.route("/ads/clear_cache")

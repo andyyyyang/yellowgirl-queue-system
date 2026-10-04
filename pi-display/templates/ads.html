@@ -1030,6 +1030,13 @@
               </button>
             </div>
             <div class="setting-item">
+              <span>出單（iPad 直接印號碼牌時關掉）</span>
+              <button class="{% if print_enabled %}toggle-on{% else %}toggle-off{% endif %}" 
+                      onclick="togglePrint()">
+                {% if print_enabled %}🖨️ 這台出單{% else %}⏸️ 不出單{% endif %}
+              </button>
+            </div>
+            <div class="setting-item">
               <span>顯示畫面</span>
               <button class="toggle-on" onclick="refreshDisplay()">🔄 重新整理</button>
             </div>
@@ -1045,6 +1052,9 @@
       <div id="print" class="tab-content">
         <div class="settings-card">
           <h2>🖨️ 列印設定</h2>
+          {% if not print_enabled %}
+          <p style="margin: 0 0 16px; color: #666; font-size: 14px;">這台目前不出單（號碼牌由 StudioX POS 的 iPad 直接印）。要改回來：「快速操作」的「出單」。</p>
+          {% endif %}
           
           <div class="form-group">
             <label>QR Code 網址模板</label>
@@ -1253,6 +1263,20 @@
         })
         .catch(error => {
           alert('❌ 切換語音失敗：' + error.message);
+        });
+    }
+
+    function togglePrint() {
+      fetch('/ads/toggle_print?pw=yellowgirl')
+        .then(response => {
+          if (response.ok) {
+            location.reload();
+          } else {
+            alert('❌ 切換出單失敗');
+          }
+        })
+        .catch(error => {
+          alert('❌ 切換出單失敗：' + error.message);
         });
     }
 
