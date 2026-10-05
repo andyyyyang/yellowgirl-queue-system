@@ -257,7 +257,7 @@ class RemoteQueueVM: ObservableObject {
     }
     
     func deleteMissedFromServer(_ number: Int) async {
-        guard let serverURL, let url = URL(string: "/missed/\(number)", relativeTo: serverURL) else { return }
+        guard let serverURL, let url = queueURL(serverURL, "/missed/\(number)") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.timeoutInterval = 5
@@ -391,7 +391,7 @@ class RemoteQueueVM: ObservableObject {
     }
 
     func fetchStatus() async {
-        guard let serverURL, let url = URL(string: "/status", relativeTo: serverURL) else { return }
+        guard let serverURL, let url = queueURL(serverURL, "/status") else { return }
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decoded = try JSONDecoder().decode(StatusPayload.self, from: data)
@@ -406,7 +406,7 @@ class RemoteQueueVM: ObservableObject {
 
     @discardableResult
     private func sendCommand(endpoint: String) async throws -> StatusPayload? {
-        guard let serverURL, let url = URL(string: "/\(endpoint)", relativeTo: serverURL) else {
+        guard let serverURL, let url = queueURL(serverURL, "/\(endpoint)") else {
             throw URLError(.badURL)
         }
         var request = URLRequest(url: url)
@@ -430,7 +430,7 @@ class RemoteQueueVM: ObservableObject {
     }
 
     func testConnection() async -> Bool {
-        guard let serverURL, let url = URL(string: "/status", relativeTo: serverURL) else { return false }
+        guard let serverURL, let url = queueURL(serverURL, "/status") else { return false }
         do {
             let (_, response) = try await URLSession.shared.data(from: url)
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
@@ -982,7 +982,7 @@ extension Color {
 // MARK: - RemoteQueueVM 新增兩個 API 呼叫
 extension RemoteQueueVM {
     func resetQueue() async -> Bool {
-        guard let serverURL, let url = URL(string: "/reset", relativeTo: serverURL) else { return false }
+        guard let serverURL, let url = queueURL(serverURL, "/reset") else { return false }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.timeoutInterval = 5
@@ -1001,7 +1001,7 @@ extension RemoteQueueVM {
     }
     
     func goPrevious() async -> Bool {
-        guard let serverURL, let url = URL(string: "/previous", relativeTo: serverURL) else { return false }
+        guard let serverURL, let url = queueURL(serverURL, "/previous") else { return false }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.timeoutInterval = 5
@@ -1022,7 +1022,7 @@ extension RemoteQueueVM {
     // MARK: - 票號標注 API
     @discardableResult
     func mark(number: Int) async -> Bool {
-        guard let serverURL, let url = URL(string: "/mark/\(number)", relativeTo: serverURL) else { return false }
+        guard let serverURL, let url = queueURL(serverURL, "/mark/\(number)") else { return false }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.timeoutInterval = 5
@@ -1043,7 +1043,7 @@ extension RemoteQueueVM {
     
     @discardableResult
     func unmark(number: Int) async -> Bool {
-        guard let serverURL, let url = URL(string: "/unmark/\(number)", relativeTo: serverURL) else { return false }
+        guard let serverURL, let url = queueURL(serverURL, "/unmark/\(number)") else { return false }
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.timeoutInterval = 5
@@ -1088,4 +1088,10 @@ struct QueuePadApp: App {
             break
         }
     }
+}
+
+/// 伺服器網址後面接路徑（網址本身可以帶路徑，例如 https://yellowgirl.tw/api/queue/op/<密鑰>）。
+/// 以前用 URL(string: "/take", relativeTo:)：開頭的 / 會把網址的路徑整個換掉，只能接在網域後面
+func queueURL(_ base: URL, _ path: String) -> URL? {
+    path.split(separator: "/").reduce(base) { $0.appendingPathComponent(String($1)) }
 }
