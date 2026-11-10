@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		532C55C32EC39026001D3CE5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5302FC812E4CE5A300CD2C7C /* WidgetKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +30,6 @@
 		5302FC512E4CE47300CD2C7C /* TicketSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicketSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5302FC5E2E4CE47600CD2C7C /* TicketSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicketSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5302FC682E4CE47600CD2C7C /* TicketSystemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicketSystemUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5302FC812E4CE5A300CD2C7C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = ../../../../../../../../../Documents/TicketSystem/WidgetKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -57,7 +55,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				532C55C32EC39026001D3CE5 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +78,6 @@
 		5302FC482E4CE47300CD2C7C = {
 			isa = PBXGroup;
 			children = (
-				5302FC812E4CE5A300CD2C7C /* WidgetKit.framework */,
 				5302FC532E4CE47300CD2C7C /* TicketSystem */,
 				5302FC612E4CE47600CD2C7C /* TicketSystemTests */,
 				5302FC6B2E4CE47600CD2C7C /* TicketSystemUITests */,
@@ -410,9 +406,9 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HK7ZMKJF5J;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = /Users/andyyang/Users/andyyang/Documents/TicketSystem;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "黃毛丫頭叫號";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates = YES;
@@ -457,9 +453,9 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HK7ZMKJF5J;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = /Users/andyyang/Users/andyyang/Documents/TicketSystem;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "黃毛丫頭叫號";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates = YES;
