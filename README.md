@@ -65,7 +65,23 @@ flowchart LR
 
 - **伺服器**：Railway（Nixpacks，`python main.py`），需要 `DATABASE_URL`。原專案的 git remote 是 Railway。
 - **樹莓派**：`pi-display/deploy.sh` 用 scp 上傳到 `pi@queuepad-pi.local:/home/pi/queuepad-display` 再重啟 `queuepad.service`。
-- **iPad**：用 Xcode 開 `ios-app/TicketSystem.xcodeproj` 建置。伺服器網址可在 App 設定頁修改。
+- **iPad**：推到 `main`（`ios-app/` 有改）就自動出一版 TestFlight，和 StudioX Console App 同一套流程（見下面「iPad App 的建置與 TestFlight」）。也可以用 Xcode 開 `ios-app/TicketSystem.xcodeproj` 自己建置。伺服器網址可在 App 設定頁修改。
+
+### iPad App 的建置與 TestFlight
+
+- **推到 main 以外的分支、開 PR**（`.github/workflows/ios.yml`）：GitHub 的 Mac 編一次模擬器版（不簽章），編不過時 Actions 的摘要列出每個錯誤與警告。
+- **推到 main**（`.github/workflows/testflight.yml`）：
+  1. Linux 先檢查 Secrets、App ID `com.yang.queuepad.yellowgirl` 註冊了沒、App Store Connect 上有沒有這個 App
+  2. Mac 用 App Store Connect API 金鑰建一張**這一次專用**的 Apple Distribution 憑證與描述檔（名稱 `Queue CI <版號>`），封存、上傳；結束就撤銷。
+     清理時只動 `Queue CI` 開頭的，不會碰到 StudioX Console、StudioX POS 的 CI
+  3. Linux 等 Apple 處理好，把最近的提交寫成「測試內容」，交給內部測試群組，寄 TestFlight 邀請
+  - 版號用 UTC 時間（`2611101405`＝26/11/10 14:05），版本改 `MARKETING_VERSION`
+  - Actions → TestFlight → Run workflow 可以手動跑；只重寄邀請：Actions → TestFlight 邀請
+- **第一次設定**：GitHub 這個 repo → Settings → Secrets and variables → Actions，新增 `ASC_KEY_ID`、`ASC_ISSUER_ID`、`ASC_PRIVATE_KEY`、`APPLE_TEAM_ID`
+  （和 StudioX Console App 同一個 Apple 團隊，值照抄那個 repo 的；Secrets 是每個 repo 各自的）。選填 `TESTFLIGHT_TESTERS`。
+  `ci/testers.enc` 是同一把金鑰加密的測試員名單，從 StudioX Console App 複製過來的。
+  App Store Connect 上還沒有這個 App 的話，流程會停下來說要怎麼在網頁上建（Apple 不讓 API 建 App）。
+- 這是私有 repo：GitHub 的 Mac 分鐘數算 10 倍，所以只在 App 的檔案有改時跑。
 
 ## 樹莓派設定檔（`pi-display/static/print/`）
 

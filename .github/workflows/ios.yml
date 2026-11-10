@@ -1,0 +1,74 @@
+# 叫號 iPad App（ios-app/TicketSystem）：推到 main 以外的分支、開 PR 時，在 GitHub 的 Mac 上編一次（模擬器版、不簽章），
+# 編不過就在 Actions 頁面看得到是哪一行。main 不跑這個（testflight.yml 會封存，一樣會編）。
+# 這是私有 repo，GitHub 的 Mac 分鐘數算 10 倍：只在 App 的檔案有改時跑，同一個分支連推只編最新的一次。
+name: iOS build
+
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - "ios-app/TicketSystem/**"
+      - "ios-app/TicketSystem.xcodeproj/**"
+      - ".github/workflows/ios.yml"
+  pull_request:
+    paths:
+      - "ios-app/TicketSystem/**"
+      - "ios-app/TicketSystem.xcodeproj/**"
+  workflow_dispatch:
+
+# GitHub 給這個流程的 token 只能讀 repo（簽章、上傳用的是 App Store Connect 的金鑰，不需要 GitHub 的寫入權限）
+permissions:
+  contents: read
+
+# 同一個分支連推好幾次：只編最新的那次（Mac 的分鐘數比較貴）
+concurrency:
+  group: ios-queue-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: 選 Xcode（用最新的）
+        run: |
+          best=""; bestv="0"
+          for app in /Applications/Xcode*.app; do
+            v=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$app/Contents/Info.plist" 2>/dev/null) || continue
+            if [ "$v" != "$bestv" ] && [ "$(printf '%s\n%s\n' "$bestv" "$v" | sort -V | tail -1)" = "$v" ]; then best="$app"; bestv="$v"; fi
+          done
+          if [ -z "$best" ]; then echo "::error::找不到 Xcode"; exit 1; fi
+          sudo xcode-select -s "$best/Contents/Developer"
+          xcodebuild -version
+
+      - name: 編譯（模擬器、不簽章）
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project ios-app/TicketSystem.xcodeproj \
+            -scheme TicketSystem \
+            -destination "generic/platform=iOS Simulator" \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee build.log | grep -E "error:|warning:|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" build.log
+
+      - name: 錯誤與警告
+        if: always()
+        run: |
+          if [ -f build.log ]; then
+            echo "## 錯誤" >> "$GITHUB_STEP_SUMMARY"
+            grep -E "^/.*error:" build.log | sed "s|$GITHUB_WORKSPACE/||" | sort -u | head -100 | sed 's/^/- /' >> "$GITHUB_STEP_SUMMARY" || true
+            echo "## 警告" >> "$GITHUB_STEP_SUMMARY"
+            grep -E "^/.*warning:" build.log | sed "s|$GITHUB_WORKSPACE/||" | sort -u | head -100 | sed 's/^/- /' >> "$GITHUB_STEP_SUMMARY" || true
+          fi
+
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: build-log
+          path: build.log
+          retention-days: 7
