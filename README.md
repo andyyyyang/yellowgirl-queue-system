@@ -77,8 +77,8 @@ flowchart LR
   3. Linux 等 Apple 處理好，把最近的提交寫成「測試內容」，交給內部測試群組，寄 TestFlight 邀請
   - 版號用 UTC 時間（`2611101405`＝26/11/10 14:05），版本改 `MARKETING_VERSION`
   - Actions → TestFlight → Run workflow 可以手動跑；只重寄邀請：Actions → TestFlight 邀請
-- **第一次設定**：GitHub 這個 repo → Settings → Secrets and variables → Actions，新增 `ASC_KEY_ID`、`ASC_ISSUER_ID`、`ASC_PRIVATE_KEY`、`APPLE_TEAM_ID`
-  （和 StudioX Console App 同一個 Apple 團隊，值照抄那個 repo 的；Secrets 是每個 repo 各自的）。選填 `TESTFLIGHT_TESTERS`。
+- **Secrets**（GitHub 這個 repo → Settings → Secrets and variables → Actions）：`APPLE_TEAM_ID`，和 App Store Connect API 金鑰
+  `APPSTORE_CONNECT_KEY_ID`、`APPSTORE_CONNECT_ISSUER_ID`、`APPSTORE_CONNECT_PRIVATE_KEY`（這個 repo 原本就有；也可以用 StudioX Console App 的名稱 `ASC_KEY_ID`、`ASC_ISSUER_ID`、`ASC_PRIVATE_KEY`，有的話優先）。選填 `TESTFLIGHT_TESTERS`。
   `ci/testers.enc` 是同一把金鑰加密的測試員名單，從 StudioX Console App 複製過來的。
   App Store Connect 上還沒有這個 App 的話，流程會停下來說要怎麼在網頁上建（Apple 不讓 API 建 App）。
 - 這是私有 repo：GitHub 的 Mac 分鐘數算 10 倍，所以只在 App 的檔案有改時跑。

@@ -2,7 +2,7 @@
 # GitHub 的 Mac 用 App Store Connect API 金鑰自己簽章、封存、上傳，
 # 再寫好「測試內容」、交給內部測試群組。金鑰放在 repo 的 Secrets（見 README「TestFlight」）：
 #   ASC_KEY_ID、ASC_ISSUER_ID、ASC_PRIVATE_KEY（.p8 的內容）、APPLE_TEAM_ID
-#   和 StudioX Console App 同一個 Apple 團隊：四個值可以直接照抄那個 repo 的（Secrets 是每個 repo 各自的，要在這裡再加一次）
+#   這個 repo 原本就有 APPSTORE_CONNECT_KEY_ID／APPSTORE_CONNECT_ISSUER_ID／APPSTORE_CONNECT_PRIVATE_KEY：沒有 ASC_* 的話用那三個
 #   ASC_PRIVATE_KEY 是 App Store Connect API 的金鑰（Admin），不是推播金鑰
 # 還沒設定 Secrets 時整個流程會跳過（不會失敗）。
 name: TestFlight
@@ -46,9 +46,9 @@ jobs:
       - uses: actions/checkout@v5
       - id: check
         env:
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || secrets.APPSTORE_CONNECT_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || secrets.APPSTORE_CONNECT_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY || secrets.APPSTORE_CONNECT_PRIVATE_KEY }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
           missing=""
@@ -67,9 +67,9 @@ jobs:
       - id: asc
         if: steps.check.outputs.ready == 'true'
         env:
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || secrets.APPSTORE_CONNECT_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || secrets.APPSTORE_CONNECT_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY || secrets.APPSTORE_CONNECT_PRIVATE_KEY }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: python3 ci/asc.py prepare
 
@@ -83,9 +83,9 @@ jobs:
       version: ${{ steps.meta.outputs.version }}
       build: ${{ steps.meta.outputs.build }}
     env:
-      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-      ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || secrets.APPSTORE_CONNECT_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || secrets.APPSTORE_CONNECT_ISSUER_ID }}
+      ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY || secrets.APPSTORE_CONNECT_PRIVATE_KEY }}
       APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
     steps:
       - uses: actions/checkout@v5
@@ -229,9 +229,9 @@ jobs:
     # 等 Apple 處理最多 40 分鐘
     timeout-minutes: 50
     env:
-      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-      ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || secrets.APPSTORE_CONNECT_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || secrets.APPSTORE_CONNECT_ISSUER_ID }}
+      ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY || secrets.APPSTORE_CONNECT_PRIVATE_KEY }}
       # 選填：除了帳號持有人，還要寄邀請給誰（逗號隔開的 Email）
       TESTFLIGHT_TESTERS: ${{ secrets.TESTFLIGHT_TESTERS }}
     steps:
