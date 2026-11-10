@@ -1,6 +1,6 @@
 # 叫號 iPad App（ios-app/TicketSystem）：推到 main 就出一版 TestFlight（和 StudioX Console App 同一套流程）。
 # GitHub 的 Mac 用 App Store Connect API 金鑰自己簽章、封存、上傳，
-# 再寫好「測試內容」、交給內部測試群組。金鑰放在 repo 的 Secrets（見 README「TestFlight」）：
+# 再寫好「測試內容」、交給內部測試群組。金鑰放在 repo 的 Secrets（見 README「iPad App 的建置與 TestFlight」）：
 #   ASC_KEY_ID、ASC_ISSUER_ID、ASC_PRIVATE_KEY（.p8 的內容）、APPLE_TEAM_ID
 #   這個 repo 原本就有 APPSTORE_CONNECT_KEY_ID／APPSTORE_CONNECT_ISSUER_ID／APPSTORE_CONNECT_PRIVATE_KEY：沒有 ASC_* 的話用那三個
 #   ASC_PRIVATE_KEY 是 App Store Connect API 的金鑰（Admin），不是推播金鑰
@@ -58,7 +58,7 @@ jobs:
           if [ -n "$missing" ]; then
             echo "ready=false" >> "$GITHUB_OUTPUT"
             echo "### ⏸ 還沒設定 TestFlight 用的 Secrets：$missing" >> "$GITHUB_STEP_SUMMARY"
-            echo "到 repo 的 Settings → Secrets and variables → Actions 新增（見 README「TestFlight」）。" >> "$GITHUB_STEP_SUMMARY"
+            echo "到 repo 的 Settings → Secrets and variables → Actions 新增（見 README「iPad App 的建置與 TestFlight」）。" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "ready=true" >> "$GITHUB_OUTPUT"
           fi
